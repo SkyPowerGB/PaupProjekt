@@ -23,5 +23,6 @@ namespace PaupProjekt.Models
 
         public string emailKorisnik { set; get; }
 
+        public string ovlast { set; get; }
     }
 }

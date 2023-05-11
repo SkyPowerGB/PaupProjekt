@@ -17,6 +17,13 @@ namespace PaupProjekt.Controllers
             return View();
         }
 
+        public ActionResult Usluge()
+        {
+
+            return View();
+        }
+
+
         public ActionResult Kontakt()
         {
             var baza = db.korisnici.ToList();
