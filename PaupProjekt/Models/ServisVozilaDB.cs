@@ -14,7 +14,7 @@ namespace PaupProjekt.Models
     public class ServisVozilaDB:DbContext 
     {
 
-        public DbSet<korisnici> korisnici { get; set; }
+        public DbSet<korisnici> KorisniciB { get; set; }
 
 
 

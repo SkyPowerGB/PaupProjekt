@@ -26,7 +26,7 @@ namespace PaupProjekt.Controllers
 
         public ActionResult Kontakt()
         {
-            var baza = db.korisnici.ToList();
+            var baza = db.KorisniciB.ToList();
             ViewBag.ime=
             baza[0].korIme;
             return View();
