@@ -1,0 +1,31 @@
+﻿
+@{
+    ViewBag.Title = "klijenti";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>klijenti</h2>
+
+<table>
+    <tr>
+        <th>vozilo</th>
+        <th>datum</th>
+        <th>usluga</th>
+        <th>detalji</th>
+    </tr>
+    
+        @for (var i = 0; i < 10; i++) {
+            <tr>
+                <th>Vozilo</th>
+                <th>10.10.2023</th>
+                <th>usluga</th>
+                <th>@Html.ActionLink("info","index","korisnici")</th>
+            </tr>
+        
+        
+        }
+
+
+
+</table>
+

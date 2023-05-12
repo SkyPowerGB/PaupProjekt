@@ -176,6 +176,7 @@
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\GostController.cs" />
     <Compile Include="Controllers\KorisnikController.cs" />
+    <Compile Include="Controllers\RadnikController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -234,6 +235,7 @@
     <Content Include="Views\Gost\Index.cshtml" />
     <Content Include="Views\Gost\Kontakt.cshtml" />
     <Content Include="Views\Gost\Usluge.cshtml" />
+    <Content Include="Views\Radnik\klijenti.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
