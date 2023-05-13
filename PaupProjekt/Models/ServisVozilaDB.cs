@@ -21,7 +21,7 @@ namespace PaupProjekt.Models
 
         public DbSet<servis> servisTab { get; set; }
 
-
+        public DbSet<račun> racunTab { get; set; }
         public DbSet<ovlasti>  ovlastiTab { get; set; }
     }
 }

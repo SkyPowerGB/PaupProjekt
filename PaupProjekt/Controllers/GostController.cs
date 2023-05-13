@@ -25,13 +25,15 @@ namespace PaupProjekt.Controllers
 
 
         public ActionResult Kontakt() {
+
             var servis = db.servisTab.ToList();
             var ovlasti = db.ovlastiTab.ToList();
             var vozila = db.voziloTab.ToList();
             var vlasniki = db.vlasnikTab.ToList();
+            var računi = db.racunTab.ToList();
 
 
-            ViewBag.ime = ovlasti[0].sifra;
+            ViewBag.ime = računi.Count();
             return View();
         }
     }

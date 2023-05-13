@@ -181,6 +181,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\ovlasti.cs" />
+    <Compile Include="Models\račun.cs" />
     <Compile Include="Models\servis.cs" />
     <Compile Include="Models\ServisVozilaDB.cs" />
     <Compile Include="Models\vlasnik.cs" />
@@ -239,12 +240,13 @@
     <Content Include="Views\Gost\Kontakt.cshtml" />
     <Content Include="Views\Gost\Usluge.cshtml" />
     <Content Include="Views\Radnik\klijenti.cshtml" />
+    <Content Include="Views\Korisnik\Index.cshtml" />
+    <Content Include="Views\Shared\_LayoutKorisnik.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Views\Admin\" />
     <Folder Include="Views\Default\" />
-    <Folder Include="Views\Korisnik\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap.rtl.min.css.map" />
