@@ -14,9 +14,14 @@ namespace PaupProjekt.Models
     public class ServisVozilaDB:DbContext 
     {
 
-        public DbSet<korisnici> KorisniciB { get; set; }
+
+       public DbSet<vlasnik> vlasnikTab { get; set; }
+
+        public DbSet<vozilo> voziloTab { get; set; }
+
+        public DbSet<servis> servisTab { get; set; }
 
 
-
+        public DbSet<ovlasti>  ovlastiTab { get; set; }
     }
 }

@@ -24,11 +24,14 @@ namespace PaupProjekt.Controllers
         }
 
 
-        public ActionResult Kontakt()
-        {
-            var baza = db.KorisniciB.ToList();
-            ViewBag.ime=
-            baza[0].korIme;
+        public ActionResult Kontakt() {
+            var servis = db.servisTab.ToList();
+            var ovlasti = db.ovlastiTab.ToList();
+            var vozila = db.voziloTab.ToList();
+            var vlasniki = db.vlasnikTab.ToList();
+
+
+            ViewBag.ime = ovlasti[0].sifra;
             return View();
         }
     }
