@@ -181,9 +181,11 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\ovlasti.cs" />
+    <Compile Include="Models\Provjere.cs" />
     <Compile Include="Models\račun.cs" />
     <Compile Include="Models\servis.cs" />
     <Compile Include="Models\ServisVozilaDB.cs" />
+    <Compile Include="Models\StatusE.cs" />
     <Compile Include="Models\vlasnik.cs" />
     <Compile Include="Models\vozilo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

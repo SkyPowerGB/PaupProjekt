@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Web;
+using System.Xml.Linq;
 
 namespace PaupProjekt.Models
 {
@@ -12,14 +13,18 @@ namespace PaupProjekt.Models
     {
 
         [Key]
+        [Display(Name = "ID Vozila")]
         public int VoziloId { get; set; }
 
+        [Display(Name = "Marka vozila")]
         public string Marka { get; set; }
 
+        [Display(Name = "Model vozila")]
         public string Model { get; set; }
-
+        [Display(Name = "Godina proizvodnje vozila")]
         public int GodinaProizvodnje { get; set; }
 
+        [Display(Name = "Registracija vozila")]
         public string Registracija { get; set; }
 
 
