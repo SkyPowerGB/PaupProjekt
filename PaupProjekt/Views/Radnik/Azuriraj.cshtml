@@ -1,0 +1,23 @@
+﻿
+@using PaupProjekt.Models;
+@model servis
+
+@{
+    ViewBag.Title = "Azuriraj";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Azuriraj</h2>
+
+@using (Html.BeginForm("Azuriraj", "Radnik", FormMethod.Post))
+{
+
+    @Html.AntiForgeryToken()
+  
+
+    @Html.LabelFor(model => model.StatusServisa)
+    @Html.TextBoxFor(model => model.StatusServisa, new { @class="form-control"});
+    @Html.ValidationMessageFor(model => model.StatusServisa, "")
+    <button>button</button>
+}
+@Html.ActionLink("nazad", "klijenti", "Radnik")

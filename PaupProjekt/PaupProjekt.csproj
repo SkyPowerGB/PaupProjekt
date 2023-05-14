@@ -185,7 +185,6 @@
     <Compile Include="Models\račun.cs" />
     <Compile Include="Models\servis.cs" />
     <Compile Include="Models\ServisVozilaDB.cs" />
-    <Compile Include="Models\StatusE.cs" />
     <Compile Include="Models\vlasnik.cs" />
     <Compile Include="Models\vozilo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -244,6 +243,8 @@
     <Content Include="Views\Radnik\klijenti.cshtml" />
     <Content Include="Views\Korisnik\Index.cshtml" />
     <Content Include="Views\Shared\_LayoutKorisnik.cshtml" />
+    <Content Include="Views\Radnik\detalji.cshtml" />
+    <Content Include="Views\Radnik\Azuriraj.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

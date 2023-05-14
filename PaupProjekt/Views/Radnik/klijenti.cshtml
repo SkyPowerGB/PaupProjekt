@@ -27,12 +27,12 @@
         @foreach (servis Servis in Model)
         {
             <tr>
-                <th>@Servis.voziloID</th>
+                <th>@Servis.VlasnikVozila.Ime</th>
                 <th>@Servis.Datum</th>
                 <th>@Servis.OpisProblema</th>
                 <th>@Servis.StatusServisa</th>
-                <th>@Html.ActionLink("info", "")</th>
-                <th>@Html.ActionLink("azuriraj", "")</th>
+                <th>@Html.ActionLink("info", "detalji",new {id=Servis.ServisID})</th>
+                <th>@Html.ActionLink("azuriraj", "Azuriraj", new { id = Servis.ServisID})</th>
                 <th>@Html.ActionLink("izbrisi", "")</th>
 
             </tr>
