@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Microsoft.Ajax.Utilities;
+using PaupProjekt.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -8,6 +10,8 @@ namespace PaupProjekt.Controllers
 {
     public class RadnikController : Controller
     {
+        ServisVozilaDB db= new ServisVozilaDB();
+        
         // GET: Radnik
         public ActionResult Index()
         {
@@ -16,7 +20,9 @@ namespace PaupProjekt.Controllers
 
         public ActionResult klijenti() {
 
-            return View();
+         var   baza = db.servisTab.ToList();
+
+            return View(baza);
         }
 
 

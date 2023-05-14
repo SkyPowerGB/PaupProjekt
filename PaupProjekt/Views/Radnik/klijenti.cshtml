@@ -1,35 +1,60 @@
 ﻿
+
+@using PaupProjekt.Models
+@model List<servis>
+
 @{
     ViewBag.Title = "klijenti";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <h2>klijenti</h2>
+@if (Model.Count > 0 )
+{
 
-<table border="1" class="table-bordered , align-content-center " >
-    <tr >
-        <th>vozilo</th>
-        <th>datum</th>
-        <th>usluga</th>
-        <th>status</th>
-    </tr>
-    
-        @for (var i = 0; i < 10; i++) {
+    <table border="1" class="table-bordered , align-content-center ">
+        <tr>
+            <th>vozilo</th>
+            <th>datum</th>
+            <th>usluga</th>
+            <th>status</th>
+        </tr>
+
+
+
+
+
+        @foreach (servis Servis in Model)
+        {
             <tr>
-                <th>Vozilo</th>
-                <th>10.10.2023</th>
-                <th>usluga</th>
-                <th>status</th>
-                <th>ifo</th>
-                <th>azuriraj</th>
-                <th>izbrisi</th>
+                <th>@Servis.voziloID</th>
+                <th>@Servis.Datum</th>
+                <th>@Servis.OpisProblema</th>
+                <th>@Servis.StatusServisa</th>
+                <th>@Html.ActionLink("info", "")</th>
+                <th>@Html.ActionLink("azuriraj", "")</th>
+                <th>@Html.ActionLink("izbrisi", "")</th>
 
             </tr>
-        
-        
+
+
         }
 
 
 
-</table>
+
+
+
+
+    </table>
+
+
+}
+else
+{
+
+
+
+    <p>Nema  zaprimljenih narudzbi</p>
+}
 
