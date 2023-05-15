@@ -13,11 +13,25 @@
 {
 
     @Html.AntiForgeryToken()
-  
+
+
+
+    @Html.LabelFor(model => model.OpisProblema)
+    @Html.EditorFor(model => model.OpisProblema, new { @class = "form-control" });
+    @Html.ValidationMessageFor(model => model.OpisProblema, "", new { @class = "text-danger" })
+
 
     @Html.LabelFor(model => model.StatusServisa)
-    @Html.TextBoxFor(model => model.StatusServisa, new { @class="form-control"});
-    @Html.ValidationMessageFor(model => model.StatusServisa, "")
-    <button>button</button>
+    @Html.EditorFor(model => model.StatusServisa, new { @class = "form-control" });
+    @Html.ValidationMessageFor(model => model.StatusServisa, "", new { @class = "text-danger" })
+    @Html.ValidationSummary();
+    <br />
+    <h2>@Model.ServisID</h2>
+    <br />
+    <h2>@Model.Datum</h2>
+    <br />
+    <h2>@Model.StatusServisa</h2>
+    <br />
+    <button type="submit">button</button>
 }
 @Html.ActionLink("nazad", "klijenti", "Radnik")

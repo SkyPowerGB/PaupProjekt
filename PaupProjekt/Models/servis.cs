@@ -15,6 +15,7 @@ namespace PaupProjekt.Models
         [Key]
 
         [Display(Name ="ID")]
+        [Required(ErrorMessage = "{0} je obavezan")]
         public int ServisID { get; set; }
 
         [Display(Name = "VoziloID")]
@@ -30,17 +31,14 @@ namespace PaupProjekt.Models
         [Required(ErrorMessage = "{0} je obavezan")]
         public DateTime Datum { get; set; }
 
-        [Display(Name = "opisProblema")]
+        [Display(Name = "OpisProblema")]
         [Required(ErrorMessage = "{0} je obavezan")]
-        [StringLength(255, MinimumLength = 2, ErrorMessage =
-        "{0} mora biti duljine minimalno {2} a maksimalno {1} znakova")]
         public string OpisProblema { get; set; }
 
 
         [Display(Name = "StatusServisa")]
         [Required(ErrorMessage = "{0} je obavezan")]
-        [StringLength(30, MinimumLength = 2, ErrorMessage =
-        "{0} mora biti duljine minimalno {2} a maksimalno {1} znakova")]
+        
         public string StatusServisa { get; set; }
 
        public virtual vozilo VoziloVlasnika {  get; set; }

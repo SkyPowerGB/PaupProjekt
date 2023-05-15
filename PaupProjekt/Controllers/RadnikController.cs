@@ -3,9 +3,12 @@ using Org.BouncyCastle.Crypto.Tls;
 using PaupProjekt.Models;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Data;
+
 
 namespace PaupProjekt.Controllers
 {
@@ -60,18 +63,19 @@ namespace PaupProjekt.Controllers
 
 
             [HttpPost]
-        public ActionResult Azuriraj(servis s) {
-          
+        [ValidateAntiForgeryToken]
+        public ActionResult Azuriraj( servis Servis) {
 
             if (ModelState.IsValid)
             {
-                db.Entry(s).State = System.Data.Entity.EntityState.Modified;
+
+                db.Entry(Servis).State =System.Data.Entity.EntityState.Modified;
                 db.SaveChanges();
                 RedirectToAction("klijenti");
-
             }
+            
 
-            return View(s);
+            return View(Servis);
             
            
 
