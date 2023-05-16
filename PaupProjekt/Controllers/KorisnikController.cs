@@ -12,14 +12,17 @@ namespace PaupProjekt.Controllers
         // GET: Korisnik
         ServisVozilaDB db = new ServisVozilaDB();
 
-        public ActionResult Index()
+        public ActionResult Index(int? id)
         {
             var baza = db.servisTab.ToList();
            // dsfsd
             return View(baza);
         }
 
-
+        public ActionResult Usluge() { 
+        
+        return View();  
+        }
         public ActionResult Profil() {
         
         return View();

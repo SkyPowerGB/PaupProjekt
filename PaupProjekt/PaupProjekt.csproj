@@ -174,6 +174,7 @@
     <Compile Include="App_Start\RoleConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\AdminController.cs" />
+    <Compile Include="Controllers\AutentifikacijskiController.cs" />
     <Compile Include="Controllers\GostController.cs" />
     <Compile Include="Controllers\KorisnikController.cs" />
     <Compile Include="Controllers\RadnikController.cs" />
@@ -273,6 +274,7 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Views\Admin\" />
+    <Folder Include="Views\Autentifikacijski\" />
     <Folder Include="Views\Default\" />
   </ItemGroup>
   <ItemGroup>
