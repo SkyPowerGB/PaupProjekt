@@ -47,6 +47,8 @@ namespace PaupProjekt.Controllers
 
         public ActionResult Azuriraj(int? id)
         {
+
+            
             servis nalozi = null;
             if (!id.HasValue ) {
                 RedirectToAction("klijenti");
@@ -57,7 +59,6 @@ namespace PaupProjekt.Controllers
             if(nalozi == null) { RedirectToAction("klijenti"); }
 
 
-
             return View(nalozi);
         }
 
@@ -65,7 +66,7 @@ namespace PaupProjekt.Controllers
             [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Azuriraj( servis Servis) {
-
+            
             if (ModelState.IsValid)
             {
 

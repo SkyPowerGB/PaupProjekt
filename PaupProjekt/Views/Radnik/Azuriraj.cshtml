@@ -14,19 +14,21 @@
 
     @Html.AntiForgeryToken()
 
+    @Html.HiddenFor(model => model.voziloID)
+    @Html.HiddenFor(model => model.VlasnikID)
+
+    @Html.HiddenFor(model => model.ServisID)
+    @Html.HiddenFor(model => model.OpisProblema)
+    @Html.TextBoxFor(model => model.Datum)
 
 
-    @Html.LabelFor(model => model.OpisProblema)
-    @Html.EditorFor(model => model.OpisProblema, new { @class = "form-control" });
-    @Html.ValidationMessageFor(model => model.OpisProblema, "", new { @class = "text-danger" })
-
-
+    @Html.DropDownListFor(model => model.StatusServisa, new SelectList(ListaStatusaE.DopusteneVrijednosi), "Odaberi status")
     @Html.LabelFor(model => model.StatusServisa)
-    @Html.EditorFor(model => model.StatusServisa, new { @class = "form-control" });
+    
     @Html.ValidationMessageFor(model => model.StatusServisa, "", new { @class = "text-danger" })
     @Html.ValidationSummary();
-    <br />
-    <h2>@Model.ServisID</h2>
+
+    <h2>@Model.OpisProblema</h2>
     <br />
     <h2>@Model.Datum</h2>
     <br />
