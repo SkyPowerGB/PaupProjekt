@@ -1,0 +1,34 @@
+﻿
+@using PaupProjekt.Models;
+@model vlasnik
+@{
+    ViewBag.Title = "Registracija";
+}
+
+<h2>Registracija</h2>
+
+@using (@Html.BeginForm("Registracija", "Autentifikacijski", FormMethod.Post))
+{
+
+    @Html.AntiForgeryToken()
+    @Html.LabelFor(model => model.Ime);
+    @Html.TextBoxFor(model => model.Ime);
+
+    @Html.LabelFor(model => model.Prezime);
+    @Html.TextBoxFor(model => model.Prezime);
+    <br />
+    @Html.LabelFor(model => model.Email);
+    @Html.TextBoxFor(model => model.Email);
+    <br />
+    @Html.LabelFor(model => model.LozinkaA);
+    @Html.PasswordFor(model => model.LozinkaA);
+    <br />
+    @Html.LabelFor(model => model.LozinkaPon);
+    @Html.PasswordFor(model => model.LozinkaPon);
+    <br />
+    <button>potvrdi</button>
+   
+}
+
+
+

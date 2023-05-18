@@ -270,11 +270,11 @@
     <Content Include="Views\Korisnik\Index.cshtml" />
     <Content Include="Views\Radnik\detalji.cshtml" />
     <Content Include="Views\Radnik\Azuriraj.cshtml" />
+    <Content Include="Views\Autentifikacijski\Registracija.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Views\Admin\" />
-    <Folder Include="Views\Autentifikacijski\" />
     <Folder Include="Views\Default\" />
   </ItemGroup>
   <ItemGroup>

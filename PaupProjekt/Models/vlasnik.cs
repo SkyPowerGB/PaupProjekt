@@ -28,6 +28,7 @@ namespace PaupProjekt.Models
 
         [Display(Name = "email")]
         [Required(ErrorMessage = "{0} je obavezno")]
+        [EmailAddress]
         public string Email { get; set; }
 
 
@@ -38,6 +39,18 @@ namespace PaupProjekt.Models
         [StringLength(255,MinimumLength =8 ,ErrorMessage ="{0} mora biti duljine minimalno {2} znakova")]
         public string Lozinka{ get; set; }
 
+        [Display(Name = "Lozinka")]
+        [DataType(DataType.Password)]
+        [Required]
+        [NotMapped]
+        public string LozinkaA { get; set; }
+
+        [Display(Name = "Ponovite lozinku")]
+        [DataType(DataType.Password)]
+        [Required]
+        [NotMapped]
+        [Compare("LozinkaA",ErrorMessage ="Lozinke se ne podudaraju")]
+        public string LozinkaPon { get; set; }
 
        
         public string ovlast { get; set; }
