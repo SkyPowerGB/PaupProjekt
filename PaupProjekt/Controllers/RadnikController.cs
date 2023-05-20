@@ -22,9 +22,15 @@ namespace PaupProjekt.Controllers
             return View();
         }
 
-        public ActionResult klijenti() {
-
+        public ActionResult klijenti(string status) {
             var baza = db.servisTab.ToList();
+            if (!String.IsNullOrWhiteSpace(status))
+            {
+                baza = baza.Where(x => x.StatusServisa.Contains(status)).ToList();
+
+            }
+
+            
 
             return View(baza);
         }

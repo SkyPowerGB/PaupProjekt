@@ -9,8 +9,25 @@
 }
 
 <h2>klijenti</h2>
-@if (Model.Count > 0 )
+
+
+@using (Html.BeginForm("klijenti", "radnik", FormMethod.Get))
 {
+
+
+
+
+    @Html.DropDownList("Status", new SelectList(ListaStatusaE.DopusteneVrijednosi))
+
+    <button type="submit"> traži </button>
+
+}
+
+
+@if (Model.Count > 0)
+{
+
+
 
     <table border="1" class="table-bordered , align-content-center ">
         <tr>
@@ -31,8 +48,8 @@
                 <th>@Servis.Datum</th>
                 <th>@Servis.OpisProblema</th>
                 <th>@Servis.StatusServisa</th>
-                <th>@Html.ActionLink("info", "detalji",new {id=Servis.ServisID})</th>
-                <th>@Html.ActionLink("azuriraj", "Azuriraj", new { id = Servis.ServisID})</th>
+                <th>@Html.ActionLink("info", "detalji", new { id = Servis.ServisID })</th>
+                <th>@Html.ActionLink("azuriraj", "Azuriraj", new { id = Servis.ServisID })</th>
                 <th>@Html.ActionLink("izbrisi", "")</th>
 
             </tr>

@@ -10,6 +10,8 @@
 @using (@Html.BeginForm("Registracija", "Autentifikacijski", FormMethod.Post))
 {
 
+
+
     @Html.AntiForgeryToken()
     @Html.LabelFor(model => model.Ime);
     @Html.TextBoxFor(model => model.Ime);
@@ -26,8 +28,9 @@
     @Html.LabelFor(model => model.LozinkaPon);
     @Html.PasswordFor(model => model.LozinkaPon);
     <br />
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
     <button>potvrdi</button>
-   
+
 }
 
 

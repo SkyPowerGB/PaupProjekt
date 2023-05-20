@@ -13,46 +13,51 @@ namespace PaupProjekt.Controllers
     {
         // GET: Autentifikacijski
         ServisVozilaDB db = new ServisVozilaDB();
-        
+        [HttpGet]
         public ActionResult Registracija()
         {
-           
+
+            ViewBag.novo = false;
 
 
-
-            return View() ;
+            return View( ) ;
         }
 
         [HttpPost]
-        public ActionResult Registracija(vlasnik v)
+        public ActionResult Registracija( vlasnik v)
         {
-            if (!String.IsNullOrWhiteSpace(v.Email)) {
-                bool racunPostoji = db.vlasnikTab.Any(x=>x.Email==v.Email);
-            if(racunPostoji)
-                {
-                    ModelState.AddModelError("Email","email zauzet molim da se prijavite");
+            v.Lozinka = v.LozinkaA;
 
-                }
-
-            }
-            if (ModelState.IsValid) {
-
-                v.Lozinka = v.LozinkaA;
-
-               
-                db.vlasnikTab.Add(v);
-                db.SaveChanges();
-
+            var emailZauzet = db.vlasnikTab.Any(x => x.Email == v.Email);
+            if (emailZauzet)
+            {
+                ModelState.AddModelError("Email", "Email je već zauzet");
             }
 
-            return View(v);
+            db.vlasnikTab.Add(v);
+                    db.SaveChanges();
+
+
+                
+            
+           
+              
+          
+            return View();
+            
         }
 
 
         public ActionResult Login()
         {
+
+
             return View();
         }
+
+       
+
+
 
         public ActionResult PromjenaLozinke(int? id)
         {
