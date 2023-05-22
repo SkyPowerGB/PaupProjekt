@@ -1,0 +1,36 @@
+﻿@using PaupProjekt.Models;
+@model List<vlasnik>
+@{
+    ViewBag.Title = "Korisnici";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Korisnici</h2>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+        <th>Prezime Ime</th>
+        <th>email</th>
+
+        <th>ovlast</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (vlasnik kor in Model)
+        {
+            <tr>
+                <td>@kor.PrezimeIme</td>
+                <td>@kor.Email</td>
+                <td>@(kor.Ovlast?.naziv)</td>
+            </tr>
+        }
+
+
+
+    </tbody>
+
+
+</table>
+
+

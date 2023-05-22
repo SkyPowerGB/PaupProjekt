@@ -13,6 +13,7 @@ namespace PaupProjekt.Models
     {
 
         [Key]
+        [Column("sifra")]
         public string sifra { get; set; }
         public string naziv { get; set; }
 

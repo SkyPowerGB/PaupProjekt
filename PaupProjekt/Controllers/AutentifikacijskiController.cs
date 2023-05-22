@@ -33,14 +33,15 @@ namespace PaupProjekt.Controllers
             {
                 ModelState.AddModelError("Email", "Email je već zauzet");
             }
+            if (ModelState.IsValid)
+            {
+                db.vlasnikTab.Add(v);
+                db.SaveChanges();
 
-            db.vlasnikTab.Add(v);
-                    db.SaveChanges();
 
 
-                
-            
-           
+
+            }
               
           
             return View();

@@ -12,15 +12,15 @@ namespace PaupProjekt.Models
     public class vlasnik
     {
         [Key]
-       [ Display(Name = "Vlasnik ID")]
-      
+        [Display(Name = "Vlasnik ID")]
+
         public int VlasnikID { get; set; }
 
         [Display(Name = "Ime")]
         [Required(ErrorMessage = "{0} je obavezno")]
         public string Ime { get; set; }
 
-        
+
         [Display(Name = "Prezime")]
         [Required(ErrorMessage = "{0} je obavezno")]
         public string Prezime { get; set; }
@@ -28,23 +28,23 @@ namespace PaupProjekt.Models
 
         [Display(Name = "email")]
         [Required(ErrorMessage = "{0} je obavezno")]
-        
+
         public string Email { get; set; }
 
 
 
         [Display(Name = "lozinka")]
-        [Required(ErrorMessage ="{0} je obavezno")]
+        [Required(ErrorMessage = "{0} je obavezno")]
 
-      
-        public string Lozinka{ get; set; }
+
+        public string Lozinka { get; set; }
 
 
 
 
 
         [Display(Name = "Lozinka")]
-       
+
         [Required]
         [NotMapped]
         public string LozinkaA { get; set; }
@@ -53,14 +53,31 @@ namespace PaupProjekt.Models
 
 
         [Display(Name = "Ponovite lozinku")]
-    
+
         [Required]
         [NotMapped]
-        [Compare("LozinkaA",ErrorMessage ="Lozinke se ne podudaraju")]
+        [Compare("LozinkaA", ErrorMessage = "Lozinke se ne podudaraju")]
         public string LozinkaPon { get; set; }
 
-       
-        public string ovlast { get; set; }
+
+
+        public string PrezimeIme {
+            get {
+                return Prezime + " " + Ime;
+            }
+
+        }
+        [Required]
+        [Column("ovlast")]
+        [ForeignKey("Ovlast")]
+        public string sifraOvlast { get; set; }
+
+        public virtual ovlasti Ovlast{get; set;}
+
+
+
+
+
 
     }
 }
