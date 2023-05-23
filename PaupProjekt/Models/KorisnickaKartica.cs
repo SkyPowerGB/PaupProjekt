@@ -1,52 +1,23 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
+using System.Xml.Linq;
 
 namespace PaupProjekt.Models
 {
     public class KorisnickaKartica
     {
-        public static int idKorisnika { get; set; }
-        public static byte razinaPristupa { get; set; }
-
-        KorisnickaKartica(int idKorisnika ,string ovlast) {
-            if (!string.IsNullOrWhiteSpace(ovlast))
-            {
-
-                switch(ovlast)
-                {
-
-                    case "Admin":
-
-                        razinaPristupa = 3;
-                        break;
-
-                    case "Radnik":
-                        razinaPristupa = 2;
-                        break;
-
-                    case "Korisnik":
-                        razinaPristupa = 1;
-                        break;
-
-                    default:
-                        razinaPristupa = 0;
-
-                        break;
 
 
-                }
-                
-
-
-                KorisnickaKartica.idKorisnika = idKorisnika;
-
-            }
-
-
-        
-        }
-
+        [Required]
+        [Display(Name = "Email ")]
+        [EmailAddress]
+        public string Email { get; set; }
+        [Required]
+        [DataType(DataType.Password)]
+        [Display(Name = "Lozinka")]
+        public string Lozinka { get; set; }
     }
 }
