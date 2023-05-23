@@ -28,13 +28,13 @@ namespace PaupProjekt.Models
 
         [Display(Name = "email")]
         [Required(ErrorMessage = "{0} je obavezno")]
-        [EmailAddress]
+      
         public string Email { get; set; }
 
 
 
-        [Display(Name = "lozinka")]
-        [Required(ErrorMessage = "{0} je obavezno")]
+        
+      
 
 
         public string Lozinka { get; set; }
@@ -44,7 +44,7 @@ namespace PaupProjekt.Models
 
 
         [Display(Name = "Lozinka")]
-
+       
         [Required]
         [NotMapped]
         public string LozinkaA { get; set; }
@@ -53,7 +53,7 @@ namespace PaupProjekt.Models
 
 
         [Display(Name = "Ponovite lozinku")]
-
+     
         [Required]
         [NotMapped]
         [Compare("LozinkaA", ErrorMessage = "Lozinke se ne podudaraju")]
@@ -67,8 +67,9 @@ namespace PaupProjekt.Models
             }
 
         }
-        [Required]
+       
         [Column("ovlast")]
+        [Display(Name = "Ovlast")]
         [ForeignKey("Ovlast")]
         public string sifraOvlast { get; set; }
 

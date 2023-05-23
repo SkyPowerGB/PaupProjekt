@@ -14,24 +14,35 @@
 
     @Html.AntiForgeryToken()
     @Html.LabelFor(model => model.Ime);
-    @Html.TextBoxFor(model => model.Ime);
+    @Html.EditorFor(model => model.Ime);
+    @Html.ValidationMessageFor(model => model.Ime, "", new { @class = "text-danger" });
 
     @Html.LabelFor(model => model.Prezime);
     @Html.TextBoxFor(model => model.Prezime);
+    @Html.ValidationMessageFor(model => model.Prezime, "", new { @class = "text-danger" });
     <br />
     @Html.LabelFor(model => model.Email);
-    @Html.TextBoxFor(model => model.Email);
+    @Html.EditorFor(model => model.Email);
+    @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" });
     <br />
     @Html.LabelFor(model => model.LozinkaA);
-    @Html.PasswordFor(model => model.LozinkaA);
+
+    @Html.EditorFor(model => model.LozinkaA);
+    @Html.ValidationMessageFor(model => model.LozinkaA, "", new { @class = "text-danger" });
     <br />
     @Html.LabelFor(model => model.LozinkaPon);
-    @Html.PasswordFor(model => model.LozinkaPon);
-    <br />
-    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-    <button>potvrdi</button>
-
+    @Html.EditorFor(model => model.LozinkaPon);
+    @Html.ValidationMessageFor(model => model.LozinkaPon, "", new { @class = "text-danger" });
+    
+ 
+    <button>
+        potvrdi
+    </button>
 }
+
+
+
+
 
 
 

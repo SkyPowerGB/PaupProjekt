@@ -277,6 +277,7 @@
     <Content Include="Views\Radnik\Azuriraj.cshtml" />
     <Content Include="Views\Autentifikacijski\Registracija.cshtml" />
     <Content Include="Views\Admin\Korisnici.cshtml" />
+    <Content Include="Views\Autentifikacijski\Login.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
