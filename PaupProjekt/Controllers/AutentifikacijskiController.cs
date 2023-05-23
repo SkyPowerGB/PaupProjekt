@@ -118,7 +118,7 @@ namespace PaupProjekt.Controllers
                         {
                             return Redirect(returnUrl);
                         }
-                        return RedirectToAction("Index", "Home");
+                        return RedirectToAction("Index", "Korisnik");
                     }
                 }
 

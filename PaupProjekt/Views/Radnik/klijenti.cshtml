@@ -33,10 +33,11 @@
         <thead>
             <tr>
 
-            <td>vozilo</td>
-            <td>datum</td>
-            <td>usluga</td>
-            <td>status</td>
+                <td>Vozilo vlasnika</td>
+                <td>marka</td>
+                <td>datum</td>
+                <td>usluga</td>
+                <td>status</td>
             </tr>
         </thead>
 
@@ -47,13 +48,14 @@
             @foreach (servis Servis in Model)
             {
                 <tr>
-                <td>@Servis.VlasnikVozila.Ime</td>
-                <td>@Servis.Datum</td>
-                <td>@Servis.OpisProblema</td>
-                <td>@Servis.StatusServisa</td>
-                <td>@Html.ActionLink("info", "detalji", new { id = Servis.ServisID })</td>
-                <td>@Html.ActionLink("azuriraj", "Azuriraj", new { id = Servis.ServisID })</td>
-                <td>@Html.ActionLink("izbrisi", "")</td>
+                    <td>@Servis.VlasnikVozila.PrezimeIme</td>
+                    <td>@Servis.VoziloVlasnika.Marka</td>
+                    <td>@Servis.Datum</td>
+                    <td>@Servis.OpisProblema</td>
+                    <td>@Servis.StatusServisa</td>
+                    <td>@Html.ActionLink("info", "detalji", new { id = Servis.ServisID })</td>
+                    <td>@Html.ActionLink("azuriraj", "Azuriraj", new { id = Servis.ServisID })</td>
+                    <td>@Html.ActionLink("izbrisi", "")</td>
 
                 </tr>
 
