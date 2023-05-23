@@ -1,9 +1,11 @@
-﻿using PaupProjekt.Models;
+﻿using Antlr.Runtime.Tree;
+using PaupProjekt.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Services.Description;
 
 namespace PaupProjekt.Controllers
 {
@@ -24,5 +26,72 @@ namespace PaupProjekt.Controllers
         return View(kor);
         
         }
+        [AllowAnonymous]
+        public ActionResult uredi(int? id) {
+            vlasnik v=null;
+            if (id.HasValue)
+            {
+           v=  baza.vlasnikTab.FirstOrDefault(x => x.VlasnikID == id);
+               ViewBag.Ovlasti=baza.ovlastiTab.ToList();
+            }
+
+            
+
+
+        
+        return View(v);
+        }
+
+        [HttpPost]
+        [AllowAnonymous]
+        public ActionResult uredi(vlasnik v)
+        {
+
+
+
+            if (ModelState.IsValid) {
+
+                baza.Entry(v).State = System.Data.Entity.EntityState.Modified;
+                baza.SaveChanges();
+
+            }
+
+
+          return  RedirectToAction("Korisnici");
+           
+        }
+
+        public ActionResult izbrisi(int? id)
+        {
+            if (id.HasValue) { 
+            vlasnik v =baza.vlasnikTab.FirstOrDefault(x=>x.VlasnikID==id);
+                if (v == null)
+                {
+
+                    return HttpNotFound();
+
+                }
+                else {
+
+                    ViewBag.Title = "Jeste li sigurni da želite izbrisat korisnika " + v.PrezimeIme;
+                    return View(v);
+                }
+            }
+
+
+            return RedirectToAction("Korisnici");
+        }
+
+        [HttpPost]
+        public ActionResult izbrisi(int id) {
+            vlasnik v = baza.vlasnikTab.FirstOrDefault(x=>x.VlasnikID==id);
+
+            if(v == null) { return HttpNotFound(); }
+            baza.vlasnikTab.Remove(v);
+            baza.SaveChanges();
+            return RedirectToAction("Korisnici");
+        
+        }
+
     }
 }

@@ -43,9 +43,9 @@ namespace PaupProjekt.Models
 
 
 
-        [Display(Name = "Lozinka")]
-       
-        [Required]
+        [Display(Name = "Unesite Lozinku")]
+        [DataType(DataType.Password)]
+    
         [NotMapped]
         public string LozinkaA { get; set; }
 
@@ -53,8 +53,8 @@ namespace PaupProjekt.Models
 
 
         [Display(Name = "Ponovite lozinku")]
-     
-        [Required]
+        [DataType(DataType.Password)]
+    
         [NotMapped]
         [Compare("LozinkaA", ErrorMessage = "Lozinke se ne podudaraju")]
         public string LozinkaPon { get; set; }

@@ -13,8 +13,14 @@ namespace PaupProjekt.Models
     {
 
         [Key]
+        [Display(Name ="sifra")]
+        [Required(ErrorMessage ="{0} JE OBAVEZNA")]
         [Column("sifra")]
         public string sifra { get; set; }
+
+        [Display(Name = "naziv")]
+        [Required(ErrorMessage = "{0} JE OBAVEZNA")]
+        [Column("naziv")]
         public string naziv { get; set; }
 
 

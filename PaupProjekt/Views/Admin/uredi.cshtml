@@ -1,0 +1,47 @@
+﻿@using PaupProjekt.Models
+
+@model vlasnik
+@{
+    ViewBag.Title = "uredi";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>uredi</h2>
+
+
+@using (Html.BeginForm("uredi", "Admin", FormMethod.Post))
+{
+
+    @Html.HiddenFor(model => model.Email);
+    @Html.HiddenFor(model => model.VlasnikID);
+    @Html.HiddenFor(model => model.Prezime);
+    @Html.HiddenFor(model => model.Ime);
+
+    @Html.HiddenFor(model => model.LozinkaA);
+
+    @Html.HiddenFor(model => model.LozinkaPon);
+    @Html.HiddenFor(model => model.Lozinka);
+
+
+
+
+
+
+
+    @Html.DropDownListFor(model => model.sifraOvlast, new SelectList(Liste.ListaOvlasti));
+
+    @Html.ValidationSummary()
+
+    <button>Spremi promjene</button>
+}
+
+
+
+
+
+
+
+
+
+
+

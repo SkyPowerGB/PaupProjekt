@@ -19,8 +19,29 @@
                 <ul class="navbar-nav flex-grow-1">
                     <li>@Html.ActionLink("Početna", "Index", "Gost", new { area = "" }, new { @class = "nav-link" })</li>
                     <li>@Html.ActionLink("Usluge", "Usluge", "Gost", new { area = "" }, new { @class = "nav-link" })</li>
-                
+
                     <li>@Html.ActionLink("Kontakt", "Kontakt", "Gost", new { area = "" }, new { @class = "nav-link" })</li>
+                </ul>
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="navbar-nav flex-grow-1 navbar-right navbar-text">
+                    @if (User.Identity.IsAuthenticated)
+                    {
+
+
+                        <li>@Html.ActionLink(((User as PaupProjekt.Misc.LogiraniKorisnik).PrezimeIme), "Index", "Korisnik")</li>
+                        <li>@Html.ActionLink("Odjava", "Odjava", "Autentifikacijski")</li>
+
+                    }
+                    else
+                    {
+
+                        <li>@Html.ActionLink("Prijava", "Login", "Autentifikacijski")</li>
+                        <li>|</li>
+                        <li>@Html.ActionLink("Registracija", "Registracija", "Autentifikacijski")</li>
+
+                    }
+
                 </ul>
             </div>
         </div>

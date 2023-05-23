@@ -17,6 +17,8 @@ namespace PaupProjekt.Controllers
     {
         // GET: Autentifikacijski
         ServisVozilaDB baza = new ServisVozilaDB();
+
+
         [HttpGet]
         [AllowAnonymous]
         public ActionResult Registracija()
@@ -56,7 +58,8 @@ namespace PaupProjekt.Controllers
 
                     baza.vlasnikTab.Add(v);
                     baza.SaveChanges();
-
+                 return  RedirectToAction("RegistracijaUspjesna");
+                   
                 }
             }
 
@@ -65,8 +68,14 @@ namespace PaupProjekt.Controllers
               
           var ovlasti = baza.ovlastiTab.OrderBy(x=>x.naziv).ToList();
             ViewBag.Ovlast = ovlasti;
+           
             return View(v);
             
+        }
+        [AllowAnonymous]
+        public ActionResult RegistracijaUspjesna() {
+
+            return View();
         }
 
         [HttpGet]
@@ -129,18 +138,22 @@ namespace PaupProjekt.Controllers
         }
 
 
-
-
-
-
-
-
-
         public ActionResult PromjenaLozinke(int? id)
         {
 
 
             return View();
         }
+
+
+
+
+        public ActionResult Odjava()
+        {
+            FormsAuthentication.SignOut();
+            Session.Abandon();
+            return RedirectToAction("Index", "Gost");
+        }
+
     }
 }

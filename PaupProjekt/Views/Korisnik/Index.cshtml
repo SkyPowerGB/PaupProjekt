@@ -1,7 +1,7 @@
 ﻿
 @using PaupProjekt.Models
 
-@model List<servis>
+@model  servis
 
 @{
     ViewBag.Title = "Index";
@@ -11,7 +11,12 @@
 <h2>Početna korisnik</h2>
 
     
-    @if (Model.Count > 0) {
+    @if (Model == null)
+    {
+
+    }
+    else
+    {
 
 
 
@@ -25,23 +30,22 @@
         <th>Status </th>
 
     </tr>
-    
-    @foreach (var voziloS in Model) {
+   
     <tr>
 
 
-        <th>@voziloS.voziloID    </th>
-        <th>@voziloS.Datum  </th>
-        <th>@voziloS.OpisProblema </th>
-        <th>@voziloS.StatusServisa </th>
+        <th>@Model.voziloID   </th>
+        <th>@Model.Datum  </th>
+        <th>@Model.OpisProblema </th>
+        <th>@Model.StatusServisa </th>
 
 
 
-    </tr>}
+    </tr>
 
-
+    
 </table>
-    
-    
+
     }
 
+@ViewBag.EMAIL

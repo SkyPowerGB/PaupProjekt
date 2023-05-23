@@ -27,11 +27,11 @@
     <br />
     @Html.LabelFor(model => model.LozinkaA);
 
-    @Html.EditorFor(model => model.LozinkaA);
+    @Html.PasswordFor(model => model.LozinkaA);
     @Html.ValidationMessageFor(model => model.LozinkaA, "", new { @class = "text-danger" });
     <br />
     @Html.LabelFor(model => model.LozinkaPon);
-    @Html.EditorFor(model => model.LozinkaPon);
+    @Html.PasswordFor(model => model.LozinkaPon);
     @Html.ValidationMessageFor(model => model.LozinkaPon, "", new { @class = "text-danger" });
     
  

@@ -1,4 +1,5 @@
-﻿using PaupProjekt.Models;
+﻿using PaupProjekt.Misc;
+using PaupProjekt.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,12 +12,20 @@ namespace PaupProjekt.Controllers
     {
         // GET: Korisnik
         ServisVozilaDB db = new ServisVozilaDB();
-
+        [Authorize]
         public ActionResult Index(int? id)
         {
-            var baza = db.servisTab.ToList();
+           var Email=HttpContext.User.Identity.Name;
+
+           vlasnik Trazeni= db.vlasnikTab.FirstOrDefault(x=>x.Email==Email);
+
+
+            var servisTrazenog = db.servisTab.FirstOrDefault(x => x.VlasnikID == Trazeni.VlasnikID);
+
+
+
            // dsfsd
-            return View(baza);
+            return View(servisTrazenog);
         }
 
         public ActionResult Usluge() { 

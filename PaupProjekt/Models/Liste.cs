@@ -18,7 +18,7 @@ namespace PaupProjekt.Models
                 ListaOvlasti = new List<string>
                 {
                     "AD",
-                    "MD",
+                    "MO",
                     "KO"
                 };
                 vrijednostiPost = true;

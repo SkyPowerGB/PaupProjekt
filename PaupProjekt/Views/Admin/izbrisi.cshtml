@@ -1,0 +1,18 @@
+﻿@using PaupProjekt.Models;
+@model vlasnik
+@{
+
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>@ViewBag.Title</h2>
+@using (Html.BeginForm("izbrisi", "Admin"))
+{
+    @Html.AntiForgeryToken();
+    <button type="submit" class="btn btn-danger">
+        <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>Izbriši
+    </button>
+    @Html.ActionLink("Odustani", "Korisnici");
+}
+
+
