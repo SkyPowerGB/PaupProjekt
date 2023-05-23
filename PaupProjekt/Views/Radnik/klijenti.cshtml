@@ -29,41 +29,45 @@
 
 
 
-    <table border="1" class="table-bordered , align-content-center ">
-        <tr>
-            <th>vozilo</th>
-            <th>datum</th>
-            <th>usluga</th>
-            <th>status</th>
-        </tr>
-
-
-
-
-
-        @foreach (servis Servis in Model)
-        {
+    <table class="table table-bordered">
+        <thead>
             <tr>
-                <th>@Servis.VlasnikVozila.Ime</th>
-                <th>@Servis.Datum</th>
-                <th>@Servis.OpisProblema</th>
-                <th>@Servis.StatusServisa</th>
-                <th>@Html.ActionLink("info", "detalji", new { id = Servis.ServisID })</th>
-                <th>@Html.ActionLink("azuriraj", "Azuriraj", new { id = Servis.ServisID })</th>
-                <th>@Html.ActionLink("izbrisi", "")</th>
 
+            <td>vozilo</td>
+            <td>datum</td>
+            <td>usluga</td>
+            <td>status</td>
             </tr>
-
-
-        }
-
+        </thead>
 
 
 
+        <tbody>
+
+            @foreach (servis Servis in Model)
+            {
+                <tr>
+                <td>@Servis.VlasnikVozila.Ime</td>
+                <td>@Servis.Datum</td>
+                <td>@Servis.OpisProblema</td>
+                <td>@Servis.StatusServisa</td>
+                <td>@Html.ActionLink("info", "detalji", new { id = Servis.ServisID })</td>
+                <td>@Html.ActionLink("azuriraj", "Azuriraj", new { id = Servis.ServisID })</td>
+                <td>@Html.ActionLink("izbrisi", "")</td>
+
+                </tr>
+
+
+            }
+        </tbody>
 
 
 
-    </table>
+
+
+
+
+        </table>
 
 
 }
