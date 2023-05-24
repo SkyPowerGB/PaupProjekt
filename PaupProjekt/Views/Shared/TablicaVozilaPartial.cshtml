@@ -1,0 +1,39 @@
+﻿@using PaupProjekt.Models
+@model List<vozilo>
+
+
+    <table class="table table-striped">
+<thead>
+    <tr>
+        <th> Marka   </th>
+        <th> Model  </th>
+        <th> Registracija  </th>
+        <th> Godina Proizvodnje  </th>
+    </tr>
+
+
+
+</thead>
+
+<tbody>
+    @foreach (vozilo Vozilo in Model)
+    {
+
+        <tr>
+            <td>@Vozilo.Marka</td>
+            <td>@Vozilo.Model</td>
+
+            <td>@Vozilo.Registracija</td>
+
+            <td>@Vozilo.GodinaProizvodnje</td>
+
+
+        </tr>
+
+
+
+
+    }
+</tbody>
+</table>
+

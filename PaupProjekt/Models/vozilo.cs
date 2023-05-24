@@ -27,6 +27,14 @@ namespace PaupProjekt.Models
         [Display(Name = "Registracija vozila")]
         public string Registracija { get; set; }
 
+        [Column("VlasnikID")]
+        [Display(Name = "ID vlasnika")]
+        public int VlasnikID { get; set; }
+
+        [ForeignKey("VlasnikID")]
+        public virtual vlasnik voziloVlasnika { get; set; }
+
+
 
     }
 }

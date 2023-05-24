@@ -1,0 +1,23 @@
+﻿@using PaupProjekt.Models
+@model List<vozilo>
+@{
+    ViewBag.Title = "Vozila";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Vozila</h2>
+@if (Model.Count >= 1)
+{
+    @Html.Partial("TablicaVozilaPartial", Model)
+
+}
+
+
+
+ 
+ 
+
+ else {
+
+<h3>nema vozila</h3>
+ }
