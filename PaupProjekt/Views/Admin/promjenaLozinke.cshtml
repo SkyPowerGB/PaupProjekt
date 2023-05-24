@@ -1,0 +1,27 @@
+﻿@using PaupProjekt.Models
+@model vlasnik
+@{
+    ViewBag.Title = "promjenaLozinke";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>promjenaLozinke</h2>
+
+@using (Html.BeginForm("promjenaLozinke", "Admin", FormMethod.Post))
+{
+
+    @Html.HiddenFor(model => model.sifraOvlast);
+    @Html.HiddenFor(model => model.VlasnikID);
+    @Html.HiddenFor(model => model.Lozinka);
+    @Html.HiddenFor(model => model.Email);
+    @Html.HiddenFor(model => model.Ime);
+
+    @Html.HiddenFor(model => model.Prezime);
+    @Html.LabelFor(model => model.LozinkaA);
+    @Html.PasswordFor(Model => Model.LozinkaA);
+    <br />
+    @Html.LabelFor(model => model.LozinkaPon);
+    @Html.PasswordFor(Model => Model.LozinkaPon);
+    <button>u redu</button>
+
+}

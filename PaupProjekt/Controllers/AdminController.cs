@@ -93,5 +93,54 @@ namespace PaupProjekt.Controllers
         
         }
 
+
+        public ActionResult promjenaLozinke(int? id) { 
+        if(id.HasValue)
+            {
+               var korisnik= baza.vlasnikTab.FirstOrDefault(x=>x.VlasnikID==id);
+
+                if (korisnik != null) {
+
+
+                    return View(korisnik);
+
+
+                }
+
+            }
+
+            return RedirectToAction("Korisnici","Admin");
+       
+        
+        }
+        [HttpPost]
+        public ActionResult promjenaLozinke(vlasnik v)
+        {
+            if (!String.IsNullOrWhiteSpace(v.LozinkaA))
+            {
+
+                v.Lozinka=Misc.PasswordHelper.IzracunajHash(v.LozinkaA);
+
+
+
+
+                if (ModelState.IsValid)
+                {
+
+                    baza.Entry(v).State = System.Data.Entity.EntityState.Modified;
+                    baza.SaveChanges();
+                    return RedirectToAction("Korisnici");
+
+                }
+
+            }
+
+            return View(v);
+
+        }
+
+
+
+
     }
 }
