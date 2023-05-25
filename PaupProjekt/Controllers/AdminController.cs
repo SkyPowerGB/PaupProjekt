@@ -84,8 +84,8 @@ namespace PaupProjekt.Controllers
 
         [HttpPost]
         public ActionResult izbrisi(int id) {
-            vlasnik v = baza.vlasnikTab.FirstOrDefault(x=>x.VlasnikID==id);
 
+            vlasnik v = baza.vlasnikTab.FirstOrDefault(x=>x.VlasnikID==id);
             if(v == null) { return HttpNotFound(); }
             baza.vlasnikTab.Remove(v);
             baza.SaveChanges();
