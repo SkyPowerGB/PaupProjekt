@@ -1,4 +1,5 @@
-﻿using PaupProjekt.Misc;
+﻿using Microsoft.Ajax.Utilities;
+using PaupProjekt.Misc;
 using PaupProjekt.Models;
 using System;
 using System.Collections.Generic;
@@ -43,8 +44,6 @@ namespace PaupProjekt.Controllers
         return View();
         }
 
-
-
         public ActionResult Vozila() {
 
             var Email = HttpContext.User.Identity.Name;
@@ -53,40 +52,72 @@ namespace PaupProjekt.Controllers
             
             return View(Vozila);
         }
+        [Authorize]
+      
 
-        public ActionResult izbrisiVozilo(int? id)
-        {
-            if(id.HasValue)
+        public ActionResult obrisiVozilo(int? idVozila) {
+     
+            if (idVozila.HasValue)
             {
-
                 ViewBag.Title = "Jeste li sigurni da želite izbrisat Vozilo ";
-
-                vozilo v=  baza.voziloTab.FirstOrDefault(x=>x.VoziloId==id);
-                if (v != null)
+                vozilo v = baza.voziloTab.FirstOrDefault(x => x.VoziloId == idVozila);
+                servis s = baza.servisTab.FirstOrDefault(x=>x.voziloID==idVozila);
+                if (s == null)
                 {
                     return View(v);
                 }
             }
-
-
+            ViewBag.Title = "Greška Vozilo je naručeno";
+            
             return View();
         }
 
         [HttpPost]
-        public ActionResult izbrisiVozilo(vozilo voz)
-        {
-            var servisi = baza.servisTab.FirstOrDefault(x => x.voziloID == voz.VoziloId);
-            if (servisi == null) {
-               
-                baza.voziloTab.Remove(voz);
-                baza.SaveChanges();
 
+        public ActionResult obrisiVozilo(int id) {
+
+            vozilo v = baza.voziloTab.FirstOrDefault(x => x.VoziloId== id);
+            servis s = baza.servisTab.FirstOrDefault(x => x.voziloID == id);
+            if (v == null) { return HttpNotFound("nije naden vlasnik vozila"); }
+            if (s == null)
+            {
+                baza.voziloTab.Remove(v);
+                baza.SaveChanges();
+            }
+            return RedirectToAction("Vozila");
+        
+        }
+      
+
+        [Authorize]
+        public ActionResult dodajVozilo() { 
+        
+       
+        return View();
+        }
+        [Authorize]
+        [HttpPost]
+        public ActionResult dodajVozilo(vozilo voz)
+
+        {
+            var Email = HttpContext.User.Identity.Name;
+            vlasnik Trazeni = baza.vlasnikTab.FirstOrDefault(x => x.Email == Email);
+
+            voz.VlasnikID = Trazeni.VlasnikID;
+
+
+
+            if (ModelState.IsValid) { 
+            
+            
+            baza.voziloTab.Add(voz);
+                baza.SaveChanges();
             }
 
 
 
-            return View("Greška");
-        }
 
+            return RedirectToAction("Vozila");
+        }
     }
 }

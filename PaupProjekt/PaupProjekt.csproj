@@ -291,8 +291,8 @@
     <Content Include="Views\Admin\promjenaLozinke.cshtml" />
     <Content Include="Views\Korisnik\Profil.cshtml" />
     <Content Include="Views\Korisnik\Vozila.cshtml" />
-    <Content Include="Views\Shared\TablicaVozilaPartial.cshtml" />
-    <Content Include="Views\Korisnik\izbrisiVozilo.cshtml" />
+    <Content Include="Views\Korisnik\dodajVozilo.cshtml" />
+    <Content Include="Views\Korisnik\obrisiVozilo.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

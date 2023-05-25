@@ -1,0 +1,29 @@
+﻿@using PaupProjekt.Models
+
+@model vozilo
+
+@{
+    ViewBag.Title = "dodajVozilo";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>dodajVozilo</h2>
+
+@using (Html.BeginForm("dodajVozilo", "Korisnik", FormMethod.Post))
+{
+
+
+    @Html.LabelFor(model => model.Model);
+    @Html.TextBoxFor(model => model.Model);
+    <br />
+    @Html.LabelFor(model => model.Marka);
+    @Html.TextBoxFor(model => model.Marka);
+    <br />
+    @Html.LabelFor(model => model.Registracija);
+    @Html.TextBoxFor(model => model.Registracija);
+
+    <br />
+    @Html.LabelFor(model => model.GodinaProizvodnje);
+    @Html.TextBoxFor(model => model.GodinaProizvodnje);
+    <button>u redu</button>
+}

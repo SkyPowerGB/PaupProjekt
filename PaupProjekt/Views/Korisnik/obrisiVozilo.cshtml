@@ -1,0 +1,19 @@
+﻿@using PaupProjekt.Models
+@model vozilo 
+@{
+
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>obrisiVozilo</h2>
+
+@ViewBag.Title
+@using (Html.BeginForm("obrisiVozilo", "Korisnik"))
+{
+    @Html.AntiForgeryToken();
+   @Html.Hidden("id",Model.VoziloId);
+    <button type="submit" class="btn btn-danger">
+        <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>Izbriši
+    </button>
+    @Html.ActionLink("Odustani", "Vozila");
+}

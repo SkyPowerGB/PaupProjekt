@@ -6,18 +6,55 @@
 }
 
 <h2>Vozila</h2>
+@Html.ActionLink("+Dodaj vozilo", "dodajVozilo");
+
 @if (Model.Count >= 1)
 {
-    @Html.Partial("TablicaVozilaPartial", Model)
+
+
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th> Marka   </th>
+                <th> Model  </th>
+                <th> Registracija  </th>
+                <th> Godina Proizvodnje  </th>
+            </tr>
+        </thead>
+
+        <tbody>
+            @foreach (vozilo Vozilo in Model)
+            {
+                <tr>
+                   <td>@Vozilo.VoziloId</td>
+                    <td>@Vozilo.Marka</td>
+                    <td>@Vozilo.Model</td>
+                    <td>@Vozilo.Registracija</td>
+                    <td>@Vozilo.GodinaProizvodnje</td>
+                    <td>@Html.ActionLink( "obrisiVozilo", "obrisiVozilo", new {idVozila = Vozilo.VoziloId})</td>
+
+
+                </tr>
+
+
+
+
+            }
+        </tbody>
+    </table>
+
+
 
 }
 
 
 
- 
- 
 
- else {
 
-<h3>nema vozila</h3>
- }
+
+else
+{
+
+    <h3>nema vozila</h3>
+}
