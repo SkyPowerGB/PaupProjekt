@@ -6,3 +6,11 @@
 
 <h2>Usluge</h2>
 
+@if (User.Identity.IsAuthenticated)
+{
+  @Html.ActionLink("Narucite se","Index","Narudzbe");
+}
+else
+{
+    <a href="@Url.Action("Login", "Autentifikacijski")">Login</a>
+}

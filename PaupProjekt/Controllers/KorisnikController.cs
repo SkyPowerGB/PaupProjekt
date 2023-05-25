@@ -31,10 +31,7 @@ namespace PaupProjekt.Controllers
             return View(servisTrazenog);
         }
 
-        public ActionResult Usluge() { 
-        
-        return View();  
-        }
+      
         public ActionResult Profil() {
         
 
@@ -43,6 +40,8 @@ namespace PaupProjekt.Controllers
 
         return View();
         }
+
+
 
         public ActionResult Vozila() {
 
@@ -73,7 +72,6 @@ namespace PaupProjekt.Controllers
         }
 
         [HttpPost]
-
         public ActionResult obrisiVozilo(int id) {
 
             vozilo v = baza.voziloTab.FirstOrDefault(x => x.VoziloId== id);
@@ -87,12 +85,10 @@ namespace PaupProjekt.Controllers
             return RedirectToAction("Vozila");
         
         }
-      
-
+     
         [Authorize]
         public ActionResult dodajVozilo() { 
         
-       
         return View();
         }
         [Authorize]

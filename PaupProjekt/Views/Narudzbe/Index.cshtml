@@ -1,0 +1,33 @@
+﻿
+@using PaupProjekt.Models;
+@model servis
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Nova narudžba</h2>
+
+@using (Html.BeginForm("index", "Narudzbe", FormMethod.Post))
+{
+
+    @Html.TextBoxFor(model => model.OpisProblema);
+
+    <br />
+    @Html.DropDownListFor(model => model.voziloID,new SelectList(((List<vozilo>)(ViewBag.VozilaList)),"voziloId", "MarkaRegitracija"));
+
+
+    @Html.HiddenFor(model=>model.StatusServisa);
+
+
+
+    <br />
+
+    <button>Naruci</button>
+   
+}
+<br />
+@Html.ActionLink("nazad", "index", "Korisnik", null, new { @class = "btn btn-primary" })
+
+@Html.ActionLink("+Dodaj vozilo", "dodajVozilo", "Korisnik", null, new { @class = "btn btn-primary" })

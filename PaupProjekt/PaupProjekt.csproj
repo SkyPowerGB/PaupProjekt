@@ -183,6 +183,7 @@
     <Compile Include="Controllers\AutentifikacijskiController.cs" />
     <Compile Include="Controllers\GostController.cs" />
     <Compile Include="Controllers\KorisnikController.cs" />
+    <Compile Include="Controllers\NarudzbeController.cs" />
     <Compile Include="Controllers\RadnikController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -293,6 +294,7 @@
     <Content Include="Views\Korisnik\Vozila.cshtml" />
     <Content Include="Views\Korisnik\dodajVozilo.cshtml" />
     <Content Include="Views\Korisnik\obrisiVozilo.cshtml" />
+    <Content Include="Views\Narudzbe\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
