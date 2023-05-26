@@ -47,7 +47,7 @@ namespace PaupProjekt.Controllers
         public ActionResult uredi(vlasnik v)
         {
 
-
+            ViewBag.Ovlasti = baza.ovlastiTab.ToList();
 
             if (ModelState.IsValid) {
 

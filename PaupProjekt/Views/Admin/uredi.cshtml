@@ -29,7 +29,7 @@
 
 
 
-    @Html.DropDownListFor(model => model.sifraOvlast, new SelectList(Liste.ListaOvlasti));
+    @Html.DropDownListFor(model => model.sifraOvlast, new SelectList(((List<ovlasti>)ViewBag.Ovlasti),"sifra", "naziv"));
 
     @Html.ValidationSummary()
 
