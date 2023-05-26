@@ -23,12 +23,12 @@ namespace PaupProjekt.Controllers
            vlasnik Trazeni= baza.vlasnikTab.FirstOrDefault(x=>x.Email==Email);
 
 
-            var servisTrazenog = baza.servisTab.FirstOrDefault(x => x.VlasnikID == Trazeni.VlasnikID);
+            var narudzbe = baza.servisTab.Where(x => x.VlasnikID == Trazeni.VlasnikID).ToList();
 
 
 
            // dsfsd
-            return View(servisTrazenog);
+            return View(narudzbe);
         }
 
       
@@ -68,7 +68,7 @@ namespace PaupProjekt.Controllers
             }
             ViewBag.Title = "Greška Vozilo je naručeno";
             
-            return View();
+            return RedirectToAction("Index","Korisnik");
         }
 
         [HttpPost]
