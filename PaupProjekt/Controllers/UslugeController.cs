@@ -96,7 +96,7 @@ namespace PaupProjekt.Controllers
             }
 
 
-            return View();
+            return RedirectToAction("ListaUsluga");
         }
 
 
