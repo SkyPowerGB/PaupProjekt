@@ -23,5 +23,14 @@ namespace PaupProjekt.Models
 
         public DbSet<račun> racunTab { get; set; }
         public DbSet<ovlasti>  ovlastiTab { get; set; }
+        public DbSet<uslugeTab> uslugeTab { get; set; }
+
+        public DbSet<ListaUslugaTab> ListaUslugaTab { get; set; }
+
+
+
+
+
     }
+
 }

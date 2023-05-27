@@ -1,0 +1,18 @@
+﻿@using PaupProjekt.Models
+@model uslugeTab
+@{
+    ViewBag.Title = "ObrisiUslugu";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Obrisi Uslugu</h2>
+@ViewBag.Title
+@using (Html.BeginForm("ObrisiUslugu","Usluge",FormMethod.Post))
+{
+   @Html.Hidden("Id",Model.UslugaID);
+
+    <button> izbrisi</button>
+
+} 
+@Html.ActionLink("odustani", "ListaUsluga");
+

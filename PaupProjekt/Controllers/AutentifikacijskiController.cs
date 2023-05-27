@@ -137,10 +137,6 @@ namespace PaupProjekt.Controllers
             return View(kartica);
         }
 
-
-
-
-
         public ActionResult PromjenaLozinke(int? id)
         {
 
@@ -148,10 +144,7 @@ namespace PaupProjekt.Controllers
             return View();
         }
 
-        
-
-
-
+       
         public ActionResult Odjava()
         {
             FormsAuthentication.SignOut();

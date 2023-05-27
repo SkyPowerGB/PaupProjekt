@@ -91,9 +91,58 @@ namespace PaupProjekt.Controllers
 
 
 
+        public ActionResult ObrisiNarudzbu(int? id) {
+            if (!id.HasValue) { return HttpNotFound(); }
 
 
 
+
+            var servisKorisnika = db.servisTab.FirstOrDefault(x => x.ServisID == id);
+
+            ViewBag.Title = "Jeste li sigurni da želite izbrisati narudžbu korisnika ";
+
+            return View(servisKorisnika);
+        }
+
+
+
+        [HttpPost]
+        public ActionResult ObrisiNarudzbu(int id)
+        {
+            var servisKorisnika = db.servisTab.FirstOrDefault(x => x.ServisID == id);
+
+            var racunServisa = db.racunTab.FirstOrDefault(x => x.ServisID == id);
+
+            if (racunServisa != null)
+            {
+                //tu treba odlucit kaj bude se desilo ak korisnik ima veci izdan racun
+                return HttpNotFound("Nije moguce obrisat korisnika ciji je racun vec izdan");
+                var usluge = db.ListaUslugaTab.FirstOrDefault(x => x.RačunID == racunServisa.RačunID);
+
+                if (usluge != null)
+                {
+
+
+                }
+                else
+                {
+
+
+                }
+
+
+            }
+            else {
+
+                db.servisTab.Remove(servisKorisnika);
+                db.SaveChanges();
+
+            }
+
+
+
+            return RedirectToAction("klijenti");
+        }
 
 
     }

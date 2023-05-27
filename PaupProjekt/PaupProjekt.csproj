@@ -185,6 +185,7 @@
     <Compile Include="Controllers\KorisnikController.cs" />
     <Compile Include="Controllers\NarudzbeController.cs" />
     <Compile Include="Controllers\RadnikController.cs" />
+    <Compile Include="Controllers\UslugeController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -193,12 +194,14 @@
     <Compile Include="Misc\PasswordHelper.cs" />
     <Compile Include="Models\KorisnickaKartica.cs" />
     <Compile Include="Models\ListaStatusa.cs" />
+    <Compile Include="Models\ListaUslugaTab.cs" />
     <Compile Include="Models\Liste.cs" />
     <Compile Include="Models\ovlasti.cs" />
     <Compile Include="Models\Provjere.cs" />
     <Compile Include="Models\račun.cs" />
     <Compile Include="Models\servis.cs" />
     <Compile Include="Models\ServisVozilaDB.cs" />
+    <Compile Include="Models\uslugeTab.cs" />
     <Compile Include="Models\vlasnik.cs" />
     <Compile Include="Models\vozilo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -295,6 +298,11 @@
     <Content Include="Views\Korisnik\dodajVozilo.cshtml" />
     <Content Include="Views\Korisnik\obrisiVozilo.cshtml" />
     <Content Include="Views\Narudzbe\Index.cshtml" />
+    <Content Include="Views\Radnik\ObrisiNarudzbu.cshtml" />
+    <Content Include="Views\Usluge\ListaUsluga.cshtml" />
+    <Content Include="Views\Usluge\DodajUslugu.cshtml" />
+    <Content Include="Views\Usluge\UrediUslugu.cshtml" />
+    <Content Include="Views\Usluge\ObrisiUslugu.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -14,7 +14,7 @@ namespace PaupProjekt.Models
 
         [Key]
         [Display(Name ="sifra")]
-        [Required(ErrorMessage ="{0} JE OBAVEZNA")]
+       
         [Column("sifra")]
         public string sifra { get; set; }
 

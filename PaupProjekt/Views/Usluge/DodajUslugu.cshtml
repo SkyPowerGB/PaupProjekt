@@ -1,0 +1,19 @@
+﻿@using PaupProjekt.Models
+@model uslugeTab
+@{
+    ViewBag.Title = "DodajUslugu";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Kreiranje nove Usluge</h2>
+@using (Html.BeginForm("DodajUslugu", "Usluge", FormMethod.Post))
+{
+    @Html.TextBoxFor(model => model.nazivUsluga);
+    <br />
+    @Html.TextBoxFor(model => model.cijenaUsluga);
+
+
+<button>Dodaj ulslugu</button>
+}
+
+ @Html.ActionLink("Nazad","ListaUsluga") 

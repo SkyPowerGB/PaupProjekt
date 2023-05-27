@@ -31,6 +31,8 @@ namespace PaupProjekt.Controllers
             var vozila = db.voziloTab.ToList();
             var vlasniki = db.vlasnikTab.ToList();
             var računi = db.racunTab.ToList();
+            var listaUsl=db.ListaUslugaTab.ToList();
+            var usluge = db.uslugeTab.ToList();
 
 
             ViewBag.ime = računi.Count();
