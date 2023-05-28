@@ -17,6 +17,7 @@ namespace PaupProjekt.Models
 
         public DateTime DatumIzdavanja { get; set; }
         public decimal UkupanIznos { get; set; }
-
+         
+        public virtual servis Narudzba { get; set; }
     }
 }

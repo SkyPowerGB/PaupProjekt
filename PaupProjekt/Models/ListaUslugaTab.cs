@@ -23,7 +23,7 @@ namespace PaupProjekt.Models
 
         public int UslugaID { get; set; }
 
-
+    
         public virtual uslugeTab Usluge{ get;set;}
 
         public virtual račun Račun { get; set; }

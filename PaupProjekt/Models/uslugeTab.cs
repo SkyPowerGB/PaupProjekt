@@ -12,11 +12,11 @@ namespace PaupProjekt.Models
     {
         [Key]
         public int UslugaID { get; set; }
-        [Display(Name = "naziv Usluga")]
+        [Display(Name = "naziv Usluge")]
         [Required(ErrorMessage = "{0} je obavezno")]
       
         public string nazivUsluga { get; set; }
-        [Display(Name = "sifra")]
+        [Display(Name = "cijena Usluge")]
         [Required(ErrorMessage = "{0} je obavezno")]
       
         public decimal cijenaUsluga { get; set; }

@@ -79,16 +79,19 @@ namespace PaupProjekt.Controllers
 
         public ActionResult DodajUslugu() {
 
-
+            
 
             return View();
         }
 
         [HttpPost]
         public ActionResult DodajUslugu(uslugeTab Usluga)
+         
         {
+      
             if(ModelState.IsValid)
             {
+              
                 baza.uslugeTab.Add(Usluga);
                 baza.SaveChanges();
 

@@ -184,6 +184,7 @@
     <Compile Include="Controllers\GostController.cs" />
     <Compile Include="Controllers\KorisnikController.cs" />
     <Compile Include="Controllers\NarudzbeController.cs" />
+    <Compile Include="Controllers\RacunController.cs" />
     <Compile Include="Controllers\RadnikController.cs" />
     <Compile Include="Controllers\UslugeController.cs" />
     <Compile Include="Global.asax.cs">
@@ -303,6 +304,8 @@
     <Content Include="Views\Usluge\DodajUslugu.cshtml" />
     <Content Include="Views\Usluge\UrediUslugu.cshtml" />
     <Content Include="Views\Usluge\ObrisiUslugu.cshtml" />
+    <Content Include="Views\Racun\IzavanjeRacuna.cshtml" />
+    <Content Include="Views\Racun\DodajUslugu.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

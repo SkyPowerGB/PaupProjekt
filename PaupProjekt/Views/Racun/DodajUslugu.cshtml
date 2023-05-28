@@ -1,0 +1,31 @@
+﻿@using PaupProjekt.Models
+@model List<uslugeTab>
+@{
+    ViewBag.Title = "DodajUslugu";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>DodajUslugu</h2>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Naziv</th>
+            <th>Cijena</th>
+
+        </tr>
+
+    </thead>
+    <tbody>
+        @foreach (uslugeTab usluga in Model)
+        {
+        <tr>
+            <th>@usluga.nazivUsluga</th>
+            <th>@usluga.cijenaUsluga</th>
+            <th>@Html.ActionLink("+","IzavanjeRacuna",new { idNarudzbe=(int)ViewBag.id , idUsluge=usluga.UslugaID})</th>
+        </tr>
+
+        }
+    </tbody>
+
+</table>
