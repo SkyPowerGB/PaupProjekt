@@ -34,6 +34,7 @@ namespace PaupProjekt.Models
         [ForeignKey("VlasnikID")]
         public virtual vlasnik voziloVlasnika { get; set; }
 
+        [Display(Name = "Marka vozila i Registracija ")]
         public string MarkaRegitracija { get { return Marka + " " + Registracija; } }
 
     }

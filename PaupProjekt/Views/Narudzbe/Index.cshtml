@@ -1,33 +1,39 @@
-﻿
-@using PaupProjekt.Models;
+﻿@using PaupProjekt.Models;
 @model servis
 
 @{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<div class="container">
+    <div class="row">
+        <div class="col-md-6 mx-auto">
+            <h2>Nova narudžba</h2>
 
-<h2>Nova narudžba</h2>
+            @using (Html.BeginForm("index", "Narudzbe", FormMethod.Post))
+            {
+                <div class="form-group">
+                    @Html.LabelFor(model => model.OpisProblema)
+                    @Html.TextBoxFor(model => model.OpisProblema, new { @class = "form-control", placeholder = "Opis problema" })
+                </div>
+                @Html.LabelFor(model => model.VoziloVlasnika.MarkaRegitracija)
+                <div class="form-group">
 
-@using (Html.BeginForm("index", "Narudzbe", FormMethod.Post))
-{
+                    @Html.DropDownListFor(model => model.voziloID, new SelectList(((List<vozilo>)(ViewBag.VozilaList)), "voziloId", "MarkaRegitracija"), "- Odaberi Vozilo -")
+                    @Html.ActionLink("+ Dodaj vozilo", "dodajVozilo", "Korisnik", null, new { @class = " btn btn-primary" })
+                </div>
 
-    @Html.TextBoxFor(model => model.OpisProblema);
+                @Html.HiddenFor(model => model.StatusServisa)
+                <br />
+                <div >
+                    <button type="submit" class="btn btn-primary">Naruči</button>
+                </div>
+            }
+            
+            <div >
+                @Html.ActionLink("Nazad", "index", "Korisnik", null, new { @class = "btn btn-primary" })
 
-    <br />
-    @Html.DropDownListFor(model => model.voziloID,new SelectList(((List<vozilo>)(ViewBag.VozilaList)),"voziloId", "MarkaRegitracija"));
-
-
-    @Html.HiddenFor(model=>model.StatusServisa);
-
-
-
-    <br />
-
-    <button>Naruci</button>
-   
-}
-<br />
-@Html.ActionLink("nazad", "index", "Korisnik", null, new { @class = "btn btn-primary" })
-
-@Html.ActionLink("+Dodaj vozilo", "dodajVozilo", "Korisnik", null, new { @class = "btn btn-primary" })
+            </div>
+        </div>
+    </div>
+</div>
