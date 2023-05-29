@@ -6,7 +6,7 @@
 }
 
 <h2>Vozila</h2>
-@Html.ActionLink("+Dodaj vozilo", "dodajVozilo");
+@Html.ActionLink("+Dodaj vozilo", "dodajVozilo",null,new {@class= "btn btn-outline-primary" });
 
 @if (Model.Count >= 1)
 {
@@ -15,7 +15,7 @@
     <table class="table table-striped">
         <thead>
             <tr>
-                <th>Id</th>
+             
                 <th> Marka   </th>
                 <th> Model  </th>
                 <th> Registracija  </th>
@@ -27,12 +27,12 @@
             @foreach (vozilo Vozilo in Model)
             {
                 <tr>
-                   <td>@Vozilo.VoziloId</td>
+                
                     <td>@Vozilo.Marka</td>
                     <td>@Vozilo.Model</td>
                     <td>@Vozilo.Registracija</td>
                     <td>@Vozilo.GodinaProizvodnje</td>
-                    <td>@Html.ActionLink( "obrisiVozilo", "obrisiVozilo", new {idVozila = Vozilo.VoziloId})</td>
+                    <td>@Html.ActionLink( "obrisiVozilo", "obrisiVozilo", new {idVozila = Vozilo.VoziloId} ,new {@class= "btn btn-danger" })</td>
 
 
                 </tr>

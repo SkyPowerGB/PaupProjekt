@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Web;
+using System.Web.ModelBinding;
 using System.Web.Mvc;
 
 namespace PaupProjekt.Controllers
@@ -31,7 +32,7 @@ namespace PaupProjekt.Controllers
             return View(narudzbe);
         }
 
-      
+        [Authorize]
         public ActionResult Profil() {
         
 
@@ -41,7 +42,7 @@ namespace PaupProjekt.Controllers
         return View();
         }
 
-
+        [Authorize]
 
         public ActionResult Vozila() {
 

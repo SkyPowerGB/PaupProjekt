@@ -20,20 +20,24 @@
                 <div class="form-group">
 
                     @Html.DropDownListFor(model => model.voziloID, new SelectList(((List<vozilo>)(ViewBag.VozilaList)), "voziloId", "MarkaRegitracija"), "- Odaberi Vozilo -")
-                    @Html.ActionLink("+ Dodaj vozilo", "dodajVozilo", "Korisnik", null, new { @class = " btn btn-primary" })
+                    @Html.ActionLink("+ dodaj vozilo", "dodajVozilo", "Korisnik", null, new { @class = " btn btn-outline-primary" })
                 </div>
 
                 @Html.HiddenFor(model => model.StatusServisa)
                 <br />
-                <div >
-                    <button type="submit" class="btn btn-primary">Naruči</button>
-                </div>
-            }
-            
-            <div >
-                @Html.ActionLink("Nazad", "index", "Korisnik", null, new { @class = "btn btn-primary" })
+                <div>
+                    @Html.ActionLink("Nazad", "index", "Korisnik", null, new { @class = "btn btn-secondary" })
 
-            </div>
+
+                    <button type="submit" class="btn btn-primary">Naruči</button>
+
+
+
+                </div>
+
+            }
+
+
         </div>
     </div>
 </div>
