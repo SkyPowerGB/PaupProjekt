@@ -4,8 +4,6 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>RegistracijaUspjesna</h2>
-
-@Html.ActionLink("Prijava", "Login");
-@Html.ActionLink("Nazad na pocetnu", "Index","Gost");
-
+<h2>Registracija Uspješna</h2>
+@Html.ActionLink("Nazad na početnu", "Index", "Gost", null, new { @class = "btn btn-primary" })
+@Html.ActionLink("Prijava", "Login", "Autentifikacijski", null, new { @class = "btn btn-primary" })

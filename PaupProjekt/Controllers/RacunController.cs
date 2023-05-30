@@ -15,9 +15,10 @@ namespace PaupProjekt.Controllers
         public ActionResult IzavanjeRacuna(int? idNarudzbe,int? idUsluge)
         {
             bool novi = false;
+
             var racunNarudzbe = (baza.racunTab.FirstOrDefault(x => x.ServisID == idNarudzbe));
             if (!idNarudzbe.HasValue) { return HttpNotFound("Usli u nema vrijednost"+idNarudzbe); }
-            if (racunNarudzbe== null) { racunNarudzbe = new račun(); racunNarudzbe.ServisID = (int)idNarudzbe;
+            if (racunNarudzbe==null) { racunNarudzbe = new račun(); racunNarudzbe.ServisID = (int)idNarudzbe;
                 novi= true;
                 ViewBag.Naslov = "Izrada novog računa";
                 racunNarudzbe.UkupanIznos = 0;
@@ -30,7 +31,7 @@ namespace PaupProjekt.Controllers
                 ListaUslugaTab novaUslugaL = new ListaUslugaTab();
                 novaUslugaL.UslugaID = (int)idUsluge;
                 novaUslugaL.koef = 1;
-                novaUslugaL.RačunID =(int) idNarudzbe;
+                novaUslugaL.RačunID =racunNarudzbe.RačunID;
 
                 baza.ListaUslugaTab.Add(novaUslugaL);
                 baza.SaveChanges();
@@ -72,10 +73,10 @@ namespace PaupProjekt.Controllers
         public ActionResult MakniUslugu(int idListe)
         {
             var listaUsluga = baza.ListaUslugaTab.FirstOrDefault(x=>x.idListe==idListe);
-            var idRacuna = listaUsluga.RačunID;
+            var idNarudzbe = listaUsluga.Račun.Narudzba.ServisID;
             baza.ListaUslugaTab.Remove(listaUsluga);
             baza.SaveChanges();
-            return RedirectToAction("IzavanjeRacuna", new { idNarudzbe=idRacuna });
+            return RedirectToAction("IzavanjeRacuna", new { idNarudzbe=idNarudzbe });
 
          
         }

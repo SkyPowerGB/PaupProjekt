@@ -3,46 +3,56 @@
 @model vlasnik
 @{
     ViewBag.Title = "Registracija";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Registracija</h2>
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <h2 >Registracija</h2>
 
-@using (@Html.BeginForm("Registracija", "Autentifikacijski", FormMethod.Post))
-{
+            @using (Html.BeginForm("Registracija", "Autentifikacijski", FormMethod.Post))
+            {
+                @Html.AntiForgeryToken()
 
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Ime)
+                    @Html.EditorFor(model => model.Ime, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Ime, "", new { @class = "text-danger" })
+                </div>
 
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Prezime)
+                    @Html.EditorFor(model => model.Prezime, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Prezime, "", new { @class = "text-danger" })
+                </div>
 
-    @Html.AntiForgeryToken()
-    @Html.LabelFor(model => model.Ime);
-    @Html.EditorFor(model => model.Ime);
-    @Html.ValidationMessageFor(model => model.Ime, "", new { @class = "text-danger" });
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Email)
+                    @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                </div>
 
-    @Html.LabelFor(model => model.Prezime);
-    @Html.TextBoxFor(model => model.Prezime);
-    @Html.ValidationMessageFor(model => model.Prezime, "", new { @class = "text-danger" });
-    <br />
-    @Html.LabelFor(model => model.Email);
-    @Html.EditorFor(model => model.Email);
-    @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" });
-    <br />
-    @Html.LabelFor(model => model.LozinkaA);
+                <div class="form-group">
+                    @Html.LabelFor(model => model.LozinkaA)
+                    @Html.PasswordFor(model => model.LozinkaA, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.LozinkaA, "", new { @class = "text-danger" })
+                </div>
 
-    @Html.PasswordFor(model => model.LozinkaA);
-    @Html.ValidationMessageFor(model => model.LozinkaA, "", new { @class = "text-danger" });
-    <br />
-    @Html.LabelFor(model => model.LozinkaPon);
-    @Html.PasswordFor(model => model.LozinkaPon);
-    @Html.ValidationMessageFor(model => model.LozinkaPon, "", new { @class = "text-danger" });
-    
- 
-    <button>
-        potvrdi
-    </button>
-}
+                <div class="form-group">
+                    @Html.LabelFor(model => model.LozinkaPon)
+                    @Html.PasswordFor(model => model.LozinkaPon, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.LozinkaPon, "", new { @class = "text-danger" })
+                </div>
+                <br />
 
-
-
-
+                <div >
+                    <button type="submit" class="btn btn-primary">Registriraj se</button>
+                </div>
+            }
+        </div>
+    </div>
+</div>
 
 
 
