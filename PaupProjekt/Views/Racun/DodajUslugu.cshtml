@@ -22,7 +22,7 @@
         <tr>
             <th>@usluga.nazivUsluga</th>
             <th>@usluga.cijenaUsluga</th>
-            <th>@Html.ActionLink("+","IzavanjeRacuna",new { idNarudzbe=(int)ViewBag.id , idUsluge=usluga.UslugaID})</th>
+            <th>@Html.ActionLink("+","IzavanjeRacuna","Racun",new { idNarudzbe=(int)ViewBag.id , idUsluge = usluga.UslugaID }, new {@class="btn btn-success" })</th>
         </tr>
 
         }

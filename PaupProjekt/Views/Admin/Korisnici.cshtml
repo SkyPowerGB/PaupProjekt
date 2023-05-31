@@ -5,39 +5,40 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Korisnici</h2>
 
-<table class="table table-striped">
-    <thead>
-        <tr>
-        <th>Prezime Ime</th>
-        <th>email</th>
-
-        <th>ovlast</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (vlasnik kor in Model)
-        {
+<div class="container ">
+    
+    <table class="table table-striped">
+        <thead>
             <tr>
-                <td>@kor.PrezimeIme</td>
-                <td>@kor.Email</td>
-                <td>@(kor.Ovlast?.naziv)</td>
-            
-                <td>@Html.ActionLink("Uredi", "uredi", new { id = kor.VlasnikID })</td>
-            
-                <td>@Html.ActionLink("Brisi","izbrisi", new { id = kor.VlasnikID })</td>
-                
+                <th>Prezime Ime</th>
+                <th>email</th>
 
-
+                <th>ovlast</th>
             </tr>
-        }
+        </thead>
+        <tbody>
+            @foreach (vlasnik kor in Model)
+            {
+                <tr>
+                    <td>@kor.PrezimeIme</td>
+                    <td>@kor.Email</td>
+                    <td>@(kor.Ovlast?.naziv)</td>
+
+                    <td>@Html.ActionLink("Uredi", "uredi", new { id = kor.VlasnikID }, new { @class = "btn btn-primary" })</td>
+
+                    <td>@Html.ActionLink("Brisi", "izbrisi", new { id = kor.VlasnikID } ,new { @class="btn btn-danger"})</td>
 
 
 
-    </tbody>
+                </tr>
+            }
 
 
-</table>
 
+        </tbody>
+
+
+    </table>
+</div>
 

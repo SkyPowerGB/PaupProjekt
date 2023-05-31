@@ -2,45 +2,45 @@
 
 @model vlasnik
 @{
-    ViewBag.Title = "uredi";
+    
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>uredi</h2>
 
-<td>@Html.ActionLink("Promjeni lozinku", "promjenaLozinke", new { id = Model.VlasnikID }, "");</td>
-
-@using (Html.BeginForm("uredi", "Admin", FormMethod.Post))
-{
-
-    @Html.HiddenFor(model => model.Email);
-    @Html.HiddenFor(model => model.VlasnikID);
-    @Html.HiddenFor(model => model.Prezime);
-    @Html.HiddenFor(model => model.Ime);
-
-    @Html.HiddenFor(model => model.LozinkaA);
-
-    @Html.HiddenFor(model => model.LozinkaPon);
-    @Html.HiddenFor(model => model.Lozinka);
+<div class="container d-flex justify-content-center">
+    <div class="col-md-6">
 
 
+        <h1>Uredi korisnika @Model.PrezimeIme</h1>
+
+        @using (Html.BeginForm("uredi", "Admin", FormMethod.Post))
+        {
+            @Html.HiddenFor(model => model.Email)
+            @Html.HiddenFor(model => model.VlasnikID)
+            @Html.HiddenFor(model => model.Prezime)
+            @Html.HiddenFor(model => model.Ime)
+            @Html.HiddenFor(model => model.LozinkaA)
+            @Html.HiddenFor(model => model.LozinkaPon)
+            @Html.HiddenFor(model => model.Lozinka)
+
+            <div class="mb-3">
+                @Html.LabelFor(model => model.Ovlast)
+                @Html.DropDownListFor(model => model.sifraOvlast, new SelectList(((List<ovlasti>)ViewBag.Ovlasti), "sifra", "naziv"), new { @class = "form-control" })
+            </div>
 
 
+         <h6>Promjeni lozinku:</h6>
+        @Html.ActionLink("Promjeni lozinku", "promjenaLozinke", new { id = Model.VlasnikID }, new { @class = "btn btn-outline-secondary" })
 
+            @Html.ValidationSummary()
 
-
-    @Html.DropDownListFor(model => model.sifraOvlast, new SelectList(((List<ovlasti>)ViewBag.Ovlasti),"sifra", "naziv"));
-
-    @Html.ValidationSummary()
-
-    <button>Spremi promjene</button>
-}
-
-
-
-
-
-
+            <div class="d-flex justify-content-between">
+                @Html.ActionLink("Odustani", "Korisnici", null, new { @class = "btn btn-secondary" })
+                <button type="submit" class="btn btn-primary">Spremi promjene</button>
+            </div>
+        }
+    </div>
+</div>
 
 
 

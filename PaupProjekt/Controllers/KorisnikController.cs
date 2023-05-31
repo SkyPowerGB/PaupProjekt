@@ -88,8 +88,8 @@ namespace PaupProjekt.Controllers
         }
      
         [Authorize]
-        public ActionResult dodajVozilo() { 
-        
+        public ActionResult dodajVozilo() {
+           
         return View();
         }
         [Authorize]
@@ -111,7 +111,7 @@ namespace PaupProjekt.Controllers
                 baza.SaveChanges();
             }
 
-
+          
 
 
             return RedirectToAction("Vozila");

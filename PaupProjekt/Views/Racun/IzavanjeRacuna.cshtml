@@ -33,7 +33,7 @@
             <tr>
                 <td>@ListaUsluga.Usluge.nazivUsluga</td>
                 <td>@ListaUsluga.Usluge.cijenaUsluga EUR</td>
-                <td>@Html.ActionLink("X", "MakniUslugu", new { idListe = ListaUsluga.idListe })</td>
+                <td>@Html.ActionLink("X", "MakniUslugu", "Racun",new { idListe = ListaUsluga.idListe }, new {@class="btn btn-danger" })</td>
 
             </tr>
         }

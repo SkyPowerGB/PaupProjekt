@@ -12,32 +12,32 @@
 
             @using (Html.BeginForm("index", "Narudzbe", FormMethod.Post))
             {
-                <div class="form-group">
-                    @Html.LabelFor(model => model.OpisProblema)
-                    @Html.TextBoxFor(model => model.OpisProblema, new { @class = "form-control", placeholder = "Opis problema" })
-                </div>
+                if ((bool)ViewBag.UslugaPoznata)
+                {
+                    <h6>Narudžba: @Model.OpisProblema</h6>
+                    @Html.HiddenFor(model => model.OpisProblema)
+                }
+                else
+                {
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.OpisProblema)
+                        @Html.TextBoxFor(model => model.OpisProblema, new { @class = "form-control", placeholder = "Opis problema" })
+                    </div>
+                }
+
                 @Html.LabelFor(model => model.VoziloVlasnika.MarkaRegitracija)
                 <div class="form-group">
-
                     @Html.DropDownListFor(model => model.voziloID, new SelectList(((List<vozilo>)(ViewBag.VozilaList)), "voziloId", "MarkaRegitracija"), "- Odaberi Vozilo -")
-                    @Html.ActionLink("+ dodaj vozilo", "dodajVozilo", "Korisnik", null, new { @class = " btn btn-outline-primary" })
+                    @Html.ActionLink("+ dodaj vozilo", "dodajVozilo", "Korisnik",null , new { @class = "btn btn-outline-primary" })
                 </div>
 
                 @Html.HiddenFor(model => model.StatusServisa)
                 <br />
                 <div>
                     @Html.ActionLink("Nazad", "index", "Korisnik", null, new { @class = "btn btn-secondary" })
-
-
                     <button type="submit" class="btn btn-primary">Naruči</button>
-
-
-
                 </div>
-
             }
-
-
         </div>
     </div>
 </div>

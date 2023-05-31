@@ -31,12 +31,12 @@ namespace PaupProjekt.Models
         [Required(ErrorMessage = "{0} je obavezan")]
         public DateTime Datum { get; set; }
 
-        [Display(Name = "OpisProblema")]
+        [Display(Name = "Opis Narudžbe")]
         [Required(ErrorMessage = "{0} je obavezan")]
         public string OpisProblema { get; set; }
 
 
-        [Display(Name = "StatusServisa")]
+        [Display(Name = "Status Servisa")]
         [Required(ErrorMessage = "{0} je obavezan")]
         
         public string StatusServisa { get; set; }

@@ -4,15 +4,20 @@
 
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<div class="container col-md-8" >
+    <h2>@ViewBag.Title</h2>
 
-<h2>@ViewBag.Title</h2>
-@using (Html.BeginForm("izbrisi", "Admin"))
-{
-    @Html.AntiForgeryToken();
-    <button type="submit" class="btn btn-danger">
-        <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>Izbriši
-    </button>
-    @Html.ActionLink("Odustani", "Korisnici");
-}
+    @using (Html.BeginForm("izbrisi", "Admin"))
+    {
+        
+                @Html.ActionLink("Odustani", "Korisnici", "Admin", new { @class = "btn btn-primary" })
+                @Html.AntiForgeryToken()
+
+                <button type="submit" class="btn btn-danger">
+                    <span aria-hidden="true"></span>Izbriši
+                </button>
+       
+    }
 
 
+</div>

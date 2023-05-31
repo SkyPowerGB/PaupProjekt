@@ -5,23 +5,37 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>promjenaLozinke</h2>
+<h2 class="text-center">Promjena Lozinke</h2>
 
-@using (Html.BeginForm("promjenaLozinke", "Admin", FormMethod.Post))
-{
+<div class="container d-flex justify-content-center">
+    <div class="col-md-6">
+        @using (Html.BeginForm("promjenaLozinke", "Admin", FormMethod.Post))
+        {
+            <div class=col-4>
+                @Html.HiddenFor(model => model.sifraOvlast)
+                @Html.HiddenFor(model => model.VlasnikID)
+                @Html.HiddenFor(model => model.Lozinka)
+                @Html.HiddenFor(model => model.Email)
+                @Html.HiddenFor(model => model.Ime)
+                @Html.HiddenFor(model => model.Prezime)
+            </div>
 
-    @Html.HiddenFor(model => model.sifraOvlast);
-    @Html.HiddenFor(model => model.VlasnikID);
-    @Html.HiddenFor(model => model.Lozinka);
-    @Html.HiddenFor(model => model.Email);
-    @Html.HiddenFor(model => model.Ime);
+            <div class="mb-3">
+                @Html.LabelFor(model => model.LozinkaA, htmlAttributes: new { @class = "form-label" })
+                @Html.PasswordFor(model => model.LozinkaA, htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.LozinkaA);
+            </div>
 
-    @Html.HiddenFor(model => model.Prezime);
-    @Html.LabelFor(model => model.LozinkaA);
-    @Html.PasswordFor(Model => Model.LozinkaA);
-    <br />
-    @Html.LabelFor(model => model.LozinkaPon);
-    @Html.PasswordFor(Model => Model.LozinkaPon);
-    <button>u redu</button>
+            <div class="mb-3">
+                @Html.LabelFor(model => model.LozinkaPon, htmlAttributes: new { @class = "form-label" })
+                @Html.PasswordFor(model => model.LozinkaPon, htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model=>model.LozinkaPon);
+            </div>
 
-}
+            <div class="d-flex justify-content-between">
+                @Html.ActionLink("Odustani", "Korisnici", "Admin", null, new { @class = "btn btn-secondary" })
+                <button type="submit" class="btn btn-primary">Promjeni lozinku</button>
+            </div>
+        }
+    </div>
+</div>

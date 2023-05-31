@@ -7,23 +7,37 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>dodajVozilo</h2>
+<h2 class="text-center">dodajVozilo</h2>
 
-@using (Html.BeginForm("dodajVozilo", "Korisnik", FormMethod.Post))
-{
+<div class="container d-flex justify-content-center">
+    <div class="col-md-6">
+        @using (Html.BeginForm("dodajVozilo", "Korisnik", FormMethod.Post))
+        {
+            
+            <div class="mb-3">
+                @Html.LabelFor(model => model.Model, htmlAttributes: new { @class = "form-label" })
+                @Html.TextBoxFor(model => model.Model, htmlAttributes: new { @class = "form-control" })
+            </div>
 
+            <div class="mb-3">
+                @Html.LabelFor(model => model.Marka, htmlAttributes: new { @class = "form-label" })
+                @Html.TextBoxFor(model => model.Marka, htmlAttributes: new { @class = "form-control" })
+            </div>
 
-    @Html.LabelFor(model => model.Model);
-    @Html.TextBoxFor(model => model.Model);
-    <br />
-    @Html.LabelFor(model => model.Marka);
-    @Html.TextBoxFor(model => model.Marka);
-    <br />
-    @Html.LabelFor(model => model.Registracija);
-    @Html.TextBoxFor(model => model.Registracija);
+            <div class="mb-3">
+                @Html.LabelFor(model => model.Registracija, htmlAttributes: new { @class = "form-label" })
+                @Html.TextBoxFor(model => model.Registracija, htmlAttributes: new { @class = "form-control" })
+            </div>
 
-    <br />
-    @Html.LabelFor(model => model.GodinaProizvodnje);
-    @Html.TextBoxFor(model => model.GodinaProizvodnje);
-    <button>u redu</button>
-}
+            <div class="mb-3">
+                @Html.LabelFor(model => model.GodinaProizvodnje, htmlAttributes: new { @class = "form-label" })
+                @Html.TextBoxFor(model => model.GodinaProizvodnje, htmlAttributes: new { @class = "form-control" })
+            </div>
+
+            <div class="text-center">
+                @Html.ActionLink("Odustani","Vozila","Korisnik",new {@class="btn btn-secondary" })
+                <button type="submit" class="btn btn-primary">Dodaj vozilo</button>
+            </div>
+        }
+    </div>
+</div>

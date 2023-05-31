@@ -8,9 +8,12 @@
 
 @if (User.Identity.IsAuthenticated)
 {
-  @Html.ActionLink("Narucite se","Index","Narudzbe");
+    @Html.ActionLink("Narucite se za zamjenu guma", "Index", "Narudzbe", new { usluga = "Zamjena Guma" },null);
+    <br />
+    @Html.ActionLink("Narucite se", "Index", "Narudzbe");
+
 }
 else
 {
-    <a href="@Url.Action("Login", "Autentifikacijski")">Login</a>
+    <a href="@Url.Action("Login","Autentifikacijski")">Prijava</a>
 }

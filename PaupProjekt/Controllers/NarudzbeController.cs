@@ -17,6 +17,7 @@ namespace PaupProjekt.Controllers
         [Authorize]
         public ActionResult Index(string usluga)
         {
+            ViewBag.UslugaPoznata = false;
             var Email = HttpContext.User.Identity.Name;
             vlasnik Trazeni = baza.vlasnikTab.FirstOrDefault(x => x.Email == Email);
             var vozila = baza.voziloTab.Where(x => x.VlasnikID == Trazeni.VlasnikID).ToList();
@@ -27,17 +28,18 @@ namespace PaupProjekt.Controllers
 
             if (!string.IsNullOrEmpty(usluga))
             {
+                ViewBag.UslugaPoznata = true;
                 ViewBag.usluga = usluga;
                 noviServis.OpisProblema = usluga;
             }
-      
+           
             return View(noviServis);
         }
 
         [HttpPost]
         public ActionResult Index(servis ser)
         {
-            
+            ViewBag.UslugaPoznata = false;
             var Email = User.Identity.Name;
             vlasnik Trazeni = baza.vlasnikTab.FirstOrDefault(x => x.Email == Email);
             ser.VlasnikID = Trazeni.VlasnikID;
