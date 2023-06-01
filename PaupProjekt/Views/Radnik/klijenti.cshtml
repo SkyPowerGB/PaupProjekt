@@ -15,7 +15,7 @@
 {
 
 
-    @Html.DropDownList("Status", new SelectList(ListaStatusaE.DopusteneVrijednosi))
+    @Html.DropDownList("Status", new SelectList(ListaStatusaE.DopusteneVrijednosi),"Status")
 
     <button type="submit"> traži </button>
 
@@ -27,7 +27,7 @@
 
 
 
-    <table class="table table-bordered">
+    <table class="table table-striped text-center">
         <thead>
             <tr>
 
@@ -51,10 +51,12 @@
                     <td>@Servis.Datum</td>
                     <td>@Servis.OpisProblema</td>
                     <td>@Servis.StatusServisa</td>
-                    <td>@Html.ActionLink("info", "detalji", new { id = Servis.ServisID })</td>
-                    <td>@Html.ActionLink("azuriraj", "Azuriraj", new { id = Servis.ServisID })</td>
-                    <td>@Html.ActionLink("izbrisi", "ObrisiNarudzbu", new { id = Servis.ServisID })</td>
-                    <td>@Html.ActionLink("IzdavanjeRacuna", "IzavanjeRacuna","Racun", new { idNarudzbe = Servis.ServisID  } ,null)</td>
+                    <td>@Html.ActionLink("info", "detalji", new { id = Servis.ServisID }, new { @class = "btn btn-primary" })</td>
+                    <td>@Html.ActionLink("azuriraj", "Azuriraj", new { id = Servis.ServisID }, new { @class = "btn btn-primary" })</td>
+                    
+                    <td>@Html.ActionLink("Izdavanje Računa", "IzavanjeRacuna", "Racun", new { idNarudzbe = Servis.ServisID }, new { @class = "btn btn-success" })</td>
+                    <td>@Html.ActionLink("izbrisi", "ObrisiNarudzbu", new { id = Servis.ServisID }, new { @class = "btn btn-danger" })</td>
+
 
                 </tr>
 

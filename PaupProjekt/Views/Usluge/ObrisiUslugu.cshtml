@@ -11,8 +11,8 @@
 {
    @Html.Hidden("Id",Model.UslugaID);
 
-    <button> izbrisi</button>
+    <button class="btn-danger"> Izbrisi </button>
 
 } 
-@Html.ActionLink("odustani", "ListaUsluga");
+@Html.ActionLink("odustani", "ListaUsluga", null,new { @class="btn btn-primary"});
 

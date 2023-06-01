@@ -27,6 +27,12 @@
                     <li>@Html.ActionLink("Usluge", "Usluge", "Gost", new { area = "" }, new { @class = "nav-link" })</li>
 
                     <li>@Html.ActionLink("Kontakt", "Kontakt", "Gost", new { area = "" }, new { @class = "nav-link" })</li>
+
+                    @if (User.Identity.IsAuthenticated) { 
+                    
+                    <li>@Html.ActionLink("Vozila", "Vozila", "Korisnik", new { area = "" }, new { @class = "nav-link" })</li>
+                    
+                    }
                 </ul>
             </div>
             <div class="navbar-collapse collapse">
@@ -37,7 +43,7 @@
 
                         <li>@Html.ActionLink(((User as PaupProjekt.Misc.LogiraniKorisnik).PrezimeIme), "Index", "Korisnik")</li>
                         <li>@Html.ActionLink("Odjava", "Odjava", "Autentifikacijski")</li>
-
+                        
 
                     }
                     else
@@ -57,7 +63,7 @@
         @RenderBody()
         <hr />
         <footer>
-            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
+            <p>&copy; @DateTime.Now.Year - Paup Servis Vozila</p>
         </footer>
     </div>
 

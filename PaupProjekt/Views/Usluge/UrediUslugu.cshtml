@@ -13,10 +13,12 @@
 {
 
     @Html.HiddenFor(model => model.UslugaID);
-    @Html.TextBoxFor(model=>model.nazivUsluga);
+    @Html.LabelFor(model => model.nazivUsluga)
+    @Html.TextBoxFor(model => model.nazivUsluga);
     <br />
-    @Html.TextBoxFor(model=>model.cijenaUsluga);
-    <button> spremi promjene</button>
+    @Html.LabelFor(model => model.cijenaUsluga)
+    @Html.TextBoxFor(model => model.cijenaUsluga);
+    @Html.ActionLink("Odustani", "ListaUsluga", null, new { @class = "btn btn-secondary" })
+    <button class="btn btn-primary"> spremi promjene</button>
 
 }
-@Html.ActionLink("Odustani","ListaUsluga");

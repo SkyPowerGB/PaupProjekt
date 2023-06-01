@@ -4,28 +4,24 @@
     ViewBag.Title = "IzavanjeRacuna";
     Layout = "~/Views/Shared/_Layout.cshtml";
     račun racun = ViewBag.racun;
-
-
 }
 
 <h2>@ViewBag.Naslov</h2>
 
-@Html.ActionLink("nova usluga", "ListaUsluga", "Usluge");
 <br />
-<h2>Ukupan iznos: @racun.UkupanIznos EUR</h2>
-@Html.ActionLink("dodaj uslugu", "DodajUslugu", new { id = (int)ViewBag.idNarudzbe })
 
-
-<table class="table-bordered">
-
+<table class="table table-striped">
     <thead>
         <tr>
             <th>Naziv</th>
-
             <th>Cijena</th>
+            <th class="border-0">
+                @Html.ActionLink("dodaj uslugu", "DodajUslugu", new { id = (int)ViewBag.idNarudzbe }, new { @class = "btn btn-success" })
+            </th>
+            <th class="border-0">
+                @Html.ActionLink("uredi listu usluga", "ListaUsluga", "Usluge", null, new { @class = "btn btn-outline-primary" })
+            </th>
         </tr>
-
-
     </thead>
     <tbody>
         @foreach (ListaUslugaTab ListaUsluga in Model)
@@ -33,10 +29,12 @@
             <tr>
                 <td>@ListaUsluga.Usluge.nazivUsluga</td>
                 <td>@ListaUsluga.Usluge.cijenaUsluga EUR</td>
-                <td>@Html.ActionLink("X", "MakniUslugu", "Racun",new { idListe = ListaUsluga.idListe }, new {@class="btn btn-danger" })</td>
-
+                <td>
+                    @Html.ActionLink("X", "MakniUslugu", "Racun", new { idListe = ListaUsluga.idListe }, new { @class = "btn btn-danger" })
+                </td>
             </tr>
         }
     </tbody>
 </table>
 
+<h2>Ukupan iznos: @racun.UkupanIznos EUR</h2>Iznos EUR</h2>

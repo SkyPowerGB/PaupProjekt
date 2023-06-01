@@ -8,12 +8,13 @@
 <h2>Kreiranje nove Usluge</h2>
 @using (Html.BeginForm("DodajUslugu", "Usluge", FormMethod.Post))
 {
+    @Html.LabelFor(model => model.nazivUsluga)
     @Html.TextBoxFor(model => model.nazivUsluga);
     <br />
+    @Html.LabelFor(model => model.cijenaUsluga)
     @Html.TextBoxFor(model => model.cijenaUsluga);
 
 
-<button>Dodaj ulslugu</button>
+    @Html.ActionLink("Nazad", "ListaUsluga", null, new { @class = "btn btn-secondary" })
+    <button class="btn btn-primary">+Dodaj ulslugu</button>
 }
-
- @Html.ActionLink("Nazad","ListaUsluga") 

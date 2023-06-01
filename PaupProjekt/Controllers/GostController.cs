@@ -13,6 +13,7 @@ namespace PaupProjekt.Controllers
         // GET: Gost
         public ActionResult Index()
         {
+            if(User.Identity.IsAuthenticated) { return RedirectToAction("Index","Korisnik"); }
             
             return View();
         }
