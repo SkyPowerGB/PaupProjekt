@@ -31,6 +31,9 @@ namespace PaupProjekt.Models
         [Required(ErrorMessage = "{0} je obavezan")]
         public DateTime Datum { get; set; }
 
+        [Display(Name = "Datum servisa")]
+        public DateTime? DatumServisa { get; set; }
+
         [Display(Name = "Opis Narudžbe")]
         [Required(ErrorMessage = "{0} je obavezan")]
         public string OpisProblema { get; set; }
@@ -40,7 +43,6 @@ namespace PaupProjekt.Models
         [Required(ErrorMessage = "{0} je obavezan")]
         
         public string StatusServisa { get; set; }
-
        public virtual vozilo VoziloVlasnika {  get; set; }
 
        public virtual vlasnik VlasnikVozila { get; set; }

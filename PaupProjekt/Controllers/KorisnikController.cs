@@ -23,9 +23,9 @@ namespace PaupProjekt.Controllers
 
            vlasnik Trazeni= baza.vlasnikTab.FirstOrDefault(x=>x.Email==Email);
 
-
+         
             var narudzbe = baza.servisTab.Where(x => x.VlasnikID == Trazeni.VlasnikID).ToList();
-
+            ViewBag.Racuni = baza.racunTab.Where(x=>x.Narudzba.VlasnikID==Trazeni.VlasnikID).ToList();
 
 
            // dsfsd

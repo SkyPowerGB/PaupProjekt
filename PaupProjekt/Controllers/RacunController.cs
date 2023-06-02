@@ -83,7 +83,15 @@ namespace PaupProjekt.Controllers
 
 
 
-       
+        public ActionResult IzdajRacun(račun r) { 
+
+
+        
+        return  View();
+        }
+
+
+
 
 
     }

@@ -22,7 +22,8 @@
     <thead>
         <tr>
             <th>Vozilo </th>
-            <th>Datum </th>
+            <th>Datum narudžbe</th>
+            <th>Datum Servisa </th>
             <th>Opis Problema </th>
             <th>Status </th>
 
@@ -34,9 +35,13 @@
     <tr>
         <td>@n.VoziloVlasnika.MarkaRegitracija</td>
         <td>@n.Datum</td>
+        @if (n.DatumServisa.HasValue)
+        {
+        <td>@n.DatumServisa</td>}
+        else { <td>Čeka</td>}
         <td>@n.OpisProblema</td>
         <td>@n.StatusServisa</td>
-
+        <td>@ViewBag.Racuni</td>
     </tr>
         }
     </tbody>
