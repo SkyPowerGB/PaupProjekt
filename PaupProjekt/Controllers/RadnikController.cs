@@ -22,8 +22,27 @@ namespace PaupProjekt.Controllers
             return View();
         }
 
-        public ActionResult klijenti(string status) {
+        public ActionResult klijenti(string prezimeIme, string marka , string usluga, string status) {
             var baza = db.servisTab.ToList();
+
+            if (!String.IsNullOrWhiteSpace(usluga))
+            {
+                baza = baza.Where(x => x.OpisProblema.ToUpper().Contains(usluga.ToUpper())).ToList();
+            }
+
+
+
+
+          
+
+
+            if (!String.IsNullOrWhiteSpace(prezimeIme))
+            {
+                baza = baza.Where(x => x.VlasnikVozila.PrezimeIme.ToUpper().Contains(prezimeIme.ToUpper())).ToList();
+            }
+
+
+
             if (!String.IsNullOrWhiteSpace(status))
             {
                 baza = baza.Where(x => x.StatusServisa.Contains(status)).ToList();

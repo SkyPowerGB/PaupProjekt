@@ -8,16 +8,24 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>klijenti</h2>
+<h2>Klijenti</h2>
 
 
 @using (Html.BeginForm("klijenti", "radnik", FormMethod.Get))
 {
 
+    @Html.TextBox("prezimeIme")
 
-    @Html.DropDownList("Status", new SelectList(ListaStatusaE.DopusteneVrijednosi),"Status")
+    @Html.TextBox("marka")
 
-    <button type="submit"> traži </button>
+  
+
+    @Html.TextBox("usluga")
+
+    @Html.DropDownList("Status", new SelectList(ListaStatusaE.DopusteneVrijednosi), "Status")
+
+
+    <button type="submit" class="btn btn-primary"> traži </button>
 
 }
 
@@ -33,7 +41,7 @@
 
                 <td>Vozilo vlasnika</td>
                 <td>marka</td>
-                <td>datum</td>
+                <td>datum Narudžbe</td>
                 <td>usluga</td>
                 <td>status</td>
             </tr>
@@ -53,7 +61,7 @@
                     <td>@Servis.StatusServisa</td>
                     <td>@Html.ActionLink("info", "detalji", new { id = Servis.ServisID }, new { @class = "btn btn-primary" })</td>
                     <td>@Html.ActionLink("azuriraj", "Azuriraj", new { id = Servis.ServisID }, new { @class = "btn btn-primary" })</td>
-                    
+
                     <td>@Html.ActionLink("Izdavanje Računa", "IzavanjeRacuna", "Racun", new { idNarudzbe = Servis.ServisID }, new { @class = "btn btn-success" })</td>
                     <td>@Html.ActionLink("izbrisi", "ObrisiNarudzbu", new { id = Servis.ServisID }, new { @class = "btn btn-danger" })</td>
 
@@ -70,7 +78,7 @@
 
 
 
-        </table>
+    </table>
 
 
 }

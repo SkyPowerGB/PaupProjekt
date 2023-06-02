@@ -39,11 +39,11 @@
                 <ul class="navbar-nav flex-grow-1 navbar-right navbar-text">
                     @if (User.Identity.IsAuthenticated)
                     {
-                        <li>@Html.ActionLink("Vozila", "Vozila", "Korisnik")</li>
+                       
 
                         <li>@Html.ActionLink(((User as PaupProjekt.Misc.LogiraniKorisnik).PrezimeIme), "Index", "Korisnik")</li>
                         <li>@Html.ActionLink("Odjava", "Odjava", "Autentifikacijski")</li>
-                        
+                     
 
                     }
                     else
