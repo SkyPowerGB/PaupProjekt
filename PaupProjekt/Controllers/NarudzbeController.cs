@@ -3,6 +3,7 @@ using PaupProjekt.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.ConstrainedExecution;
 using System.Web;
 using System.Web.Mvc;
 
@@ -12,9 +13,9 @@ namespace PaupProjekt.Controllers
     {
         ServisVozilaDB baza = new ServisVozilaDB();
         // GET: Narudzbe
-
-
-        [Authorize]
+        servis NovaNarudzba;
+      
+       [Authorize]
         public ActionResult Index(string usluga)
         {
             ViewBag.UslugaPoznata = false;
@@ -44,21 +45,48 @@ namespace PaupProjekt.Controllers
             vlasnik Trazeni = baza.vlasnikTab.FirstOrDefault(x => x.Email == Email);
             ser.VlasnikID = Trazeni.VlasnikID;
             ser.Datum = DateTime.Now;
-          
-
+            NovaNarudzba = ser;
+/*
             if (ModelState.IsValid)
             {
                 baza.servisTab.Add(ser);
                 baza.SaveChanges();
             }
 
-            var vozila = baza.voziloTab.Where(x => x.VlasnikID == Trazeni.VlasnikID).ToList();
+
+     var vozila = baza.voziloTab.Where(x => x.VlasnikID == Trazeni.VlasnikID).ToList();
             ViewBag.VozilaList = vozila;
 
-            return RedirectToAction("Index","Korisnik");
+ */
+
+            return RedirectToAction("Potvrda",ser);
+        }
+        [HttpGet]
+        public ActionResult Potvrda(servis ser) {
+            if (ser== null) { return HttpNotFound("greska nije postavljen"); }
+          
+
+
+            return View(ser);
+        }
+        [HttpPost]
+        public ActionResult PotvrdaNarudzbe(servis ser)
+        {
+            var Email = User.Identity.Name;
+            vlasnik Trazeni = baza.vlasnikTab.FirstOrDefault(x => x.Email == Email);
+
+            //trerba dodat ua kontrolu ako vozilo i vlasnik id pripada korisniku koji je ulogiran
+            if (ModelState.IsValid)
+            {
+                baza.servisTab.Add(ser);
+                baza.SaveChanges();
+            }
+            var vozila = baza.voziloTab.Where(x => x.VlasnikID == Trazeni.VlasnikID).ToList();
+            ViewBag.VozilaList = vozila;
+            return RedirectToAction("Index", "Korisnik");
         }
 
 
 
-    }
+        }
 }
