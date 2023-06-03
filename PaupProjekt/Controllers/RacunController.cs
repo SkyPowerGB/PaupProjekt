@@ -1,4 +1,5 @@
-﻿using PaupProjekt.Models;
+﻿using Microsoft.Ajax.Utilities;
+using PaupProjekt.Models;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -11,15 +12,21 @@ namespace PaupProjekt.Controllers
     public class RacunController : Controller
     {
         ServisVozilaDB baza = new ServisVozilaDB();
-        // GET: Racun
+        
         public ActionResult IzavanjeRacuna(int? idNarudzbe,int? idUsluge)
         {
             bool novi = false;
 
             var racunNarudzbe = (baza.racunTab.FirstOrDefault(x => x.ServisID == idNarudzbe));
+          
             var uslugeNarudzbe = baza.ListaUslugaTab.Where(x=>x.RačunID==racunNarudzbe.RačunID);
             //narudzba ne postoji
             if (!idNarudzbe.HasValue) { return HttpNotFound("Usli u nema vrijednost"+idNarudzbe); }
+
+            if (racunNarudzbe.Izdan) {
+
+                return HttpNotFound("racun izdan");
+            }
 
             //izrada novoga racuna ako je prvi put
             if (racunNarudzbe==null) {
@@ -59,17 +66,20 @@ namespace PaupProjekt.Controllers
 
             }
             if (!novi) { ViewBag.Naslov = "Uredivanje računa"; }
-         
+            ViewBag.idRacuna = racunNarudzbe.RačunID;
             ViewBag.idNarudzbe= idNarudzbe;
+
             var listaUsluga = baza.ListaUslugaTab.Where(x=>x.RačunID==racunNarudzbe.RačunID).ToList();
            
+
+            //uk - ukupni iznos iz listeUsluga tog racuna
             var uk = listaUsluga.Sum(x => x.Usluge.cijenaUsluga*x.kol);
            
 
-         
+         //malo zeznti naziv trebal bi se zvat ukupni iznos 
             racunNarudzbe.UkupanIznos = 0+uk;
             ViewBag.racun=racunNarudzbe;
-         
+         //-----------------
 
             return View(listaUsluga);
         }
@@ -100,29 +110,27 @@ namespace PaupProjekt.Controllers
          
         }
 
-       
 
 
-        public ActionResult IzdajRacun(int idRacuna) { 
+        [HttpGet]
+        public ActionResult IzdajRacun(int idRacuna) {
+
+        ViewBag.uslugeNarudzbe =  baza.ListaUslugaTab.Where(x=>x.RačunID==idRacuna).ToList();
+          var racun = baza.racunTab.FirstOrDefault(x => x.RačunID == idRacuna);
 
 
-        
-
-
-        return  View();
+        return View(racun);
         }
 
-        [HttpPost]
+     
         public ActionResult IzdajRacun(račun r)
         {
-
-
-
-
-
-            return View();
+            r.Izdan = true;
+            r.DatumIzdavanja=DateTime.Now;
+            baza.Entry(r).State= System.Data.Entity.EntityState.Modified;
+            baza.SaveChanges();
+            return RedirectToAction("klijenti","Radnik");
         }
-
 
 
     }

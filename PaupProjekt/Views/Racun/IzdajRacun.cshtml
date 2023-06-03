@@ -1,0 +1,50 @@
+﻿@using PaupProjekt.Models
+@model račun
+
+@{
+    ViewBag.Title = "IzdajRacun";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+    List<ListaUslugaTab> listaUslugaRacuna =(( List < ListaUslugaTab > )ViewBag.uslugeNarudzbe);
+}
+
+<h2 class="alert-danger">Upozorenje! </h2>
+<h2>nakon što je račun izdan više ga nije već moguće uređivat</h2>
+<p>@Model.Izdan</p>
+<p> @Model.Narudzba.OpisProblema</p>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th> Naziv usluge</th>
+            <th>Kol</th>
+            <th>Cijena</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        @foreach (ListaUslugaTab usluga in listaUslugaRacuna) {
+        <tr>
+            
+            <td> @usluga.Usluge.nazivUsluga</td>
+            <td>@usluga.kol</td>
+            <td>@usluga.Usluge.cijenaUsluga</td>
+            <td></td>
+        </tr>
+        }
+    </tbody>
+
+</table>
+
+
+
+@using (Html.BeginForm("IzdajRacun", "Racun", FormMethod.Post))
+{ 
+@Html.HiddenFor(model => model.RačunID);;
+@Html.HiddenFor(model => model.UkupanIznos);
+@Html.HiddenFor(model => model.ServisID);
+
+
+
+
+<button> Izdaj Racun</button>
+}
