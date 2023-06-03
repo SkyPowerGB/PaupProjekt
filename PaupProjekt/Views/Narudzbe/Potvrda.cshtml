@@ -1,22 +1,43 @@
-﻿@model PaupProjekt.Models.servis
+﻿@using PaupProjekt.Models
+@model servis
 @{
     ViewBag.Title = "Potvrda";
     Layout = "~/Views/Shared/_Layout.cshtml";
+    vlasnik vlas = null;
+    vozilo voz = null;
+    bool notNull = false;
+
+    if (ViewBag.Vozilo != null)
+    {
+        voz = ((vozilo)ViewBag.Vozilo);
+        notNull = true;
+    }
+    if (ViewBag.Vlasnik != null)
+    {
+
+        vlas = ((vlasnik)ViewBag.Vlasnik);
+    }
+
+
 }
 
-<h2>Potvrda</h2>
-
-
 <h2>Potvrda Narudžbe</h2>
+<h3>Podaci o vozilu:</h3>
+@if (notNull)
+{
+    <p>@voz.Marka</p>
+    <p>@voz.Registracija</p>
+    <p>@voz.GodinaProizvodnje</p>
+
+}
+<h3>Podaci o narudžbi:</h3>
 <p>@Model.StatusServisa</p>
-<p>@Model.VlasnikID</p>
-<p>@Model.voziloID</p>
 <p>@Model.OpisProblema</p>
 <p>@Model.Datum</p>
 
 
 @using (Html.BeginForm("PotvrdaNarudzbe", "Narudzbe", FormMethod.Post))
-{  @Html.HiddenFor(model => model.StatusServisa)
+{@Html.HiddenFor(model => model.StatusServisa)
 @Html.HiddenFor(model => model.voziloID)
 @Html.HiddenFor(model => model.VlasnikID)
 @Html.HiddenFor(model => model.OpisProblema)

@@ -46,7 +46,9 @@ namespace PaupProjekt.Controllers
             ser.VlasnikID = Trazeni.VlasnikID;
             ser.Datum = DateTime.Now;
             NovaNarudzba = ser;
+           
 /*
+ * Stari kod za spremanje:
             if (ModelState.IsValid)
             {
                 baza.servisTab.Add(ser);
@@ -63,8 +65,10 @@ namespace PaupProjekt.Controllers
         }
         [HttpGet]
         public ActionResult Potvrda(servis ser) {
+
             if (ser== null) { return HttpNotFound("greska nije postavljen"); }
-          
+            ViewBag.Vozilo = baza.voziloTab.FirstOrDefault(x=>x.VoziloId==ser.voziloID);
+            ViewBag.Vlasnik=baza.vlasnikTab.FirstOrDefault(x=>x.VlasnikID==ser.VlasnikID);
 
 
             return View(ser);
@@ -81,6 +85,7 @@ namespace PaupProjekt.Controllers
                 baza.servisTab.Add(ser);
                 baza.SaveChanges();
             }
+            
             var vozila = baza.voziloTab.Where(x => x.VlasnikID == Trazeni.VlasnikID).ToList();
             ViewBag.VozilaList = vozila;
             return RedirectToAction("Index", "Korisnik");
