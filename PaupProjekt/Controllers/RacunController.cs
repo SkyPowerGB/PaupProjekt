@@ -17,8 +17,13 @@ namespace PaupProjekt.Controllers
             bool novi = false;
 
             var racunNarudzbe = (baza.racunTab.FirstOrDefault(x => x.ServisID == idNarudzbe));
+            var uslugeNarudzbe = baza.ListaUslugaTab.Where(x=>x.RačunID==racunNarudzbe.RačunID);
+            //narudzba ne postoji
             if (!idNarudzbe.HasValue) { return HttpNotFound("Usli u nema vrijednost"+idNarudzbe); }
-            if (racunNarudzbe==null) { racunNarudzbe = new račun(); racunNarudzbe.ServisID = (int)idNarudzbe;
+
+            //izrada novoga racuna ako je prvi put
+            if (racunNarudzbe==null) {
+                racunNarudzbe = new račun(); racunNarudzbe.ServisID = (int)idNarudzbe;
                 novi= true;
                 ViewBag.Naslov = "Izrada novog računa";
                 racunNarudzbe.UkupanIznos = 0;
@@ -26,15 +31,30 @@ namespace PaupProjekt.Controllers
                 baza.SaveChanges();
             }
 
+            //dodavanje nove usluge
             if(idUsluge.HasValue)
             {
-                ListaUslugaTab novaUslugaL = new ListaUslugaTab();
-                novaUslugaL.UslugaID = (int)idUsluge;
-                novaUslugaL.koef = 1;
-                novaUslugaL.RačunID =racunNarudzbe.RačunID;
+                if (uslugeNarudzbe.FirstOrDefault(x => x.UslugaID == idUsluge) != null)
+                {
+                    var usluga = uslugeNarudzbe.FirstOrDefault(x => x.UslugaID == idUsluge);
+                    usluga.kol++;
 
-                baza.ListaUslugaTab.Add(novaUslugaL);
-                baza.SaveChanges();
+                    baza.Entry(usluga).State = System.Data.Entity.EntityState.Modified;
+                    baza.SaveChanges();
+                }
+                else
+                {
+
+                    ListaUslugaTab novaUslugaL = new ListaUslugaTab();
+                    novaUslugaL.UslugaID = (int)idUsluge;
+                    novaUslugaL.koef = 1;
+                    novaUslugaL.kol = 1;
+                    novaUslugaL.RačunID = racunNarudzbe.RačunID;
+
+                    baza.ListaUslugaTab.Add(novaUslugaL);
+                    baza.SaveChanges();
+                }
+                 
                 baza=new ServisVozilaDB();
 
             }
@@ -43,8 +63,8 @@ namespace PaupProjekt.Controllers
             ViewBag.idNarudzbe= idNarudzbe;
             var listaUsluga = baza.ListaUslugaTab.Where(x=>x.RačunID==racunNarudzbe.RačunID).ToList();
            
-            var uk = listaUsluga.Sum(x => x.Usluge.cijenaUsluga);
-
+            var uk = listaUsluga.Sum(x => x.Usluge.cijenaUsluga*x.kol);
+           
 
          
             racunNarudzbe.UkupanIznos = 0+uk;
@@ -54,9 +74,7 @@ namespace PaupProjekt.Controllers
             return View(listaUsluga);
         }
 
-
-
-       
+     
 
         public ActionResult DodajUslugu(int id) {
 
@@ -74,6 +92,7 @@ namespace PaupProjekt.Controllers
         {
             var listaUsluga = baza.ListaUslugaTab.FirstOrDefault(x=>x.idListe==idListe);
             var idNarudzbe = listaUsluga.Račun.Narudzba.ServisID;
+           
             baza.ListaUslugaTab.Remove(listaUsluga);
             baza.SaveChanges();
             return RedirectToAction("IzavanjeRacuna", new { idNarudzbe=idNarudzbe });
@@ -81,16 +100,28 @@ namespace PaupProjekt.Controllers
          
         }
 
+       
 
 
-        public ActionResult IzdajRacun(račun r) { 
+        public ActionResult IzdajRacun(int idRacuna) { 
 
 
         
+
+
         return  View();
         }
 
+        [HttpPost]
+        public ActionResult IzdajRacun(račun r)
+        {
 
+
+
+
+
+            return View();
+        }
 
 
 

@@ -31,11 +31,6 @@ namespace PaupProjekt.Controllers
             }
 
 
-
-
-          
-
-
             if (!String.IsNullOrWhiteSpace(prezimeIme))
             {
                 baza = baza.Where(x => x.VlasnikVozila.PrezimeIme.ToUpper().Contains(prezimeIme.ToUpper())).ToList();

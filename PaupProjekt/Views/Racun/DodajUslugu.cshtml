@@ -20,9 +20,10 @@
         @foreach (uslugeTab usluga in Model)
         {
         <tr>
-            <th>@usluga.nazivUsluga</th>
-            <th>@usluga.cijenaUsluga</th>
-            <th>@Html.ActionLink("+","IzavanjeRacuna","Racun",new { idNarudzbe=(int)ViewBag.id , idUsluge = usluga.UslugaID }, new {@class="btn btn-success" })</th>
+            <td>@usluga.nazivUsluga</td>
+           
+            <td>@usluga.cijenaUsluga</td>
+            <td>@Html.ActionLink("+","IzavanjeRacuna","Racun",new { idNarudzbe=(int)ViewBag.id , idUsluge = usluga.UslugaID }, new {@class="btn btn-success" })</td>
         </tr>
 
         }

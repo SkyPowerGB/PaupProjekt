@@ -6,51 +6,69 @@
 @{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
+
 }
 
 <h2>Početna korisnik</h2>
 
-    
-    @if (Model.Count >= 1)
-    {
+
+@if (Model.Count >= 1)
+            {
 
 
 
 
-<table border="1" class="table table-bordered">
+                <table border="1" class="table table-bordered">
 
-    <thead>
-        <tr>
-            <th>Vozilo </th>
-            <th>Datum narudžbe</th>
-            <th>Datum Servisa </th>
-            <th>Opis Problema </th>
-            <th>Status </th>
+                    <thead>
+                        <tr>
+                            <th>Vozilo </th>
+                            <th>Datum narudžbe</th>
+                            <th>Datum Servisa </th>
+                            <th>Opis Problema </th>
+                            <th>Status </th>
 
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (servis n in Model)
-        {
-    <tr>
-        <td>@n.VoziloVlasnika.MarkaRegitracija</td>
-        <td>@n.Datum</td>
-        @if (n.DatumServisa.HasValue)
-        {
-        <td>@n.DatumServisa</td>}
-        else { <td>Čeka</td>}
-        <td>@n.OpisProblema</td>
-        <td>@n.StatusServisa</td>
-       
-    </tr>
-        }
-    </tbody>
-</table>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (servis n in Model)
+                        {
+                            <tr>
+                                <td>@n.VoziloVlasnika.MarkaRegitracija</td>
+                                <td>@n.Datum</td>
+                                @if (n.DatumServisa.HasValue)
+                                {
+                                    <td>@n.DatumServisa</td>
+                                }
+                                else
+                                {
+                                    <td>Čeka</td>
+                                }
+                                <td>@n.OpisProblema</td>
+                                <td>@n.StatusServisa</td>
+                                @if (((List<račun>)ViewBag.Racuni).FirstOrDefault(x => x.ServisID == n.ServisID)!=null)
+                                {
 
-    }
-    else { 
-    
-    <p>nema narudzbi</p>
-    }
+                                if (((List<račun>)ViewBag.Racuni).FirstOrDefault(x => x.ServisID == n.ServisID).Izdan)
+                                { 
+
+                                    <td>
+                                       Preuzimanje računa
+                                    </td>
+                                }
+
+                                }
+
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+
+            }
+            else
+            {
+
+                <p>nema narudzbi</p>
+            }
 
 
