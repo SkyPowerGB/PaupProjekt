@@ -23,11 +23,7 @@ namespace PaupProjekt.Controllers
             //narudzba ne postoji
             if (!idNarudzbe.HasValue) { return HttpNotFound("Usli u nema vrijednost"+idNarudzbe); }
 
-            if (racunNarudzbe.Izdan) {
-
-                return HttpNotFound("racun izdan");
-            }
-
+         
             //izrada novoga racuna ako je prvi put
             if (racunNarudzbe==null) {
                 racunNarudzbe = new račun(); racunNarudzbe.ServisID = (int)idNarudzbe;
@@ -37,9 +33,15 @@ namespace PaupProjekt.Controllers
                 baza.racunTab.Add(racunNarudzbe);
                 baza.SaveChanges();
             }
+         //ako je racun izdan nemoguce je mjenjat
+            if (racunNarudzbe.Izdan)
+            {
+
+                return HttpNotFound("racun izdan");
+            }
 
             //dodavanje nove usluge
-            if(idUsluge.HasValue)
+            if (idUsluge.HasValue)
             {
                 if (uslugeNarudzbe.FirstOrDefault(x => x.UslugaID == idUsluge) != null)
                 {
@@ -76,10 +78,10 @@ namespace PaupProjekt.Controllers
             var uk = listaUsluga.Sum(x => x.Usluge.cijenaUsluga*x.kol);
            
 
-         //malo zeznti naziv trebal bi se zvat ukupni iznos 
+     //postavljanje ukupnoga iznosa
             racunNarudzbe.UkupanIznos = 0+uk;
             ViewBag.racun=racunNarudzbe;
-         //-----------------
+
 
             return View(listaUsluga);
         }
