@@ -33,7 +33,7 @@ namespace PaupProjekt.Controllers
                 ViewBag.usluga = usluga;
                 noviServis.OpisProblema = usluga;
             }
-           
+           noviServis.Datum=DateTime.Now;
             return View(noviServis);
         }
 

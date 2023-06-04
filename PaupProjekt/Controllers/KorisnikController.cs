@@ -1,6 +1,7 @@
 ﻿using Microsoft.Ajax.Utilities;
 using PaupProjekt.Misc;
 using PaupProjekt.Models;
+using Rotativa;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -169,5 +170,36 @@ namespace PaupProjekt.Controllers
 
             return RedirectToAction("Vozila");
         }
+
+
+        public ActionResult pregledRacuna(int? servisId) {
+            if (servisId == null) { return RedirectToAction("Index"); }
+            var Racun = baza.racunTab.FirstOrDefault(x=>x.ServisID== servisId);
+            if(Racun == null) { return RedirectToAction("index"); }
+            ViewData["ListaUsluga"] = baza.ListaUslugaTab.Where(x => x.RačunID == Racun.RačunID).ToList();
+            ViewData["Servis"] = baza.servisTab.FirstOrDefault(x=>x.ServisID==servisId);
+        
+        return View(Racun);
+        }
+
+
+        public ActionResult ispisRacunaPDF(račun Racun )
+        {
+           
+            if (Racun == null) { return HttpNotFound(); }
+
+            ViewData["ListaUsluga"] = baza.ListaUslugaTab.Where(x => x.RačunID == Racun.RačunID).ToList();
+            ViewData["Servis"] = baza.servisTab.FirstOrDefault(x => x.ServisID == Racun.ServisID);
+
+            return new ViewAsPdf("pregledRacuna", Racun)
+            {
+                FileName = "RacunServisa.pdf" 
+            };
+        }
+
+
+
+
     }
+
 }

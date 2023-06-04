@@ -17,14 +17,18 @@
     @Html.HiddenFor(model => model.voziloID)
     @Html.HiddenFor(model => model.VlasnikID)
 
+    @Html.HiddenFor(model => model.Datum)
+
     @Html.HiddenFor(model => model.ServisID)
     @Html.HiddenFor(model => model.OpisProblema)
+
+    @Html.LabelFor(model => model.DatumServisa)
     @Html.TextBoxFor(model => model.DatumServisa)
 
-
+    @Html.LabelFor(model => model.StatusServisa)
     @Html.DropDownListFor(model => model.StatusServisa, new SelectList(ListaStatusaE.DopusteneVrijednosi), "Odaberi status")
     @Html.LabelFor(model => model.StatusServisa)
-    
+
     @Html.ValidationMessageFor(model => model.StatusServisa, "", new { @class = "text-danger" })
     @Html.ValidationSummary();
 
@@ -34,6 +38,6 @@
     <br />
     <h2>@Model.StatusServisa</h2>
     <br />
-    <button type="submit">button</button>
+    <button type="submit" class="btn btn-primary">Ažuriraj</button>
 }
 @Html.ActionLink("nazad", "klijenti", "Radnik")

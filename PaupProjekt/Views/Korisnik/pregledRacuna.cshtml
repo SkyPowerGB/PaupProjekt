@@ -1,0 +1,57 @@
+﻿@using PaupProjekt.Models
+
+@model račun
+
+@{
+
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    List<ListaUslugaTab> usluge = ViewData["ListaUsluga"] as List<ListaUslugaTab>;
+    servis Servis = ViewData["Servis"] as servis;
+    račun RacunM = Model;
+
+}
+
+<h2>Pregled Racuna</h2>
+
+{<h3>Datum narudžbe: @Servis.Datum</h3>
+
+
+
+ <h3>Datum servisa: @Servis.DatumServisa</h3>}
+
+
+<h3>Datum izdavanja računa: @Model.DatumIzdavanja</h3>
+
+<br />
+<h3>Podaci o vlasniku:</h3>
+<br />
+<h3>Prezime i ime vlasnika : @Servis.VlasnikVozila.PrezimeIme</h3>
+<br />
+<h3>Podaci o vozilu:</h3>
+<h3>Marka: @Servis.VoziloVlasnika.Marka</h3>
+<h3>Registracija: @Servis.VoziloVlasnika.Registracija</h3>
+<h3>Godina Proizvodnje: @Servis.VoziloVlasnika.GodinaProizvodnje</h3>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Naziv usluge</th>
+            <th>Kol</th>
+            <th>Cijena</th>
+            <th>Ukupno</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (ListaUslugaTab usluga in usluge)
+        {
+            <tr>
+                <td>@usluga.Usluge.nazivUsluga</td>
+                <td>@usluga.kol</td>
+                <td>@usluga.Usluge.cijenaUsluga</td>
+                <td>@(usluga.kol*usluga.Usluge.cijenaUsluga)</td>
+            </tr>
+
+        }
+    </tbody>
+</table>
+@Html.ActionLink("Preuzmi PDF", "ispisRacunaPDF", "Korisnik",RacunM , null)
