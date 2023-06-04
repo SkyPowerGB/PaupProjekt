@@ -1,0 +1,37 @@
+﻿@model PaupProjekt.Models.vlasnik
+@{
+    ViewBag.Title = "PromjenaKorisnickihPod";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>PromjenaKorisnickihPod</h2>
+
+@using (Html.BeginForm("PromjenaKorisnickihPod", "Korisnik", FormMethod.Post))
+{
+
+    @Html.HiddenFor(model => model.VlasnikID)
+
+
+    <br />
+    @Html.LabelFor(model => model.Ime)
+    @Html.TextBoxFor(model => model.Ime)
+    @Html.ValidationMessageFor(model => model.Ime)
+
+
+    <br />
+    @Html.LabelFor(model => model.Prezime)
+    @Html.TextBoxFor(model => model.Prezime)
+    @Html.ValidationMessageFor(model => model.Prezime)
+
+
+    <br />
+    @Html.LabelFor(model => model.Email)
+    @Html.TextBoxFor(model => model.Email)
+    @Html.ValidationMessageFor(model => model.Email)
+    <br />
+    @Html.ActionLink("Promjeni Lozinku(neje nap)", " ");
+    <br />
+    @Html.ActionLink("Odustani", "Profil", null, new {@class="btn btn-secondary" });
+    <btn class="btn btn-primary">Spremi Promjene</btn>
+
+}

@@ -43,11 +43,35 @@ namespace PaupProjekt.Controllers
             return View(KorRacun);
         }
 
-     
+        [Authorize]
+        [HttpGet]
+        public ActionResult PromjenaKorisnickihPod() {
+            var Email = HttpContext.User.Identity.Name;
+            vlasnik KorRacun = baza.vlasnikTab.FirstOrDefault(x => x.Email == Email);
 
+
+            return View(KorRacun);
+        }
 
 
         [Authorize]
+        [HttpPost]
+        public ActionResult PromjenaKorisnickihPod(vlasnik v)
+        {
+
+            if (ModelState.IsValid) {
+
+                baza.Entry(v).State= System.Data.Entity.EntityState.Modified;
+
+                baza.SaveChanges();
+
+
+                return RedirectToAction("Profil");
+            }
+
+
+            return View(v);
+        }
 
         public ActionResult Vozila() {
 

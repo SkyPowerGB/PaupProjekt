@@ -308,6 +308,7 @@
     <Content Include="Views\Racun\DodajUslugu.cshtml" />
     <Content Include="Views\Racun\IzdajRacun.cshtml" />
     <Content Include="Views\Narudzbe\Potvrda.cshtml" />
+    <Content Include="Views\Korisnik\PromjenaKorisnickihPod.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
