@@ -21,32 +21,32 @@ namespace PaupProjekt.Controllers
         {
             return View();
         }
-
+      
         public ActionResult klijenti(string prezimeIme, string marka , string usluga, string status) {
-            var baza = db.servisTab.ToList();
+            var narudzbe = db.servisTab.ToList();
 
             if (!String.IsNullOrWhiteSpace(usluga))
             {
-                baza = baza.Where(x => x.OpisProblema.ToUpper().Contains(usluga.ToUpper())).ToList();
+                narudzbe = narudzbe.Where(x => x.OpisProblema.ToUpper().Contains(usluga.ToUpper())).ToList();
             }
 
 
             if (!String.IsNullOrWhiteSpace(prezimeIme))
             {
-                baza = baza.Where(x => x.VlasnikVozila.PrezimeIme.ToUpper().Contains(prezimeIme.ToUpper())).ToList();
+                narudzbe = narudzbe.Where(x => x.VlasnikVozila.PrezimeIme.ToUpper().Contains(prezimeIme.ToUpper())).ToList();
             }
 
 
 
             if (!String.IsNullOrWhiteSpace(status))
             {
-                baza = baza.Where(x => x.StatusServisa.Contains(status)).ToList();
+                narudzbe = narudzbe.Where(x => x.StatusServisa.Contains(status)).ToList();
 
             }
 
             
 
-            return View(baza);
+            return View(narudzbe);
         }
 
         public ActionResult detalji(int? id) {
@@ -130,28 +130,23 @@ namespace PaupProjekt.Controllers
             if (racunServisa != null)
             {
                 //tu treba odlucit kaj bude se desilo ak korisnik ima veci izdan racun
-                return HttpNotFound("Nije moguce obrisat korisnika ciji je racun vec izdan");
-                var usluge = db.ListaUslugaTab.FirstOrDefault(x => x.RačunID == racunServisa.RačunID);
-
-                if (usluge != null)
-                {
-
-
-                }
-                else
-                {
-
-
-                }
-
+               
+                var uslugeServisa = db.ListaUslugaTab.Where(x=>x.RačunID==racunServisa.RačunID).ToList();
+                if (uslugeServisa != null) { foreach (ListaUslugaTab usluga in uslugeServisa) {
+                        db.ListaUslugaTab.Remove(usluga);
+                    
+                    
+                    } }
+                db.racunTab.Remove(racunServisa);
+                db.SaveChanges();
 
             }
-            else {
+         
 
                 db.servisTab.Remove(servisKorisnika);
                 db.SaveChanges();
 
-            }
+          
 
 
 
