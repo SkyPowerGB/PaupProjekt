@@ -34,13 +34,18 @@ namespace PaupProjekt.Controllers
 
         [Authorize]
         public ActionResult Profil() {
-        
+
+            var Email = HttpContext.User.Identity.Name;
+            vlasnik KorRacun = baza.vlasnikTab.FirstOrDefault(x => x.Email == Email);
 
 
 
-
-        return View();
+            return View(KorRacun);
         }
+
+     
+
+
 
         [Authorize]
 
