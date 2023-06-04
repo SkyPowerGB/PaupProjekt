@@ -45,22 +45,31 @@
                                     <td>Čeka</td>
                                 }
                                 <td>@n.OpisProblema</td>
+
                                 <td>@n.StatusServisa</td>
-                                @if (((List<račun>)ViewBag.Racuni).FirstOrDefault(x => x.ServisID == n.ServisID)!=null)
+                                @if (((List<račun>)ViewBag.Racuni).FirstOrDefault(x => x.ServisID == n.ServisID) != null)
                                 {
 
-                                if (((List<račun>)ViewBag.Racuni).FirstOrDefault(x => x.ServisID == n.ServisID).Izdan)
-                                { 
+                                    if (((List<račun>)ViewBag.Racuni).FirstOrDefault(x => x.ServisID == n.ServisID).Izdan)
+                                    {
 
-                                    <td>
-                                       Preuzimanje računa
-                                    </td>
+                                        <td>
+                                            Preuzimanje računa
+                                        </td>
+                                    }
+
                                 }
-
+                                @if (n.DatumServisa==null) {
+                                    if (n.StatusServisa != "Otkazan")
+                                    {
+                                <td>@Html.ActionLink("Otkaži", "OtkaziNarudzbu", new { idNarudzbe = n.ServisID })</td>
+                                
                                 }
-
+                                }
                             </tr>
+
                         }
+
                     </tbody>
                 </table>
 

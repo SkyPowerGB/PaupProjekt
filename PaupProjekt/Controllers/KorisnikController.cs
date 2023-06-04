@@ -31,6 +31,30 @@ namespace PaupProjekt.Controllers
            // dsfsd
             return View(narudzbe);
         }
+        [Authorize]
+        [HttpGet]
+        public ActionResult OtkaziNarudzbu(int idNarudzbe) {
+
+          
+            var Narudzba = baza.servisTab.FirstOrDefault(X=>X.ServisID==idNarudzbe);
+
+
+        return View(Narudzba);
+        }
+        [Authorize]
+        [HttpPost]
+        public ActionResult OtkaziNarudzbu(servis Narudzba)
+        {
+            Narudzba.StatusServisa = "Otkazan";
+
+            if (ModelState.IsValid) { 
+            baza.Entry(Narudzba).State= System.Data.Entity.EntityState.Modified;
+                baza.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            return View(Narudzba);
+        }
+
 
         [Authorize]
         public ActionResult Profil() {

@@ -21,9 +21,12 @@ namespace PaupProjekt.Models
             {
                 DopusteneVrijednosi = new List<string>
                 {
+                    
                     "Na Čekanju",
+                    "Zaprimljen",
                     "U tijeku",
-                    "Završen"
+                    "Završen",
+                    "Otkazan"
                 };
                 vrijednostiPost = true;
             }
