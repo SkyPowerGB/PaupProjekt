@@ -1,13 +1,15 @@
-﻿@using PaupProjekt.Models;
-@model List<vlasnik>
+﻿@using PagedList.Mvc
+@using PagedList
+@using PaupProjekt.Models;
+@model PagedList<vlasnik>
 @{
     ViewBag.Title = "Korisnici";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-
+<link href="/Content/PagedList.css" rel="stylesheet" type="text/css" />
 <div class="container ">
-    
+
     <table class="table table-striped">
         <thead>
             <tr>
@@ -27,7 +29,7 @@
 
                     <td>@Html.ActionLink("Uredi", "uredi", new { id = kor.VlasnikID }, new { @class = "btn btn-primary" })</td>
 
-                    <td>@Html.ActionLink("Brisi", "izbrisi", new { id = kor.VlasnikID } ,new { @class="btn btn-danger"})</td>
+                    <td>@Html.ActionLink("Brisi", "izbrisi", new { id = kor.VlasnikID }, new { @class = "btn btn-danger" })</td>
 
 
 
@@ -40,5 +42,8 @@
 
 
     </table>
+
+    @Html.PagedListPager(Model, page => Url.Action("Korisnici", new { i = page }))
+
 </div>
 

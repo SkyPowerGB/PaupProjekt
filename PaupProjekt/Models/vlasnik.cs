@@ -27,6 +27,7 @@ namespace PaupProjekt.Models
 
 
         [Display(Name = "email")]
+        [EmailAddress]
         [Required(ErrorMessage = "{0} je obavezno")]
       
         public string Email { get; set; }

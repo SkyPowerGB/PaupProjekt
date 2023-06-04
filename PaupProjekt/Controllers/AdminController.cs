@@ -1,4 +1,5 @@
 ﻿using Antlr.Runtime.Tree;
+using PagedList;
 using PaupProjekt.Models;
 using System;
 using System.Collections.Generic;
@@ -19,16 +20,19 @@ namespace PaupProjekt.Controllers
         {
             return View();
         }
-        
- 
-        public ActionResult Korisnici() {
-            
 
+
+        public ActionResult Korisnici(int? i)
+        {
+            var pageNumber = i ?? 1;
+            var pageSize = 10;
             var kor = baza.vlasnikTab.ToList();
-        
-        return View(kor);
-        
+
+            var pagedKorisnici = kor.ToPagedList(pageNumber, pageSize);
+
+            return View(pagedKorisnici);
         }
+
         [AllowAnonymous]
         public ActionResult uredi(int? id) {
             vlasnik v=null;
