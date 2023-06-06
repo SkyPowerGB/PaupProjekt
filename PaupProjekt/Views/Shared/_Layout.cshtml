@@ -14,6 +14,7 @@
 
 </head>
 <body>
+    @using PaupProjekt.Misc
     <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark bg-dark">
         <div class="container">
             @Html.ActionLink("Servis vozila" , "Index", "Gost", new { area = "" }, new { @class = "navbar-brand" })
@@ -28,11 +29,31 @@
 
                     <li>@Html.ActionLink("Kontakt", "Kontakt", "Gost", new { area = "" }, new { @class = "nav-link" })</li>
 
-                    @if (User.Identity.IsAuthenticated) { 
-                    
-                    <li>@Html.ActionLink("Vozila", "Vozila", "Korisnik", new { area = "" }, new { @class = "nav-link" })</li>
-                    
+                    @if (User.Identity.IsAuthenticated)
+                    {
+
+                        <li>@Html.ActionLink("Vozila", "Vozila", "Korisnik", new { area = "" }, new { @class = "nav-link" })</li>
+
                     }
+                    @if (User.Identity.IsAuthenticated &&
+                        ((User as LogiraniKorisnik).IsInRole(OvlastiKorisnik.Radnik) ||
+                        (User as LogiraniKorisnik).IsInRole(OvlastiKorisnik.Admin)))
+                    {
+
+
+                        <li>@Html.ActionLink("Servisi", "klijenti", "Radnik", new { area = "" }, new { @class = "nav-link" })</li>
+                    }
+
+                    @if (User.Identity.IsAuthenticated &&
+                       
+                       (User as LogiraniKorisnik).IsInRole(OvlastiKorisnik.Admin))
+                    {
+
+
+                        <li>@Html.ActionLink("Korisnici", "Korisnici", "Admin", new { area = "" }, new { @class = "nav-link" })</li>
+                    }
+
+
                 </ul>
             </div>
             <div class="navbar-collapse collapse">
