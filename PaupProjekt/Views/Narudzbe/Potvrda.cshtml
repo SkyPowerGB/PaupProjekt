@@ -35,6 +35,8 @@
 <p>@Model.OpisProblema</p>
 <p>@Model.Datum</p>
 
+<h2>Slika:</h2>
+<img src="@Url.Content(Model.slikaVozila)" width="250" />
 
 @using (Html.BeginForm("PotvrdaNarudzbe", "Narudzbe", FormMethod.Post))
 {@Html.HiddenFor(model => model.StatusServisa)
@@ -42,6 +44,7 @@
 @Html.HiddenFor(model => model.VlasnikID)
 @Html.HiddenFor(model => model.OpisProblema)
 @Html.HiddenFor(model => model.Datum)
+    @Html.HiddenFor(model=>model.slikaVozila);
 <button> Naruči</button>
 }
-@Html.ActionLink("Odustani", "Index", new { usluga = Model.OpisProblema });
+@Html.ActionLink("Odustani", "odustani", new { path=Model.slikaVozila, usluga = Model.OpisProblema });

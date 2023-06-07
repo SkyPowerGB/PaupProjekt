@@ -14,8 +14,8 @@ namespace PaupProjekt.Controllers
         ServisVozilaDB baza = new ServisVozilaDB();
         // GET: Narudzbe
         servis NovaNarudzba;
-      
-       [Authorize]
+
+        [Authorize]
         public ActionResult Index(string usluga)
         {
             ViewBag.UslugaPoznata = false;
@@ -33,7 +33,7 @@ namespace PaupProjekt.Controllers
                 ViewBag.usluga = usluga;
                 noviServis.OpisProblema = usluga;
             }
-           noviServis.Datum=DateTime.Now;
+            noviServis.Datum = DateTime.Now;
             return View(noviServis);
         }
 
@@ -48,7 +48,8 @@ namespace PaupProjekt.Controllers
             NovaNarudzba = ser;
 
 
-            if (ser.ImageFile != null) {
+            if (ser.ImageFile != null)
+            {
                 string fileName = Path.GetFileNameWithoutExtension(ser.ImageFile.FileName);
                 string extension = Path.GetExtension(ser.ImageFile.FileName);
 
@@ -58,7 +59,7 @@ namespace PaupProjekt.Controllers
                     ser.slikaVozila = "~/SlikeServisi/" + fileName;
                     fileName = Path.Combine(Server.MapPath("~/SlikeServisi/"), fileName);
                     ser.ImageFile.SaveAs(fileName);
-                   
+
                 }
                 else
                 {
@@ -67,28 +68,29 @@ namespace PaupProjekt.Controllers
 
             }
 
-/*
- * Stari kod za spremanje:
-            if (ModelState.IsValid)
-            {
-                baza.servisTab.Add(ser);
-                baza.SaveChanges();
-            }
+            /*
+             * Stari kod za spremanje:
+                        if (ModelState.IsValid)
+                        {
+                            baza.servisTab.Add(ser);
+                            baza.SaveChanges();
+                        }
 
 
-     var vozila = baza.voziloTab.Where(x => x.VlasnikID == Trazeni.VlasnikID).ToList();
-            ViewBag.VozilaList = vozila;
+                 var vozila = baza.voziloTab.Where(x => x.VlasnikID == Trazeni.VlasnikID).ToList();
+                        ViewBag.VozilaList = vozila;
 
- */
+             */
 
-            return RedirectToAction("Potvrda",ser);
+            return RedirectToAction("Potvrda", ser);
         }
         [HttpGet]
-        public ActionResult Potvrda(servis ser) {
+        public ActionResult Potvrda(servis ser)
+        {
 
-            if (ser== null) { return HttpNotFound("greska nije postavljen"); }
-            ViewBag.Vozilo = baza.voziloTab.FirstOrDefault(x=>x.VoziloId==ser.voziloID);
-            ViewBag.Vlasnik=baza.vlasnikTab.FirstOrDefault(x=>x.VlasnikID==ser.VlasnikID);
+            if (ser == null) { return HttpNotFound("greska nije postavljen"); }
+            ViewBag.Vozilo = baza.voziloTab.FirstOrDefault(x => x.VoziloId == ser.voziloID);
+            ViewBag.Vlasnik = baza.vlasnikTab.FirstOrDefault(x => x.VlasnikID == ser.VlasnikID);
 
 
             return View(ser);
@@ -105,13 +107,26 @@ namespace PaupProjekt.Controllers
                 baza.servisTab.Add(ser);
                 baza.SaveChanges();
             }
-            
+
             var vozila = baza.voziloTab.Where(x => x.VlasnikID == Trazeni.VlasnikID).ToList();
             ViewBag.VozilaList = vozila;
             return RedirectToAction("Index", "Korisnik");
         }
 
 
+        public ActionResult odustani(string path, string usluga)
+        {
+            var putanja = Server.MapPath(path);
+            if (System.IO.File.Exists(putanja))
+            {
+                System.IO.File.Delete(putanja);
+            }
+            else { return HttpNotFound("slika neje nađena"); }
 
+            return RedirectToAction("Index", "Narudzbe", (usluga));
         }
+
+
+       
+    }
 }
