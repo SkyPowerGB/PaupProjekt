@@ -323,6 +323,8 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="SlikeServisi\" />
+    <Folder Include="Slike\" />
     <Folder Include="Views\Default\" />
   </ItemGroup>
   <ItemGroup>
