@@ -116,6 +116,7 @@ namespace PaupProjekt.Controllers
          
         }
 
+
         //------------------Potvrda (izdaj) Račun-------------------------
 
         //nakon što je izdan više ga nije moguće uređivat 

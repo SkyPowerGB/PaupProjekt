@@ -93,7 +93,8 @@ namespace PaupProjekt.Controllers
 
             
         }
-//uzmi provjeri  i spremiKorPodatke/javi netocna lozinka ili email
+
+//uzmi provjeri  i spremiKorPodatke /javi netocna lozinka ili email
 
         [HttpPost]
         [AllowAnonymous]
