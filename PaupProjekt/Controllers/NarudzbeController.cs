@@ -6,7 +6,7 @@ using System.Linq;
 using System.Runtime.ConstrainedExecution;
 using System.Web;
 using System.Web.Mvc;
-
+using System.IO;
 namespace PaupProjekt.Controllers
 {
     public class NarudzbeController : Controller
@@ -46,7 +46,27 @@ namespace PaupProjekt.Controllers
             ser.VlasnikID = Trazeni.VlasnikID;
             ser.Datum = DateTime.Now;
             NovaNarudzba = ser;
-           
+
+
+            if (ser.ImageFile != null) {
+                string fileName = Path.GetFileNameWithoutExtension(ser.ImageFile.FileName);
+                string extension = Path.GetExtension(ser.ImageFile.FileName);
+
+                if (extension == ".jpg" || extension == ".jepg" || extension == ".png")
+                {
+                    fileName = fileName + DateTime.Now.ToString("yymmssfff") + extension;
+                    ser.slikaVozila = "~/SlikeServisi/" + fileName;
+                    fileName = Path.Combine(Server.MapPath("~/SlikeServisi/"), fileName);
+                    ser.ImageFile.SaveAs(fileName);
+                   
+                }
+                else
+                {
+                    ModelState.AddModelError("Slika kvara", "Nepodržana ekstenzija");
+                }
+
+            }
+
 /*
  * Stari kod za spremanje:
             if (ModelState.IsValid)

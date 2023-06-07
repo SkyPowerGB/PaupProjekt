@@ -43,9 +43,21 @@ namespace PaupProjekt.Models
         [Required(ErrorMessage = "{0} je obavezan")]
         
         public string StatusServisa { get; set; }
-       public virtual vozilo VoziloVlasnika {  get; set; }
+
+
+        [Display(Name ="Slika kvara vozila")]    
+        public string slikaVozila { get; set; }
+
+        [NotMapped]
+        public HttpPostedFileBase ImageFile { get; set; }
+
+
+
+        public virtual vozilo VoziloVlasnika {  get; set; }
 
        public virtual vlasnik VlasnikVozila { get; set; }
 
+
     }
 }
+

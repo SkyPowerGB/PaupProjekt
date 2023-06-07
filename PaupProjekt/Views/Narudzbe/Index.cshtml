@@ -10,7 +10,8 @@
         <div class="col-md-6 mx-auto">
             <h2>Nova narudžba</h2>
 
-            @using (Html.BeginForm("index", "Narudzbe", FormMethod.Post))
+            @using (Html.BeginForm("index", "Narudzbe", FormMethod.Post , new {@class="form-horizontal" ,
+               role="form" , enctype="multipart/form-data" }))
             {
                 if ((bool)ViewBag.UslugaPoznata)
                 {
@@ -24,6 +25,15 @@
                         @Html.TextBoxFor(model => model.OpisProblema, new { @class = "form-control", placeholder = "Opis problema" })
                     </div>
                 }
+                @Html.HiddenFor(model=>model.slikaVozila)
+               <div class="form-group">
+                   @Html.LabelFor(model=>model.slikaVozila)
+                   <div>
+                       <input type="file"  name="ImageFile" class="form-control" />
+                       @Html.ValidationMessageFor(model => model.slikaVozila,"",new {@class="text-danger" });
+                   </div>
+
+               </div>
 
                 @Html.LabelFor(model => model.VoziloVlasnika.MarkaRegitracija)
                 <div class="form-group">
