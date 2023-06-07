@@ -18,9 +18,10 @@ namespace PaupProjekt.Controllers
         // GET: Autentifikacijski
         ServisVozilaDB baza = new ServisVozilaDB();
 
-
+ //----------------Registracija------------------------------
         [HttpGet]
         [AllowAnonymous]
+  
         public ActionResult Registracija()
         {
 
@@ -29,7 +30,7 @@ namespace PaupProjekt.Controllers
 
             return View( ) ;
         }
-
+//spremi podatke
         [HttpPost]
         [AllowAnonymous]
         public ActionResult Registracija( vlasnik v)
@@ -72,12 +73,16 @@ namespace PaupProjekt.Controllers
             return View(v);
             
         }
+        
+  //----------Registracija Uspješna-------------------------      
         [AllowAnonymous]
         public ActionResult RegistracijaUspjesna() {
 
             return View();
         }
 
+
+ //-------Prijava-----------------------------------
         [HttpGet]
         [AllowAnonymous]
         public ActionResult Login(string returnUrl)
@@ -88,7 +93,7 @@ namespace PaupProjekt.Controllers
 
             
         }
-
+//uzmi provjeri  i spremiKorPodatke/javi netocna lozinka ili email
 
         [HttpPost]
         [AllowAnonymous]
@@ -137,6 +142,8 @@ namespace PaupProjekt.Controllers
             return View(kartica);
         }
 
+
+        //-----tu bi trebala biti promjena  Lozinke korisnika (NIJE NAPRAVLJENO)
         public ActionResult PromjenaLozinke(int? id)
         {
 
@@ -144,7 +151,7 @@ namespace PaupProjekt.Controllers
             return View();
         }
 
-       
+   //-----------------------------------odjava----------------  
         public ActionResult Odjava()
         {
             FormsAuthentication.SignOut();

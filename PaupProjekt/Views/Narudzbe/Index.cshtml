@@ -25,16 +25,18 @@
                         @Html.TextBoxFor(model => model.OpisProblema, new { @class = "form-control", placeholder = "Opis problema" })
                     </div>
                 }
-                @Html.HiddenFor(model=>model.slikaVozila)
+               
+                @Html.HiddenFor(model => model.slikaVozila)
                <div class="form-group">
-                   @Html.LabelFor(model=>model.slikaVozila)
+                   @Html.LabelFor(model => model.slikaVozila)
                    <div>
                        <input type="file"  name="ImageFile" class="form-control" />
-                       @Html.ValidationMessageFor(model => model.slikaVozila,"",new {@class="text-danger" });
+                       @Html.ValidationMessageFor(model => model.slikaVozila, "", new { @class = "text-danger" });
+                       
                    </div>
 
                </div>
-
+                
                 @Html.LabelFor(model => model.VoziloVlasnika.MarkaRegitracija)
                 <div class="form-group">
                     @Html.DropDownListFor(model => model.voziloID, new SelectList(((List<vozilo>)(ViewBag.VozilaList)), "voziloId", "MarkaRegitracija"), "- Odaberi Vozilo -")

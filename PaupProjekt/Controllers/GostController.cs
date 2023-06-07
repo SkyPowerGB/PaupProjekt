@@ -11,20 +11,22 @@ namespace PaupProjekt.Controllers
     { 
         ServisVozilaDB db =new ServisVozilaDB();
         // GET: Gost
+
+//početna opcenito o nama----------------------
         public ActionResult Index()
         {
             if(User.Identity.IsAuthenticated) { return RedirectToAction("Index","Korisnik"); }
             
             return View();
         }
-
+//----za Logirane: Narucivanje ---za Goste linkovi su za prijavu----------------------
         public ActionResult Usluge()
         {
 
             return View();
         }
 
-
+//-------------Podaci za Kontakt----------------------------
         public ActionResult Kontakt() {
 
          

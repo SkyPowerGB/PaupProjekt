@@ -15,13 +15,8 @@ namespace PaupProjekt.Controllers
     {
         ServisVozilaDB baza = new ServisVozilaDB();
 
-        // GET: Admin
-        public ActionResult Index()
-        {
-            return View();
-        }
-
-
+       
+      //--------(Tablica) --Lista Korisnika-*------------------
         public ActionResult Korisnici(int? i)
         {
             var pageNumber = i ?? 1;
@@ -33,6 +28,8 @@ namespace PaupProjekt.Controllers
             return View(pagedKorisnici);
         }
 
+
+//-----promjena ovlasti / lozinke ------------------------------
         [AllowAnonymous]
         public ActionResult uredi(int? id) {
             vlasnik v=null;
@@ -67,8 +64,9 @@ namespace PaupProjekt.Controllers
           return  RedirectToAction("Korisnici");
            
         }
-
-        public ActionResult izbrisi(int? id)
+ //----------izbrisi korisnika---------------------------------
+//potvrdi
+       public ActionResult izbrisi(int? id)
         {
             if (id.HasValue) { 
             vlasnik v =baza.vlasnikTab.FirstOrDefault(x=>x.VlasnikID==id);
@@ -88,7 +86,7 @@ namespace PaupProjekt.Controllers
 
             return RedirectToAction("Korisnici");
         }
-
+ //izbrisi
         [HttpPost]
         public ActionResult izbrisi(int id) {
 
@@ -100,7 +98,7 @@ namespace PaupProjekt.Controllers
         
         }
 
-
+//--------------------------promjeni lozinku-------------------------
         public ActionResult promjenaLozinke(int? id) { 
         if(id.HasValue)
             {
@@ -120,6 +118,8 @@ namespace PaupProjekt.Controllers
        
         
         }
+       
+    //spremi promjene
         [HttpPost]
         public ActionResult promjenaLozinke(vlasnik v)
         {

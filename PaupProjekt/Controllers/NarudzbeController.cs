@@ -15,10 +15,16 @@ namespace PaupProjekt.Controllers
         // GET: Narudzbe
         servis NovaNarudzba;
 
+        //Ulsuge Stranica (sve za narucivanje)--------------------
+       
+
+        // -------------Kreiranje novoga Servisa tj nova narudžba-----------
         [Authorize]
         public ActionResult Index(string usluga)
         {
             ViewBag.UslugaPoznata = false;
+          
+            
             var Email = HttpContext.User.Identity.Name;
             vlasnik Trazeni = baza.vlasnikTab.FirstOrDefault(x => x.Email == Email);
             var vozila = baza.voziloTab.Where(x => x.VlasnikID == Trazeni.VlasnikID).ToList();
@@ -33,13 +39,16 @@ namespace PaupProjekt.Controllers
                 ViewBag.usluga = usluga;
                 noviServis.OpisProblema = usluga;
             }
+
             noviServis.Datum = DateTime.Now;
             return View(noviServis);
         }
 
+     //uzmi podatke o narudžbi
         [HttpPost]
         public ActionResult Index(servis ser)
         {
+           
             ViewBag.UslugaPoznata = false;
             var Email = User.Identity.Name;
             vlasnik Trazeni = baza.vlasnikTab.FirstOrDefault(x => x.Email == Email);
@@ -47,7 +56,7 @@ namespace PaupProjekt.Controllers
             ser.Datum = DateTime.Now;
             NovaNarudzba = ser;
 
-
+            
             if (ser.ImageFile != null)
             {
                 string fileName = Path.GetFileNameWithoutExtension(ser.ImageFile.FileName);
@@ -64,6 +73,7 @@ namespace PaupProjekt.Controllers
                 else
                 {
                     ModelState.AddModelError("Slika kvara", "Nepodržana ekstenzija");
+                    return View(ser);
                 }
 
             }
@@ -85,6 +95,8 @@ namespace PaupProjekt.Controllers
             return RedirectToAction("Potvrda", ser);
         }
         [HttpGet]
+
+        //------------------Potvrdi narudžbu-------------------------
         public ActionResult Potvrda(servis ser)
         {
 
@@ -96,6 +108,8 @@ namespace PaupProjekt.Controllers
             return View(ser);
         }
         [HttpPost]
+        //spremi 
+
         public ActionResult PotvrdaNarudzbe(servis ser)
         {
             var Email = User.Identity.Name;
@@ -107,23 +121,31 @@ namespace PaupProjekt.Controllers
                 baza.servisTab.Add(ser);
                 baza.SaveChanges();
             }
+            else { return RedirectToAction("Index",ser); }
 
             var vozila = baza.voziloTab.Where(x => x.VlasnikID == Trazeni.VlasnikID).ToList();
             ViewBag.VozilaList = vozila;
             return RedirectToAction("Index", "Korisnik");
         }
 
-
+        //---------------Odustani i (izbiriši sliku) nazad na novu narudžbu-----------------------------
         public ActionResult odustani(string path, string usluga)
         {
-            var putanja = Server.MapPath(path);
-            if (System.IO.File.Exists(putanja))
-            {
-                System.IO.File.Delete(putanja);
-            }
-            else { return HttpNotFound("slika neje nađena"); }
+           
 
-            return RedirectToAction("Index", "Narudzbe", (usluga));
+            if (!String.IsNullOrWhiteSpace(path))
+            {
+                var putanja = Server.MapPath(path);
+                if (System.IO.File.Exists(putanja))
+                {
+                    System.IO.File.Delete(putanja);
+                   
+                }
+                else { return HttpNotFound("slika neje nađena"); }
+            }
+           
+
+            return RedirectToAction("Index", "Narudzbe", new { usluga = usluga });
         }
 
 

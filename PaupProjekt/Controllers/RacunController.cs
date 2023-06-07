@@ -13,6 +13,8 @@ namespace PaupProjekt.Controllers
     {
         ServisVozilaDB baza = new ServisVozilaDB();
         
+        //-------------------Kreiranje / uređivanje (ne izdanog) Računa-----
+
         public ActionResult IzavanjeRacuna(int? idNarudzbe,int? idUsluge)
         {
             bool novi = false;
@@ -37,7 +39,7 @@ namespace PaupProjekt.Controllers
             if (racunNarudzbe.Izdan)
             {
 
-                return HttpNotFound("racun izdan");
+                return RedirectToAction("klijenti","Radnik");
             }
 
             //dodavanje nove usluge
@@ -86,7 +88,7 @@ namespace PaupProjekt.Controllers
             return View(listaUsluga);
         }
 
-     
+     //------------------Dodaj uslugu na listu usluga Računa-------------------------
 
         public ActionResult DodajUslugu(int id) {
 
@@ -100,6 +102,8 @@ namespace PaupProjekt.Controllers
             return View(baza.uslugeTab.ToList());
         }
 
+
+        //------------------Makni uslugu sa liste usluga Računa-------------------------
         public ActionResult MakniUslugu(int idListe)
         {
             var listaUsluga = baza.ListaUslugaTab.FirstOrDefault(x=>x.idListe==idListe);
@@ -112,7 +116,9 @@ namespace PaupProjekt.Controllers
          
         }
 
+        //------------------Potvrda (izdaj) Račun-------------------------
 
+        //nakon što je izdan više ga nije moguće uređivat 
 
         [HttpGet]
         public ActionResult IzdajRacun(int idRacuna) {

@@ -14,14 +14,13 @@ namespace PaupProjekt.Controllers
 {
     public class RadnikController : Controller
     {
-        ServisVozilaDB db = new ServisVozilaDB();
 
-        // GET: Radnik
-        public ActionResult Index()
-        {
-            return View();
-        }
-      
+        //--------baza----------------------------
+        ServisVozilaDB db = new ServisVozilaDB();
+        //-----------------------------------------
+     
+     
+      //-------------------servis talblica--------------------------------------------------------------------------------------
         public ActionResult klijenti(string prezimeIme, string marka , string usluga, string status) {
             var narudzbe = db.servisTab.ToList();
 
@@ -49,6 +48,7 @@ namespace PaupProjekt.Controllers
             return View(narudzbe);
         }
 
+        //----------detalji servisa-------------------------------------------------------------------------------------------
         public ActionResult detalji(int? id) {
 
             if (id == null) { return RedirectToAction("klijenti"); }
@@ -65,6 +65,7 @@ namespace PaupProjekt.Controllers
             }
 
 
+        //----------------- Ažuriranje servisa--------------------------------------------------------------------------------------
         public ActionResult Azuriraj(int? id)
         {
 
@@ -72,7 +73,7 @@ namespace PaupProjekt.Controllers
             servis nalozi = null;
             if (!id.HasValue ) {
                 RedirectToAction("klijenti");
-
+               
             }
           
             nalozi= db.servisTab.FirstOrDefault(x=>x.ServisID==id);
@@ -81,7 +82,7 @@ namespace PaupProjekt.Controllers
 
             return View(nalozi);
         }
-
+       
 
             [HttpPost]
         [ValidateAntiForgeryToken]
@@ -104,6 +105,7 @@ namespace PaupProjekt.Controllers
 
 
 
+        //----------------Brisanje Servisa-----------------------------------------------------------------------------
 
         public ActionResult ObrisiNarudzbu(int? id) {
             if (!id.HasValue) { return HttpNotFound(); }
@@ -130,6 +132,7 @@ namespace PaupProjekt.Controllers
             if (racunServisa != null)
             {
                 //tu treba odlucit kaj bude se desilo ak korisnik ima veci izdan racun
+                if (racunServisa.Izdan) { return RedirectToAction("klijenti"); }
                
                 var uslugeServisa = db.ListaUslugaTab.Where(x=>x.RačunID==racunServisa.RačunID).ToList();
                 if (uslugeServisa != null) { foreach (ListaUslugaTab usluga in uslugeServisa) {
@@ -152,6 +155,7 @@ namespace PaupProjekt.Controllers
 
             return RedirectToAction("klijenti");
         }
+
 
 
     }

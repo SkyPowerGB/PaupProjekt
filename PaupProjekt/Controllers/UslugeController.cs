@@ -11,7 +11,10 @@ namespace PaupProjekt.Controllers
     public class UslugeController : Controller
     {
         // GET: Usluge
+     
         ServisVozilaDB baza = new ServisVozilaDB();
+
+       //---------Tablica Usluga------------------------------
         public ActionResult ListaUsluga()
         {
       var usluge =  baza.uslugeTab.ToList();
@@ -19,8 +22,10 @@ namespace PaupProjekt.Controllers
 
             return View(usluge);
         }
-        [HttpGet]
 
+        //---------Uredi Uslugu------------------------------
+
+        [HttpGet]
         public ActionResult UrediUslugu(int? id) {
 
             if (id.HasValue) {
@@ -49,7 +54,7 @@ namespace PaupProjekt.Controllers
             return RedirectToAction("ListaUsluga");
         }
 
-
+        //---------Obriši Uslugu----------------------------------
         [HttpGet]
         public ActionResult ObrisiUslugu(int? idUsluge)
         {
@@ -76,7 +81,7 @@ namespace PaupProjekt.Controllers
             return RedirectToAction("ListaUsluga");
         }
 
-
+        //---------Kreiraj novu Uslugu------------------------------
         public ActionResult DodajUslugu() {
 
             

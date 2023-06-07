@@ -16,6 +16,8 @@ namespace PaupProjekt.Controllers
     {
         // GET: Korisnik
         ServisVozilaDB baza = new ServisVozilaDB();
+//--------Početna KORISNIK----------------------------------------
+
         [Authorize]
         public ActionResult Index(int? id)
         {
@@ -34,6 +36,8 @@ namespace PaupProjekt.Controllers
         }
         [Authorize]
         [HttpGet]
+
+ //--------otkazivanje narudžbe---------------------------------------
         public ActionResult OtkaziNarudzbu(int idNarudzbe) {
 
           
@@ -43,6 +47,7 @@ namespace PaupProjekt.Controllers
         return View(Narudzba);
         }
         [Authorize]
+ //potvrdi otkazivanje
         [HttpPost]
         public ActionResult OtkaziNarudzbu(servis Narudzba)
         {
@@ -56,7 +61,7 @@ namespace PaupProjekt.Controllers
             return View(Narudzba);
         }
 
-
+  //--------Stranica Profila---------------------------------------
         [Authorize]
         public ActionResult Profil() {
 
@@ -68,6 +73,8 @@ namespace PaupProjekt.Controllers
             return View(KorRacun);
         }
 
+
+//----------Promjena Podataka na profilnoj-----------------------
         [Authorize]
         [HttpGet]
         public ActionResult PromjenaKorisnickihPod() {
@@ -77,8 +84,7 @@ namespace PaupProjekt.Controllers
 
             return View(KorRacun);
         }
-
-
+//preuzmi podatke i spremi
         [Authorize]
         [HttpPost]
         public ActionResult PromjenaKorisnickihPod(vlasnik v)
@@ -98,6 +104,8 @@ namespace PaupProjekt.Controllers
             return View(v);
         }
 
+
+//--------------Tablica Vozila Korisnika--------------------------------------------------
         public ActionResult Vozila() {
 
             var Email = HttpContext.User.Identity.Name;
@@ -108,7 +116,8 @@ namespace PaupProjekt.Controllers
         }
         [Authorize]
       
-
+//-----------Brisanje Vozila -------------------------------------------------------------
+//potvrdi brisanje
         public ActionResult obrisiVozilo(int? idVozila) {
      
             if (idVozila.HasValue)
@@ -125,7 +134,7 @@ namespace PaupProjekt.Controllers
             
             return RedirectToAction("Index","Korisnik");
         }
-
+//izbrisi
         [HttpPost]
         public ActionResult obrisiVozilo(int id) {
 
@@ -141,6 +150,7 @@ namespace PaupProjekt.Controllers
         
         }
      
+//-------------Kreiranje novoga vozila----------------------------------------------------
         [Authorize]
         public ActionResult dodajVozilo() {
            
@@ -171,7 +181,7 @@ namespace PaupProjekt.Controllers
             return RedirectToAction("Vozila");
         }
 
-
+//-------------Pregled Računa prije ispisa (View ovog kontrolera ce se ispisat)----------------------
         public ActionResult pregledRacuna(int? servisId) {
             if (servisId == null) { return RedirectToAction("Index"); }
             var Racun = baza.racunTab.FirstOrDefault(x=>x.ServisID== servisId);
@@ -182,7 +192,7 @@ namespace PaupProjekt.Controllers
         return View(Racun);
         }
 
-
+//ispis
         public ActionResult ispisRacunaPDF(račun Racun )
         {
            
