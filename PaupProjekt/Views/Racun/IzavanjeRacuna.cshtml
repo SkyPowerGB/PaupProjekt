@@ -39,4 +39,5 @@
 </table>
 
 <h2>Ukupan iznos: @racun.UkupanIznos EUR</h2>
-@Html.ActionLink("izdaj Racun","izdajRacun",new { idRacuna=racun.RačunID});
+@Html.ActionLink("Odustani","klijenti","Radnik",null,new { @class="btn btn-secondary"})
+@Html.ActionLink("izdaj Racun","izdajRacun",new { idRacuna=racun.RačunID , iznos=racun.UkupanIznos },new {@class="btn btn-primary" })

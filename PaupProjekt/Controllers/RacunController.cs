@@ -25,16 +25,17 @@ namespace PaupProjekt.Controllers
             //narudzba ne postoji
             if (!idNarudzbe.HasValue) { return HttpNotFound("Usli u nema vrijednost"+idNarudzbe); }
 
-         
+
             //izrada novoga racuna ako je prvi put
-            if (racunNarudzbe==null) {
+            if (racunNarudzbe == null) {
                 racunNarudzbe = new račun(); racunNarudzbe.ServisID = (int)idNarudzbe;
-                novi= true;
+                novi = true;
                 ViewBag.Naslov = "Izrada novog računa";
                 racunNarudzbe.UkupanIznos = 0;
                 baza.racunTab.Add(racunNarudzbe);
                 baza.SaveChanges();
             }
+          
          //ako je racun izdan nemoguce je mjenjat
             if (racunNarudzbe.Izdan)
             {
@@ -77,13 +78,17 @@ namespace PaupProjekt.Controllers
            
 
             //uk - ukupni iznos iz listeUsluga tog racuna
-            var uk = listaUsluga.Sum(x => x.Usluge.cijenaUsluga*x.kol);
+            var uk = ((decimal)(listaUsluga.Sum(x => x.Usluge.cijenaUsluga*x.kol)));
            
 
      //postavljanje ukupnoga iznosa
             racunNarudzbe.UkupanIznos = 0+uk;
             ViewBag.racun=racunNarudzbe;
-
+            //spremi nove podatke o racunu 
+            
+                
+                    
+                     
 
             return View(listaUsluga);
         }
@@ -122,11 +127,14 @@ namespace PaupProjekt.Controllers
         //nakon što je izdan više ga nije moguće uređivat 
 
         [HttpGet]
-        public ActionResult IzdajRacun(int idRacuna) {
-
+        public ActionResult IzdajRacun(int idRacuna , decimal? iznos) {
+            
+            
         ViewBag.uslugeNarudzbe =  baza.ListaUslugaTab.Where(x=>x.RačunID==idRacuna).ToList();
-          var racun = baza.racunTab.FirstOrDefault(x => x.RačunID == idRacuna);
 
+          var racun = baza.racunTab.FirstOrDefault(x => x.RačunID == idRacuna);
+            if (iznos == null) { return HttpNotFound(); }
+            racun.UkupanIznos = (decimal)iznos;
 
         return View(racun);
         }
@@ -134,6 +142,7 @@ namespace PaupProjekt.Controllers
      
         public ActionResult IzdajRacun(račun r)
         {
+            
             r.Izdan = true;
             r.DatumIzdavanja=DateTime.Now;
             baza.Entry(r).State= System.Data.Entity.EntityState.Modified;

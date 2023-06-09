@@ -34,7 +34,7 @@ namespace PaupProjekt.Models
         [Display(Name = "Datum servisa")]
         public DateTime? DatumServisa { get; set; }
 
-        [Display(Name = "Opis Narudžbe")]
+        [Display(Name = "Opis servisa")]
         [Required(ErrorMessage = "{0} je obavezan")]
         public string OpisProblema { get; set; }
 

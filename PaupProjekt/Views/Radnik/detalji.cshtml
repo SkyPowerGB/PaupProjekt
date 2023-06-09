@@ -5,10 +5,34 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>detalji</h2>
+<h2>Detalji</h2>
 
+<h3>Korisnik</h3>
+@Model.VlasnikVozila.PrezimeIme
+@Model.VlasnikVozila.Email
+
+<h3>Vozilo</h3>
+@Html.LabelFor(model => model.VoziloVlasnika.Marka)
+@Model.VoziloVlasnika.Marka
+@Html.LabelFor(model => model.VoziloVlasnika.Model)
+@Model.VoziloVlasnika.Model
+@Html.LabelFor(model => model.VoziloVlasnika.Registracija)
+@Model.VoziloVlasnika.Registracija
+@Html.LabelFor(model => model.VoziloVlasnika.GodinaProizvodnje)
+@Model.VoziloVlasnika.GodinaProizvodnje
+
+<h3>podaci o Servisu</h3>
+@Html.LabelFor(model=>model.Datum)
+@Model.Datum
+@Html.LabelFor(model => model.OpisProblema)
 @Model.OpisProblema
+
+<h3>SLika kvara:</h3>
+
 @if (Model.slikaVozila != null)
 {
-    <img src="@Url.Content(Model.slikaVozila)" width="250" />
+    <img src="@Url.Content(Model.slikaVozila)" width="500" />
 }
+<br />
+
+@Html.ActionLink("Nazad", "klijenti", null,new { @class="btn btn-primary"});

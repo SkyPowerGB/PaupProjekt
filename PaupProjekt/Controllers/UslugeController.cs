@@ -15,10 +15,14 @@ namespace PaupProjekt.Controllers
         ServisVozilaDB baza = new ServisVozilaDB();
 
        //---------Tablica Usluga------------------------------
-        public ActionResult ListaUsluga()
+        public ActionResult ListaUsluga(string naziv)
         {
       var usluge =  baza.uslugeTab.ToList();
+            if (!String.IsNullOrWhiteSpace(naziv)) {
 
+             usluge=   usluge.Where(x => x.nazivUsluga.ToUpper().Contains(naziv.ToUpper())).ToList();
+            
+            }
 
             return View(usluge);
         }

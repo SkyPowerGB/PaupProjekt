@@ -8,7 +8,9 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.Data;
-
+using PaupProjekt.Misc;
+using System.IO;
+using System.Security.Principal;
 
 namespace PaupProjekt.Controllers
 {
@@ -132,8 +134,21 @@ namespace PaupProjekt.Controllers
             if (racunServisa != null)
             {
                 //tu treba odlucit kaj bude se desilo ak korisnik ima veci izdan racun
-                if (racunServisa.Izdan) { return RedirectToAction("klijenti"); }
-               
+                if ((User as LogiraniKorisnik).IsInRole(OvlastiKorisnik.Admin)) { }
+                else
+                {
+                    if (racunServisa.Izdan) { return RedirectToAction("klijenti"); }
+                }
+                var path = servisKorisnika.slikaVozila;
+                   
+                var putanja = Server.MapPath(path);
+                if (System.IO.File.Exists(putanja))
+                {
+                    System.IO.File.Delete(putanja);
+
+                }
+                else {  }
+
                 var uslugeServisa = db.ListaUslugaTab.Where(x=>x.RačunID==racunServisa.RačunID).ToList();
                 if (uslugeServisa != null) { foreach (ListaUslugaTab usluga in uslugeServisa) {
                         db.ListaUslugaTab.Remove(usluga);

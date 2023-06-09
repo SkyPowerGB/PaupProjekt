@@ -105,7 +105,8 @@ namespace PaupProjekt.Controllers
         }
 
 
-//--------------Tablica Vozila Korisnika--------------------------------------------------
+   //--------------Tablica Vozila Korisnika--------------------------------------------------
+        [Authorize]
         public ActionResult Vozila() {
 
             var Email = HttpContext.User.Identity.Name;
@@ -115,9 +116,10 @@ namespace PaupProjekt.Controllers
             return View(Vozila);
         }
         [Authorize]
-      
-//-----------Brisanje Vozila -------------------------------------------------------------
-//potvrdi brisanje
+
+        //-----------Brisanje Vozila -------------------------------------------------------------
+        [Authorize]
+        //potvrdi brisanje
         public ActionResult obrisiVozilo(int? idVozila) {
      
             if (idVozila.HasValue)
@@ -134,7 +136,8 @@ namespace PaupProjekt.Controllers
             
             return RedirectToAction("Index","Korisnik");
         }
-//izbrisi
+        [Authorize]
+
         [HttpPost]
         public ActionResult obrisiVozilo(int id) {
 
@@ -182,6 +185,7 @@ namespace PaupProjekt.Controllers
         }
 
 //-------------Pregled Računa prije ispisa (View ovog kontrolera ce se ispisat)----------------------
+        [Authorize]
         public ActionResult pregledRacuna(int? servisId) {
             if (servisId == null) { return RedirectToAction("Index"); }
             var Racun = baza.racunTab.FirstOrDefault(x=>x.ServisID== servisId);
@@ -191,8 +195,8 @@ namespace PaupProjekt.Controllers
         
         return View(Racun);
         }
-
-//ispis
+        [Authorize]
+  //ispis
         public ActionResult ispisRacunaPDF(račun Racun )
         {
            

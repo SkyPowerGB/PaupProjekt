@@ -4,57 +4,59 @@
     ViewBag.Title = "Vozila";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<div>
 
-<h2>Vozila</h2>
-@Html.ActionLink("+Dodaj vozilo", "dodajVozilo",null,new {@class= "btn btn-outline-primary" });
+    <h2 class="text-center">Vozila</h2>
+    <div class="text-end">
+        @Html.ActionLink("+Dodaj vozilo", "dodajVozilo", null, new { @class = "btn btn-outline-primary " })
+   
 
-@if (Model.Count >= 1)
-{
+    @if (Model.Count >= 1)
+    {
 
 
-    <table class="table table-striped">
-        <thead>
-            <tr>
-             
-                <th> Marka   </th>
-                <th> Model  </th>
-                <th> Registracija  </th>
-                <th> Godina Proizvodnje  </th>
-            </tr>
-        </thead>
-
-        <tbody>
-            @foreach (vozilo Vozilo in Model)
-            {
+        <table class="table table-striped">
+            <thead>
                 <tr>
-                
-                    <td>@Vozilo.Marka</td>
-                    <td>@Vozilo.Model</td>
-                    <td>@Vozilo.Registracija</td>
-                    <td>@Vozilo.GodinaProizvodnje</td>
-                    <td>@Html.ActionLink( "obrisiVozilo", "obrisiVozilo", new {idVozila = Vozilo.VoziloId} ,new {@class= "btn btn-danger" })</td>
 
-
+                    <th> Marka   </th>
+                    <th> Model  </th>
+                    <th> Registracija  </th>
+                    <th> Godina Proizvodnje  </th>
                 </tr>
+            </thead>
+
+            <tbody>
+                @foreach (vozilo Vozilo in Model)
+                {
+                    <tr>
+
+                        <td>@Vozilo.Marka</td>
+                        <td>@Vozilo.Model</td>
+                        <td>@Vozilo.Registracija</td>
+                        <td>@Vozilo.GodinaProizvodnje</td>
+                        <td>@Html.ActionLink("obrisiVozilo", "obrisiVozilo", new { idVozila = Vozilo.VoziloId }, new { @class = "btn btn-danger" })</td>
+
+
+                    </tr>
 
 
 
 
-            }
-        </tbody>
-    </table>
+                }
+            </tbody>
+        </table>
 
 
 
-}
+    }
 
 
+    else
+    {
+        
+        <h3 class="text-center">Nemate spremljena vozila</h3>
+    }
+</div>
 
-
-
-
-else
-{
-
-    <h3>nema vozila</h3>
-}
+</div>

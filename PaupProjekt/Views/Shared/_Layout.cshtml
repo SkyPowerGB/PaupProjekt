@@ -42,10 +42,11 @@
 
 
                         <li>@Html.ActionLink("Servisi", "klijenti", "Radnik", new { area = "" }, new { @class = "nav-link" })</li>
+                        <li>@Html.ActionLink("Lista Usluga", "ListaUsluga", "Usluge", new { area = "" }, new { @class = "nav-link" })</li>
                     }
 
                     @if (User.Identity.IsAuthenticated &&
-                       
+
                        (User as LogiraniKorisnik).IsInRole(OvlastiKorisnik.Admin))
                     {
 

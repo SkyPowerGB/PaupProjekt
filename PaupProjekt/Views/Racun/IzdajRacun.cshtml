@@ -4,14 +4,20 @@
 @{
     ViewBag.Title = "IzdajRacun";
     Layout = "~/Views/Shared/_Layout.cshtml";
-
+    decimal UkupanIznos = 0;
     List<ListaUslugaTab> listaUslugaRacuna =(( List < ListaUslugaTab > )ViewBag.uslugeNarudzbe);
 }
 
 <h2 class="alert-danger">Upozorenje! </h2>
-<h2>nakon što je račun izdan više ga nije već moguće uređivat</h2>
-<p>@Model.Izdan</p>
-<p> @Model.Narudzba.OpisProblema</p>
+<h3 class="text-bg-danger ">Nakon što je račun izdan više ga nije moguće uređivat ni izbrisat</h3>
+
+<h4> Opis servisa : @Model.Narudzba.OpisProblema</h4>
+
+
+    
+
+
+
 <table class="table table-striped">
     <thead>
         <tr>
@@ -28,23 +34,29 @@
             <td> @usluga.Usluge.nazivUsluga</td>
             <td>@usluga.kol</td>
             <td>@usluga.Usluge.cijenaUsluga</td>
-            <td></td>
+            @{UkupanIznos += usluga.Usluge.cijenaUsluga;
+            }
         </tr>
         }
     </tbody>
 
 </table>
+<div class="text-end">
+    <h3>Ukupan iznos: @UkupanIznos</h3>
+</div>
+@{
+ViewBag.UkupanIznos= UkupanIznos;
 
-
+ }
 
 @using (Html.BeginForm("IzdajRacun", "Racun", FormMethod.Post))
 { 
-@Html.HiddenFor(model => model.RačunID);;
-@Html.HiddenFor(model => model.UkupanIznos);
-@Html.HiddenFor(model => model.ServisID);
+@Html.HiddenFor(model => model.RačunID)
+@Html.HiddenFor(model => model.UkupanIznos)
+@Html.HiddenFor(model => model.ServisID)
 
+    
 
-
-
-<button> Izdaj Racun</button>
+  @Html.ActionLink("Odustani","IzavanjeRacuna","Racun",new { idNarudzbe=Model.ServisID},new {@class= "btn btn-secondary" })
+<button class="btn btn-primary"> Izdaj Racun</button>
 }

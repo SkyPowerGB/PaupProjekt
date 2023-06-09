@@ -13,11 +13,11 @@
 
 <h2>Pregled Racuna</h2>
 
-{<h3>Datum narudžbe: @Servis.Datum</h3>
+<h3>Datum narudžbe: @Servis.Datum</h3>
 
 
 
- <h3>Datum servisa: @Servis.DatumServisa</h3>}
+ <h3>Datum servisa: @Servis.DatumServisa</h3>
 
 
 <h3>Datum izdavanja računa: @Model.DatumIzdavanja</h3>
@@ -54,4 +54,7 @@
         }
     </tbody>
 </table>
+<div class="text-end">
+    <h3>Ukupan iznos: @Model.UkupanIznos</h3>
+</div>
 @Html.ActionLink("Preuzmi PDF", "ispisRacunaPDF", "Korisnik",RacunM , null)

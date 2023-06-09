@@ -20,33 +20,41 @@
 
 
 }
+<div class="text-center">
+    <h2>Potvrda servisa</h2>
 
-<h2>Potvrda Narudžbe</h2>
-<h3>Podaci o vozilu:</h3>
-@if (notNull)
-{
-    <p>@voz.Marka</p>
-    <p>@voz.Registracija</p>
-    <p>@voz.GodinaProizvodnje</p>
+    <h4>Podaci o vozilu:</h4>
+    @if (notNull)
+    {
+        <p>@Html.Label(voz.Marka):  @voz.Marka</p>
+        <p>@Html.Label(voz.Registracija):@voz.Registracija</p>
+        <p>@Html.Label(voz.GodinaProizvodnje.ToString()):@voz.GodinaProizvodnje</p>
+    }
+    <h5>Slika kvara:</h5>
+    @if (Model.slikaVozila != null)
+    {
+        <img src="@Url.Content(Model.slikaVozila)" width="250" />
+    }
 
-}
-<h3>Podaci o narudžbi:</h3>
-<p>@Model.StatusServisa</p>
-<p>@Model.OpisProblema</p>
-<p>@Model.Datum</p>
+    <h4>Podaci o servisu:</h4>
 
-<h2>Slika:</h2>
-@if (Model.slikaVozila != null)
-{
-<img src="@Url.Content(Model.slikaVozila)" width="250" />
-}
-@using (Html.BeginForm("PotvrdaNarudzbe", "Narudzbe", FormMethod.Post))
-{@Html.HiddenFor(model => model.StatusServisa)
-@Html.HiddenFor(model => model.voziloID)
-@Html.HiddenFor(model => model.VlasnikID)
-@Html.HiddenFor(model => model.OpisProblema)
-@Html.HiddenFor(model => model.Datum)
-    @Html.HiddenFor(model=>model.slikaVozila);
-<button> Naruči</button>
-}
-@Html.ActionLink("Odustani", "odustani", new { path=Model.slikaVozila, usluga= Model.OpisProblema });
+    <p>@Html.LabelFor(model => model.OpisProblema): @Model.OpisProblema</p>
+    <p>@Html.LabelFor(model => model.Datum): @Model.Datum</p>
+
+
+
+    @using (Html.BeginForm("PotvrdaNarudzbe", "Narudzbe", FormMethod.Post))
+    {
+        @Html.HiddenFor(model => model.StatusServisa)
+        @Html.HiddenFor(model => model.voziloID)
+        @Html.HiddenFor(model => model.VlasnikID)
+        @Html.HiddenFor(model => model.OpisProblema)
+        @Html.HiddenFor(model => model.Datum)
+        @Html.HiddenFor(model => model.slikaVozila)
+
+        <div class="mt-3">
+            @Html.ActionLink("Odustani", "odustani", new { path = Model.slikaVozila, usluga = Model.OpisProblema }, new { @class = "btn btn-secondary mr-2" })
+            <button class="btn btn-primary">Naruči</button>
+        </div>
+    }
+</div>

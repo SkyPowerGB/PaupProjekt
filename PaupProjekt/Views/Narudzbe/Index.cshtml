@@ -8,14 +8,13 @@
 <div class="container">
     <div class="row">
         <div class="col-md-6 mx-auto">
-            <h2>Nova narudžba</h2>
+            <h2>Novi servis</h2>
 
-            @using (Html.BeginForm("index", "Narudzbe", FormMethod.Post , new {@class="form-horizontal" ,
-               role="form" , enctype="multipart/form-data" }))
+            @using (Html.BeginForm("index", "Narudzbe", FormMethod.Post, new { @class = "form-horizontal", role = "form", enctype = "multipart/form-data" }))
             {
                 if ((bool)ViewBag.UslugaPoznata)
                 {
-                    <h6>Narudžba: @Model.OpisProblema</h6>
+                    <h6>Opis servisa: @Model.OpisProblema</h6>
                     @Html.HiddenFor(model => model.OpisProblema)
                 }
                 else
@@ -25,22 +24,21 @@
                         @Html.TextBoxFor(model => model.OpisProblema, new { @class = "form-control", placeholder = "Opis problema" })
                     </div>
                 }
-               
-                @Html.HiddenFor(model => model.slikaVozila)
-               <div class="form-group">
-                   @Html.LabelFor(model => model.slikaVozila)
-                   <div>
-                       <input type="file"  name="ImageFile" class="form-control" />
-                       @Html.ValidationMessageFor(model => model.slikaVozila, "", new { @class = "text-danger" });
-                       
-                   </div>
 
-               </div>
-                
+                @Html.HiddenFor(model => model.slikaVozila)
+                <div class="form-group">
+                    @Html.LabelFor(model => model.slikaVozila)
+                    <div>
+                        <input type="file" name="ImageFile" id="imageInput" class="form-control" onchange="previewImage(event)" />
+                        @Html.ValidationMessageFor(model => model.slikaVozila, "", new { @class = "text-danger" })
+                    </div>
+                    <div id="imagePreview"></div>
+                </div>
+
                 @Html.LabelFor(model => model.VoziloVlasnika.MarkaRegitracija)
                 <div class="form-group">
                     @Html.DropDownListFor(model => model.voziloID, new SelectList(((List<vozilo>)(ViewBag.VozilaList)), "voziloId", "MarkaRegitracija"), "- Odaberi Vozilo -")
-                    @Html.ActionLink("+ dodaj vozilo", "dodajVozilo", "Korisnik",null , new { @class = "btn btn-outline-primary" })
+                    @Html.ActionLink("+ dodaj vozilo", "dodajVozilo", "Korisnik", null, new { @class = "btn btn-outline-primary" })
                 </div>
 
                 @Html.HiddenFor(model => model.StatusServisa)
@@ -53,3 +51,14 @@
         </div>
     </div>
 </div>
+
+<script>
+    function previewImage(event) {
+        var reader = new FileReader();
+        reader.onload = function () {
+            var output = document.getElementById('imagePreview');
+            output.innerHTML = '<img src="' + reader.result + '" width="250" />';
+        }
+        reader.readAsDataURL(event.target.files[0]);
+    }
+</script>
