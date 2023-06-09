@@ -20,8 +20,8 @@ namespace PaupProjekt.Controllers
         //--------baza----------------------------
         ServisVozilaDB db = new ServisVozilaDB();
         //-----------------------------------------
-     
-     
+
+        [Authorize]
       //-------------------servis talblica--------------------------------------------------------------------------------------
         public ActionResult klijenti(string prezimeIme, string marka , string usluga, string status) {
             var narudzbe = db.servisTab.ToList();
@@ -51,6 +51,8 @@ namespace PaupProjekt.Controllers
         }
 
         //----------detalji servisa-------------------------------------------------------------------------------------------
+
+        [Authorize]
         public ActionResult detalji(int? id) {
 
             if (id == null) { return RedirectToAction("klijenti"); }
@@ -66,7 +68,7 @@ namespace PaupProjekt.Controllers
                     return View(Servis);
             }
 
-
+        [Authorize]
         //----------------- Ažuriranje servisa--------------------------------------------------------------------------------------
         public ActionResult Azuriraj(int? id)
         {
@@ -84,9 +86,9 @@ namespace PaupProjekt.Controllers
 
             return View(nalozi);
         }
-       
 
-            [HttpPost]
+        [Authorize]
+        [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Azuriraj( servis Servis) {
             
@@ -108,7 +110,7 @@ namespace PaupProjekt.Controllers
 
 
         //----------------Brisanje Servisa-----------------------------------------------------------------------------
-
+        [Authorize]
         public ActionResult ObrisiNarudzbu(int? id) {
             if (!id.HasValue) { return HttpNotFound(); }
 
@@ -123,7 +125,7 @@ namespace PaupProjekt.Controllers
         }
 
 
-
+        [Authorize]
         [HttpPost]
         public ActionResult ObrisiNarudzbu(int id)
         {

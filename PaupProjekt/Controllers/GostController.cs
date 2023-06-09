@@ -10,9 +10,9 @@ namespace PaupProjekt.Controllers
     public class GostController : Controller
     { 
         ServisVozilaDB db =new ServisVozilaDB();
-        // GET: Gost
+        //stranica od ikoni: https://icons.getbootstrap.com/
 
-//početna opcenito o nama----------------------
+        //početna opcenito o nama----------------------
         public ActionResult Index()
         {
             if(User.Identity.IsAuthenticated) { return RedirectToAction("Index","Korisnik"); }
