@@ -7,37 +7,45 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Azuriraj</h2>
+<div class="container">
+    <h2>Ažuriraj</h2>
 
-@using (Html.BeginForm("Azuriraj", "Radnik", FormMethod.Post))
-{
+    @using (Html.BeginForm("Azuriraj", "Radnik", FormMethod.Post))
+    {
+        @Html.AntiForgeryToken()
 
-    @Html.AntiForgeryToken()
+        @Html.HiddenFor(model => model.voziloID)
+        @Html.HiddenFor(model => model.VlasnikID)
+        @Html.HiddenFor(model => model.Datum)
+        @Html.HiddenFor(model => model.ServisID)
+        @Html.HiddenFor(model => model.OpisProblema)
 
-    @Html.HiddenFor(model => model.voziloID)
-    @Html.HiddenFor(model => model.VlasnikID)
+        <div class="form-group">
+            @Html.LabelFor(model => model.DatumServisa)
+            @Html.TextBoxFor(model => model.DatumServisa, new { @class = "form-control" })
+        </div>
 
-    @Html.HiddenFor(model => model.Datum)
+        <div class="form-group">
+            @Html.LabelFor(model => model.StatusServisa)
+            @Html.DropDownListFor(model => model.StatusServisa, new SelectList(ListaStatusaE.DopusteneVrijednosi), "Odaberi status", new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.StatusServisa, "", new { @class = "text-danger" })
+        </div>
 
-    @Html.HiddenFor(model => model.ServisID)
-    @Html.HiddenFor(model => model.OpisProblema)
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
-    @Html.LabelFor(model => model.DatumServisa)
-    @Html.TextBoxFor(model => model.DatumServisa)
+        <h4 class="mt-4"> @Model.OpisProblema</h4>
+        <p>@Model.Datum</p>
+        <p>@Model.StatusServisa</p>
 
-    @Html.LabelFor(model => model.StatusServisa)
-    @Html.DropDownListFor(model => model.StatusServisa, new SelectList(ListaStatusaE.DopusteneVrijednosi), "Odaberi status")
-    @Html.LabelFor(model => model.StatusServisa)
+        <div class="form-group">
+            <div  >
+                @Html.ActionLink("Nazad", "klijenti", "Radnik", new { area = "" }, new { @class = "btn btn-secondary" })
+           
+                <button type="submit" class="btn btn-primary">Ažuriraj</button>
+            </div>
+        </div>
 
-    @Html.ValidationMessageFor(model => model.StatusServisa, "", new { @class = "text-danger" })
-    @Html.ValidationSummary();
+    }
 
-    <h2>@Model.OpisProblema</h2>
-    <br />
-    <h2>@Model.Datum</h2>
-    <br />
-    <h2>@Model.StatusServisa</h2>
-    <br />
-    <button type="submit" class="btn btn-primary">Ažuriraj</button>
-}
-@Html.ActionLink("nazad", "klijenti", "Radnik")
+ 
+</div>

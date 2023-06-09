@@ -73,10 +73,10 @@ namespace PaupProjekt.Controllers
         public ActionResult Azuriraj(int? id)
         {
 
-            
+      
             servis nalozi = null;
             if (!id.HasValue ) {
-                RedirectToAction("klijenti");
+                return RedirectToAction("klijenti");
                
             }
           

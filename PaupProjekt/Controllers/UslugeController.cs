@@ -14,7 +14,8 @@ namespace PaupProjekt.Controllers
      
         ServisVozilaDB baza = new ServisVozilaDB();
 
-       //---------Tablica Usluga------------------------------
+        //---------Tablica Usluga------------------------------
+        [Authorize]
         public ActionResult ListaUsluga(string naziv)
         {
       var usluge =  baza.uslugeTab.ToList();
@@ -28,7 +29,7 @@ namespace PaupProjekt.Controllers
         }
 
         //---------Uredi Uslugu------------------------------
-
+        [Authorize]
         [HttpGet]
         public ActionResult UrediUslugu(int? id) {
 
@@ -45,6 +46,7 @@ namespace PaupProjekt.Controllers
         
         return View();  
         }
+        [Authorize]
         [HttpPost]
         public ActionResult UrediUslugu(uslugeTab usluga) {
 
@@ -59,6 +61,7 @@ namespace PaupProjekt.Controllers
         }
 
         //---------Obriši Uslugu----------------------------------
+        [Authorize]
         [HttpGet]
         public ActionResult ObrisiUslugu(int? idUsluge)
         {
@@ -71,7 +74,7 @@ namespace PaupProjekt.Controllers
 
             return View(usluga);
         }
-
+        [Authorize]
         [HttpPost]
         public ActionResult ObrisiUslugu(int id) {
             var usluga= baza.uslugeTab.FirstOrDefault(x=>x.UslugaID == id);
@@ -92,7 +95,7 @@ namespace PaupProjekt.Controllers
 
             return View();
         }
-
+        [Authorize]
         [HttpPost]
         public ActionResult DodajUslugu(uslugeTab Usluga)
          
