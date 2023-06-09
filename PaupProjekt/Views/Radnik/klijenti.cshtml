@@ -59,9 +59,9 @@
                     <td>@Servis.StatusServisa</td>
                     <td>@Html.ActionLink("info", "detalji", new { id = Servis.ServisID }, new { @class = "btn btn-primary" })</td>
                     <td>@Html.ActionLink("azuriraj", "Azuriraj", new { id = Servis.ServisID }, new { @class = "btn btn-primary" })</td>
-
+                    
                     <td>@Html.ActionLink("Izdavanje Računa", "IzavanjeRacuna", "Racun", new { idNarudzbe = Servis.ServisID }, new { @class = "btn btn-success" })</td>
-                    <td>@Html.ActionLink("izbrisi", "ObrisiNarudzbu", new { id = Servis.ServisID }, new { @class = "btn btn-danger" })</td>
+                    <td>@Html.ActionLink("izbriši", "ObrisiNarudzbu", new { id = Servis.ServisID }, new { @class = "btn btn-danger  bi bi-trash3-fill"  })</td>
 
 
                 </tr>
