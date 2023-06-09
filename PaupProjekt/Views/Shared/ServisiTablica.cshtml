@@ -1,0 +1,93 @@
+﻿@using PaupProjekt.Models
+@using PaupProjekt.Misc
+@model List<servis>
+
+@{
+    string Kontroler= ViewContext.RouteData.Values["controller"].ToString();
+
+    var Korisnik=  User as PaupProjekt.Misc.LogiraniKorisnik;
+
+    bool vlasnik = (Kontroler != "Radnik") ? true : false;
+
+    
+
+}
+
+
+<table class="table table-striped text-center">
+    <thead>
+        <tr>
+
+            @if (vlasnik)
+            {
+                <th>Vozilo</th>
+}
+
+            @if (!vlasnik)
+            {
+                <th>Vlasnik vozila</th>
+}
+
+
+            <th>Opis Problema </th>
+            <th>datum Narudžbe</th>
+            <th>Datum Servisa </th>
+            <th>status</th>
+
+
+
+        </tr>
+
+    </thead>
+
+
+    <tbody>
+        @foreach (servis Servis in Model)
+        {
+            <tr>
+                @if (vlasnik)
+                {
+                    <td>@Servis.VoziloVlasnika.MarkaRegitracija</td>
+                }
+                @if (!vlasnik)
+                {
+                    <td>@Servis.VlasnikVozila.PrezimeIme</td>
+                }
+
+
+
+                <td>@Servis.OpisProblema </td>
+                <td>@Servis.Datum</td>
+                @if (Servis.DatumServisa != null){ 
+                <td>@Servis.DatumServisa</td>}
+else {<td>Čeka</td> }
+
+
+                <td>@Servis.StatusServisa</td>
+                @if (!vlasnik)
+                {
+                    if (Korisnik.IsInRole(OvlastiKorisnik.Radnik) || Korisnik.IsInRole(OvlastiKorisnik.Admin))
+                    {
+                    <td>@Html.ActionLink("info", "detalji", new { id = Servis.ServisID }, new { @class = "btn btn-primary" })</td>
+                    <td>@Html.ActionLink("azuriraj", "Azuriraj", new { id = Servis.ServisID }, new { @class = "btn btn-primary" })</td>
+                    <td>@Html.ActionLink("Izdavanje Računa", "IzavanjeRacuna", "Racun", new { idNarudzbe = Servis.ServisID }, new { @class = "btn btn-success" })</td>
+                    <td>@Html.ActionLink("izbriši", "ObrisiNarudzbu", new { id = Servis.ServisID }, new { @class = "btn btn-danger  bi bi-trash3-fill" })</td>
+                    }
+
+                }
+                else { 
+
+                
+                
+                
+                }
+            </tr>
+
+        }
+        
+        
+        
+        
+    </tbody>
+
+</table>
