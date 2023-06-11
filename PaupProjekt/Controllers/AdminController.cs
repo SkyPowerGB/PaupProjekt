@@ -120,6 +120,23 @@ namespace PaupProjekt.Controllers
 
             vlasnik v = baza.vlasnikTab.FirstOrDefault(x=>x.VlasnikID==id);
             if(v == null) { return HttpNotFound(); }
+
+            var vozila = baza.voziloTab.Where(x => x.VlasnikID == v.VlasnikID).ToList();
+            var servisi = baza.servisTab.Where(x => x.VlasnikID == v.VlasnikID).ToList();
+            if (servisi != null) {
+                return RedirectToAction("klijenti", "Radnik");
+            }
+
+
+            if (vozila != null)
+            {
+
+                foreach (vozilo voz in vozila)
+                {
+                    baza.voziloTab.Remove(voz);
+                    baza.SaveChanges();
+                }
+            }
             baza.vlasnikTab.Remove(v);
             baza.SaveChanges();
             return RedirectToAction("Korisnici");
