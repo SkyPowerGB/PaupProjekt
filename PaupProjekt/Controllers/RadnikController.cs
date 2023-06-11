@@ -45,7 +45,7 @@ namespace PaupProjekt.Controllers
 
             }
 
-            
+            ViewBag.racuni=db.racunTab.ToList();
 
             return View(narudzbe);
         }
