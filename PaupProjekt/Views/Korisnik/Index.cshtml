@@ -1,82 +1,78 @@
-﻿
-@using PaupProjekt.Models
+﻿@using PaupProjekt.Models
 
-@model  List<servis>
+@model List<servis>
 
 @{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
-
 }
 
 <h2>Početna korisnik</h2>
 
-
 @if (Model.Count >= 1)
+{
+    <table border="1" class="table table-bordered">
+        <thead>
+            <tr class="table-dark">
+                <th>Vozilo</th>
+                <th>Datum narudžbe</th>
+                <th>Datum Servisa</th>
+                <th>Opis Problema</th>
+                <th>Status</th>
+                <th>Račun</th>
+                <th>Otkaži</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (servis n in Model)
             {
-
-
-
-
-                <table border="1" class="table table-bordered">
-
-                    <thead>
-                        <tr>
-                            <th>Vozilo </th>
-                            <th>Datum narudžbe</th>
-                            <th>Datum Servisa </th>
-                            <th>Opis Problema </th>
-                            <th>Status </th>
-
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach (servis n in Model)
+                <tr class="@(n.StatusServisa == "Završen" ? "table-secondary" : "")">
+                    <td>@n.VoziloVlasnika.MarkaRegitracija</td>
+                    <td>@n.Datum</td>
+                    <td>@(n.DatumServisa.HasValue ? n.DatumServisa.ToString() : "Čeka")</td>
+                    <td>@n.OpisProblema</td>
+                    <td>@n.StatusServisa</td>
+                    @if (((List<račun>)ViewBag.Racuni).FirstOrDefault(x => x.ServisID == n.ServisID) != null)
+                    {
+                        if (((List<račun>)ViewBag.Racuni).FirstOrDefault(x => x.ServisID == n.ServisID).Izdan)
                         {
-                            <tr>
-                                <td>@n.VoziloVlasnika.MarkaRegitracija</td>
-                                <td>@n.Datum</td>
-                                @if (n.DatumServisa.HasValue)
-                                {
-                                    <td>@n.DatumServisa</td>
-                                }
-                                else
-                                {
-                                    <td>Čeka</td>
-                                }
-                                <td>@n.OpisProblema</td>
-
-                                <td>@n.StatusServisa</td>
-                                @if (((List<račun>)ViewBag.Racuni).FirstOrDefault(x => x.ServisID == n.ServisID) != null)
-                                {
-
-                                    if (((List<račun>)ViewBag.Racuni).FirstOrDefault(x => x.ServisID == n.ServisID).Izdan)
-                                    {
-
-                                        <td>
-                                           @Html.ActionLink("Preuzimanje računa","pregledRacuna",new { servisId=n.ServisID }, new {@class="btn bnt-primary" });
-                                        </td>
-                                    }
-
-                                }
-                                @if (n.DatumServisa==null) {
-                                    if (n.StatusServisa != "Otkazan")
-                                    {
-                                <td>@Html.ActionLink("Otkaži", "OtkaziNarudzbu", new { idNarudzbe = n.ServisID } , new {@class="btn btn-outline-danger" })</td>
-                                
-                                }
-                                }
-                            </tr>
-
+                            <td>
+                                @Html.ActionLink("Preuzimanje računa", "pregledRacuna", new { servisId = n.ServisID }, new { @class = "btn btn-primary" })
+                            </td>
+                        }
+                        else
+                        {
+                            <td>
+                            </td>
                         }
 
-                    </tbody>
-                </table>
-
+                    }
+                    else
+                    {
+                        <td>
+                        </td>
+                    }
+                    @if (n.DatumServisa == null)
+                    {
+                        if (n.StatusServisa != "Otkazan")
+                        {
+                            <td>@Html.ActionLink("Otkaži", "OtkaziNarudzbu", new { idNarudzbe = n.ServisID }, new { @class = "btn btn-outline-danger" })</td>
+                        }
+                        else
+                        {
+                            <td></td>
+}
+                        }
+                        else
+                        {
+                        <td></td>
+    }
+                </tr>
             }
-            else
-            {
-
-                <h2>Nema servisa</h2>
-            }
-
+        </tbody>
+    </table>
+}
+else
+{
+    <h2>Nema servisa</h2>
+}
