@@ -6,14 +6,114 @@
 
 <h2>Usluge</h2>
 
-@if (User.Identity.IsAuthenticated)
-{
-    @Html.ActionLink("Narucite se za zamjenu guma", "Index", "Narudzbe", new { usluga = "Zamjena Guma" , trebaSlika=false},null);
-    <br />
-    @Html.ActionLink("Narucite se", "Index", "Narudzbe" , new {trebaSlika= true },null);
 
-}
-else
-{
-    <a class="btn btn-outline-primary" href="@Url.Action("Login","Autentifikacijski")">Prijava</a>
-}
+<p>
+    Redovno održavanje vozila: Pružanje rutinskog servisa, uključujući zamjenu ulja i filtera, provjeru tekućina, provjeru kočnica i guma te zamjenu svjećica.
+    <br>
+    @if (User.Identity.IsAuthenticated)
+    {
+        @Html.ActionLink("Narucite se na redovno održavanje", "Index", "Narudzbe", new { usluga = "Redovni Servis", trebaSlika = false }, null);
+    }
+    else
+    {
+        <a class="btn btn-outline-primary" href="@Url.Action("Login","Autentifikacijski")">Prijava</a>
+    }
+    <br>
+
+
+    Dijagnostika i popravka motora: Pružanje usluga dijagnostike problema s motorom te popravke i zamjene oštećenih dijelova.
+    <br>
+    @if (User.Identity.IsAuthenticated)
+    {
+        @Html.ActionLink("Narucite se na servis motora", "Index", "Narudzbe", new { usluga = "Servis motora", trebaSlika = false }, null);
+    }
+    else
+    {
+        <a class="btn btn-outline-primary" href="@Url.Action("Login","Autentifikacijski")">Prijava</a>
+    }
+    <br>
+
+    Servis klima uređaja: Pružanje usluga punjenja, čišćenja i popravke klima uređaja kako bi se osiguralo ugodno putovanje za vozače i putnike.
+    <br>
+    @if (User.Identity.IsAuthenticated)
+    {
+        @Html.ActionLink("Narucite se na servis klima uređaja", "Index", "Narudzbe", new { usluga = "Servis klima", trebaSlika = false }, null);
+    }
+    else
+    {
+        <a class="btn btn-outline-primary" href="@Url.Action("Login","Autentifikacijski")">Prijava</a>
+    }
+    <br>
+    Popravka kočnica: Pružanje usluga pregleda, popravke i zamjene kočionih komponenti kako bi se osigurala sigurnost i učinkovitost kočnog sustava.
+    <br>
+    @if (User.Identity.IsAuthenticated)
+    {
+        @Html.ActionLink("Narucite se na popravak kočnica", "Index", "Narudzbe", new { usluga = "Servis kočnica", trebaSlika = false }, null);
+    }
+    else
+    {
+        <a class="btn btn-outline-primary" href="@Url.Action("Login","Autentifikacijski")">Prijava</a>
+    }
+    <br>
+    Popravka ovjesa: Pružanje usluga provjere i popravke ovjesa, uključujući zamjenu amortizera, opruga i drugih komponenti.
+    <br>
+    @if (User.Identity.IsAuthenticated)
+    {
+        @Html.ActionLink("Narucite se na popravak ovjesa", "Index", "Narudzbe", new { usluga = "Servis ovjesa", trebaSlika = false }, null);
+    }
+    else
+    {
+        <a class="btn btn-outline-primary" href="@Url.Action("Login","Autentifikacijski")">Prijava</a>
+    }
+    <br>
+    Električni i elektronički sustavi: Pružanje usluga dijagnostike i popravke električnih i elektroničkih sustava vozila, uključujući popravku problema s akumulatorom, svjetlima, električnim bravama itd.
+    <br>
+    @if (User.Identity.IsAuthenticated)
+    {
+        @Html.ActionLink("Narucite se na popravak ovjesa", "Index", "Narudzbe", new { usluga = "Servis elektronike", trebaSlika = false }, null);
+    }
+    else
+    {
+        <a class="btn btn-outline-primary" href="@Url.Action("Login","Autentifikacijski")">Prijava</a>
+    }
+    <br>
+
+    Popravka mjenjača: Pružanje usluga dijagnostike, popravke i zamjene mjenjača vozila kako bi se osiguralo pravilno funkcioniranje i ugodno vožnja.
+    <br>
+    @if (User.Identity.IsAuthenticated)
+    {
+        @Html.ActionLink("Narucite se na popravak mjenjača", "Index", "Narudzbe", new { usluga = "Servis mjenjača", trebaSlika = false }, null);
+    }
+    else
+    {
+        <a class="btn btn-outline-primary" href="@Url.Action("Login","Autentifikacijski")">Prijava</a>
+    }
+    <br>
+
+    Ugradnja dodatne opreme: Pružanje usluga ugradnje dodatne opreme poput alarmnih sustava, navigacijskih uređaja, audio sustava i drugih dodataka prema željama klijenata.
+    <br>
+    @if (User.Identity.IsAuthenticated)
+    {
+        @Html.ActionLink("Narucite se na ugradnju dodatne opreme", "Index", "Narudzbe", new { usluga = "Ugradnja dodatne opreme", trebaSlika = false }, null);
+    }
+    else
+    {
+        <a class="btn btn-outline-primary" href="@Url.Action("Login","Autentifikacijski")">Prijava</a>
+    }
+    <br>
+
+
+
+
+
+    @if (User.Identity.IsAuthenticated)
+    {
+
+        <br />
+        @Html.ActionLink("Narucite se", "Index", "Narudzbe", new { trebaSlika = true }, null);
+
+    }
+    else
+    {
+        <a class="btn btn-outline-primary" href="@Url.Action("Login","Autentifikacijski")">Prijava</a>
+    }
