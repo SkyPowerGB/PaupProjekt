@@ -7,37 +7,55 @@
 
 <h2>Detalji</h2>
 
-<h3>Korisnik</h3>
-@Model.VlasnikVozila.PrezimeIme
-@Model.VlasnikVozila.Email
+<div>
+    <h3>Korisnik</h3>
+    @Model.VlasnikVozila.PrezimeIme
+    @Model.VlasnikVozila.Email
+</div>
 
-<h3>Vozilo</h3>
-@Html.LabelFor(model => model.VoziloVlasnika.Marka)
-@Model.VoziloVlasnika.Marka
-@Html.LabelFor(model => model.VoziloVlasnika.Model)
-@Model.VoziloVlasnika.Model
-@Html.LabelFor(model => model.VoziloVlasnika.Registracija)
-@Model.VoziloVlasnika.Registracija
-@Html.LabelFor(model => model.VoziloVlasnika.GodinaProizvodnje)
-@Model.VoziloVlasnika.GodinaProizvodnje
+<div>
+    <h3>Vozilo</h3>
+    <div>
+        @Html.LabelFor(model => model.VoziloVlasnika.Marka)
+        @Model.VoziloVlasnika.Marka
+    </div>
+    <div>
+        @Html.LabelFor(model => model.VoziloVlasnika.Model)
+        @Model.VoziloVlasnika.Model
+    </div>
+    <div>
+        @Html.LabelFor(model => model.VoziloVlasnika.Registracija)
+        @Model.VoziloVlasnika.Registracija
+    </div>
+    <div>
+        @Html.LabelFor(model => model.VoziloVlasnika.GodinaProizvodnje)
+        @Model.VoziloVlasnika.GodinaProizvodnje
+    </div>
+</div>
 
-<h3>podaci o Servisu</h3>
-@Html.LabelFor(model => model.Datum)
-@Model.Datum
+<div>
+    <h3>Podaci o Servisu</h3>
+    <div>
+        @Html.LabelFor(model => model.Datum)
+        @Model.Datum
+    </div>
+    <div>
+        @Html.LabelFor(model => model.DatumServisa)
+        @Model.DatumServisa
+    </div>
+    <div>
+        @Html.LabelFor(model => model.OpisProblema)
+        @Model.OpisProblema
+    </div>
+</div>
 
-@Html.LabelFor(model => model.DatumServisa)
-@Model.DatumServisa
-
-@Html.LabelFor(model => model.OpisProblema)
-@Model.OpisProblema
-
-
-<h3>SLika kvara:</h3>
-
-@if (Model.slikaVozila != null)
-{
-    <img src="@Url.Content(Model.slikaVozila)" width="500" />
-}
+<div>
+    <h3>Slika kvara:</h3>
+    @if (Model.slikaVozila != null)
+    {
+        <img src="@Url.Content(Model.slikaVozila)" width="500" />
+    }
+</div>
 <br />
 
-@Html.ActionLink("Nazad", "klijenti", null, new { @class = "btn btn-primary" });
+@Html.ActionLink("Nazad", "klijenti", null, new { @class = "btn btn-primary" })

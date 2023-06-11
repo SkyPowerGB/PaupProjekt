@@ -10,33 +10,29 @@
 {
     @Html.AntiForgeryToken()
     @Html.HiddenFor(model => model.VlasnikID)
-
     @Html.HiddenFor(model => model.sifraOvlast)
     @Html.HiddenFor(model => model.Lozinka)
 
+    <div class="form-group">
+        @Html.LabelFor(model => model.Ime)
+        @Html.TextBoxFor(model => model.Ime)
+        @Html.ValidationMessageFor(model => model.Ime)
+    </div>
 
-    <br />
-    @Html.LabelFor(model => model.Ime)
-    @Html.TextBoxFor(model => model.Ime)
-    @Html.ValidationMessageFor(model => model.Ime)
+    <div class="form-group">
+        @Html.LabelFor(model => model.Prezime)
+        @Html.TextBoxFor(model => model.Prezime)
+        @Html.ValidationMessageFor(model => model.Prezime)
+    </div>
 
+    <div class="form-group">
+        @Html.LabelFor(model => model.Email)
+        @Html.TextBoxFor(model => model.Email)
+        @Html.ValidationMessageFor(model => model.Email)
+    </div>
 
-    <br />
-    @Html.LabelFor(model => model.Prezime)
-    @Html.TextBoxFor(model => model.Prezime)
-    @Html.ValidationMessageFor(model => model.Prezime)
-
-
-    <br />
-    @Html.LabelFor(model => model.Email)
-    @Html.TextBoxFor(model => model.Email)
-    @Html.ValidationMessageFor(model => model.Email)
-
- 
-    @Html.ActionLink("Odustani", "Profil", null, new { @class = "btn btn-secondary" });
-
-
-
-    <button class="btn btn-primary">Spremi Promjene</button>
-
+    <div class="form-group">
+        @Html.ActionLink("Odustani", "Profil", null, new { @class = "btn btn-secondary" })
+        <button class="btn btn-primary">Spremi Promjene</button>
+    </div>
 }

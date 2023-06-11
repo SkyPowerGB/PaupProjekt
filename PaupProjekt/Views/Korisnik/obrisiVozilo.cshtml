@@ -1,20 +1,23 @@
 ﻿@using PaupProjekt.Models
-@model vozilo 
+@model vozilo
 @{
 
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>obrisiVozilo</h2>
+<h2>Obriši vozilo</h2>
 
 @ViewBag.Title
 @using (Html.BeginForm("obrisiVozilo", "Korisnik"))
 {
 
     @Html.AntiForgeryToken();
-   @Html.Hidden("id",Model.VoziloId);
+
+    @Html.Hidden("id", Model.VoziloId);
+    @Html.ActionLink("Odustani", "Vozila" , null ,new {@class="btn btn-secondary" } );
+
     <button type="submit" class="btn btn-danger">
         <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>Izbriši
     </button>
-    @Html.ActionLink("Odustani", "Vozila");
+
 }

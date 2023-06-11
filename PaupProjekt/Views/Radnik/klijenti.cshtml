@@ -10,20 +10,21 @@
     List<račun> Računi = ViewBag.racuni as List<račun>;
     račun racunS = new račun();
 }
-<h2>Klijenti</h2>
+<h2>Servisi</h2>
 
 
 @using (Html.BeginForm("klijenti", "radnik", FormMethod.Get))
 {
-
+    @Html.Label("Prezime Ime:")
     @Html.TextBox("prezimeIme")
-
+    @Html.Label("marka:")
     @Html.TextBox("marka")
 
-  
+    @Html.Label("usluga:")
 
     @Html.TextBox("usluga")
 
+    @Html.Label("status:")
     @Html.DropDownList("Status", new SelectList(ListaStatusaE.DopusteneVrijednosi), "Status")
 
 
@@ -37,13 +38,17 @@
 
     <table class="table table-striped text-center">
         <thead>
-            <tr>
+            <tr class="table-dark">
 
                 <th>Vozilo vlasnika</th>
                 <th>marka</th>
                 <th>datum Narudžbe</th>
                 <th>usluga</th>
                 <th>status</th>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th></th>
             </tr>
         </thead>
 
@@ -53,7 +58,8 @@
 
             @foreach (servis Servis in Model)
             {
-                <tr>
+                <tr class="@(Servis.StatusServisa == "Završen" ? "table-secondary" : "")
+                    @(Servis.StatusServisa=="Otkazan"?"table-danger":"")">
                     <td>@Servis.VlasnikVozila.PrezimeIme</td>
                     <td>@Servis.VoziloVlasnika.Marka</td>
                     <td>@Servis.Datum</td>
@@ -71,7 +77,7 @@
                     }
                     @if (racunS.Izdan)
                     {
-                        <td>@Html.ActionLink("Pregled računa", "pregledRacuna", "Korisnik", new {servisId=Servis.ServisID }, new {@class="btn btn-primary" })</td>
+                        <td>@Html.ActionLink("Pregled računa", "pregledRacuna", "Korisnik", new { servisId = Servis.ServisID }, new { @class = "btn btn-primary" })</td>
 
                     }
 
