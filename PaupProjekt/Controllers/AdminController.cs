@@ -122,11 +122,13 @@ namespace PaupProjekt.Controllers
             if(v == null) { return HttpNotFound(); }
 
             var vozila = baza.voziloTab.Where(x => x.VlasnikID == v.VlasnikID).ToList();
-            var servisi = baza.servisTab.Where(x => x.VlasnikID == v.VlasnikID).ToList();
-            if (servisi != null) {
+
+            var servisi = baza.servisTab.FirstOrDefault(x => x.VlasnikID == v.VlasnikID);
+            if (servisi != null)
+            {
+
                 return RedirectToAction("klijenti", "Radnik");
             }
-
 
             if (vozila != null)
             {
@@ -137,6 +139,11 @@ namespace PaupProjekt.Controllers
                     baza.SaveChanges();
                 }
             }
+           
+
+
+
+
             baza.vlasnikTab.Remove(v);
             baza.SaveChanges();
             return RedirectToAction("Korisnici");
