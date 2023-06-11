@@ -29,8 +29,9 @@ namespace PaupProjekt.Controllers
         }
 
         //---------Uredi Uslugu------------------------------
-        [Authorize]
+       
         [HttpGet]
+        [Authorize]
         public ActionResult UrediUslugu(int? id) {
 
             if (id.HasValue) {
@@ -46,8 +47,9 @@ namespace PaupProjekt.Controllers
         
         return View();  
         }
-        [Authorize]
+     
         [HttpPost]
+        [Authorize]
         public ActionResult UrediUslugu(uslugeTab usluga) {
 
             if (ModelState.IsValid) {
@@ -61,8 +63,9 @@ namespace PaupProjekt.Controllers
         }
 
         //---------Obriši Uslugu----------------------------------
-        [Authorize]
+        
         [HttpGet]
+        [Authorize]
         public ActionResult ObrisiUslugu(int? idUsluge)
         {
             if (!idUsluge.HasValue) { return HttpNotFound("Id nije naden"); }
@@ -74,8 +77,9 @@ namespace PaupProjekt.Controllers
 
             return View(usluga);
         }
-        [Authorize]
+      
         [HttpPost]
+        [Authorize]
         public ActionResult ObrisiUslugu(int id) {
             var usluga= baza.uslugeTab.FirstOrDefault(x=>x.UslugaID == id);
             if (baza.ListaUslugaTab.FirstOrDefault(x => x.UslugaID == usluga.UslugaID) != null)
@@ -95,8 +99,9 @@ namespace PaupProjekt.Controllers
 
             return View();
         }
-        [Authorize]
+       
         [HttpPost]
+        [Authorize]
         public ActionResult DodajUslugu(uslugeTab Usluga)
          
         {

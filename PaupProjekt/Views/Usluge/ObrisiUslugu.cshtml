@@ -5,14 +5,20 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Obrisi Uslugu</h2>
+<h2>Obriši Uslugu</h2>
 @ViewBag.Title
-@using (Html.BeginForm("ObrisiUslugu","Usluge",FormMethod.Post))
-{
-   @Html.Hidden("Id",Model.UslugaID);
 
-    <button class="btn-danger"> Izbrisi </button>
+<div>
 
-} 
-@Html.ActionLink("odustani", "ListaUsluga", null,new { @class="btn btn-primary"});
+    @using (Html.BeginForm("ObrisiUslugu", "Usluge", FormMethod.Post))
+    {
+        @Html.Hidden("Id", Model.UslugaID);
 
+
+        @Html.ActionLink("odustani", "ListaUsluga", null, new { @class = "btn btn-primary" });
+        <button class="btn btn-danger"> Izbrisi </button>
+
+    }
+
+
+</div>

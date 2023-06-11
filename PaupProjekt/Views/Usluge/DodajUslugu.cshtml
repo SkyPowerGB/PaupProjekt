@@ -1,20 +1,29 @@
-﻿@using PaupProjekt.Models
-@model uslugeTab
+﻿@model PaupProjekt.Models.uslugeTab
+
 @{
     ViewBag.Title = "DodajUslugu";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Kreiranje nove Usluge</h2>
+<h2>Kreiranje nove usluge</h2>
+
 @using (Html.BeginForm("DodajUslugu", "Usluge", FormMethod.Post))
 {
-    @Html.LabelFor(model => model.nazivUsluga)
-    @Html.TextBoxFor(model => model.nazivUsluga);
+    <div class="form-group">
+        @Html.LabelFor(model => model.nazivUsluga)
+        @Html.TextBoxFor(model => model.nazivUsluga, new { @class = "form-control" })
+        @Html.ValidationMessageFor(model => model.nazivUsluga, "", new { @class = "text-danger" })
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.cijenaUsluga)
+        @Html.TextBoxFor(model => model.cijenaUsluga, new { @class = "form-control" })
+        @Html.ValidationMessageFor(model => model.cijenaUsluga, "", new { @class = "text-danger" })
+    </div>
+
     <br />
-    @Html.LabelFor(model => model.cijenaUsluga)
-    @Html.TextBoxFor(model => model.cijenaUsluga);
-
-
-    @Html.ActionLink("Nazad", "ListaUsluga", null, new { @class = "btn btn-secondary" })
-    <button class="btn btn-primary">+Dodaj ulslugu</button>
+    <div class="form-group">
+        @Html.ActionLink("Nazad", "ListaUsluga", null, new { @class = "btn btn-secondary" })
+        <button type="submit" class="btn btn-primary">+Dodaj uslugu</button>
+    </div>
 }
