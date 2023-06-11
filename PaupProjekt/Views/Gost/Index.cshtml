@@ -4,5 +4,14 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Gost stranica</h2>
-<h2>@ViewBag.Podaci</h2>
+
+
+<h2 style="text-align: center; color: #333;">Dobrodošli na stranicu servisa vozila</h2>
+<div style="display: flex; justify-content: center; align-items: center; height: 300px; background-color: #f2f2f2;">
+   
+    <p style="font-size: 20px;">Servis vozila vam pruža sve usluge održavanja i popravke vašeg vozila. Naš tim stručnjaka stoji vam na raspolaganju kako bi vaše vozilo bilo u najboljem mogućem stanju.</p>
+</div>
+<p style="text-align: center;">Zakažite termin za servisiranje vašeg vozila i uvjerite se u našu stručnost i kvalitetu usluge.</p>
+<div class="text-center">
+    @Html.ActionLink("Naručite se", "Usluge", null, new { @class = "btn btn-outline-primary" })
+</div>

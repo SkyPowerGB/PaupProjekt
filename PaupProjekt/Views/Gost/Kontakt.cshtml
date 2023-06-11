@@ -4,5 +4,31 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Kontakt</h2>
 
+
+<div>
+    <h2>Kontaktirajte nas</h2>
+    <p>Ako imate pitanja, želite zakazati termin ili jednostavno želite saznati više o našim uslugama, slobodno nas kontaktirajte putem sljedećih podataka:</p>
+    <div style="display: flex; justify-content: center; align-items: center; margin-top: 30px;">
+        <div style="margin-right: 50px;">
+            <h3>Adresa</h3>
+            <p>Ulica i broj</p>
+            <p>Grad, Poštanski broj</p>
+        </div>
+        <div>
+            <h3>Kontakt informacije</h3>
+            <p>Telefon: +123456789</p>
+            <p>Email: info@sviservis.com</p>
+        </div>
+    </div>
+    <div style="text-align: center; margin-top: 30px;">
+        <h3>Radno vrijeme</h3>
+        <p>Ponedjeljak - Petak: 8:00 - 17:00</p>
+        <p>Subota: 9:00 - 13:00</p>
+        <p>Nedjelja: Zatvoreno</p>
+    </div>
+    <div class="text-center">
+
+        <p style="text-align: center; margin-top: 30px;" class="btn btn-outline-primary"><a href=@Url.Action("Usluge") style="color: #007bff;">Zakažite termin</a></p>
+    </div>
+</div>
