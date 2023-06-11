@@ -33,6 +33,7 @@ namespace PaupProjekt.Controllers
 //spremi podatke
         [HttpPost]
         [AllowAnonymous]
+        [ValidateAntiForgeryToken]
         public ActionResult Registracija( vlasnik v)
         {
 
@@ -98,7 +99,7 @@ namespace PaupProjekt.Controllers
 
         [HttpPost]
         [AllowAnonymous]
-
+        [ValidateAntiForgeryToken]
         public ActionResult Login( KorisnickaKartica kartica,string returnUrl)
         {
           
@@ -147,7 +148,7 @@ namespace PaupProjekt.Controllers
         //-----tu bi trebala biti promjena  Lozinke korisnika (NIJE NAPRAVLJENO)
         //bilo bi dobro izvest tak da i admin ima tu tj ka ne tre dva action resulta
         [Authorize]
-
+        [ValidateAntiForgeryToken]
         public ActionResult PromjenaLozinke(int? id)
         {
          

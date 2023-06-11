@@ -45,6 +45,7 @@
 
     @using (Html.BeginForm("PotvrdaNarudzbe", "Narudzbe", FormMethod.Post))
     {
+        @Html.AntiForgeryToken()
         @Html.HiddenFor(model => model.StatusServisa)
         @Html.HiddenFor(model => model.voziloID)
         @Html.HiddenFor(model => model.VlasnikID)

@@ -49,6 +49,7 @@ namespace PaupProjekt.Controllers
         [Authorize]
  //potvrdi otkazivanje
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult OtkaziNarudzbu(servis Narudzba)
         {
             Narudzba.StatusServisa = "Otkazan";
@@ -87,6 +88,7 @@ namespace PaupProjekt.Controllers
 //preuzmi podatke i spremi
         [Authorize]
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult PromjenaKorisnickihPod(vlasnik v)
         {
 
@@ -139,6 +141,7 @@ namespace PaupProjekt.Controllers
         [Authorize]
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult obrisiVozilo(int id) {
 
             vozilo v = baza.voziloTab.FirstOrDefault(x => x.VoziloId== id);
@@ -161,6 +164,7 @@ namespace PaupProjekt.Controllers
         }
         [Authorize]
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult dodajVozilo(vozilo voz)
 
         {
@@ -196,6 +200,7 @@ namespace PaupProjekt.Controllers
         return View(Racun);
         }
         [Authorize]
+
   //ispis
         public ActionResult ispisRacunaPDF(račun Racun )
         {

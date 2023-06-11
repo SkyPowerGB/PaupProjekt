@@ -54,7 +54,7 @@
                                     {
 
                                         <td>
-                                           @Html.ActionLink("Preuzimanje računa","pregledRacuna",new { servisId=n.ServisID });
+                                           @Html.ActionLink("Preuzimanje računa","pregledRacuna",new { servisId=n.ServisID }, new {@class="btn bnt-primary" });
                                         </td>
                                     }
 
@@ -62,7 +62,7 @@
                                 @if (n.DatumServisa==null) {
                                     if (n.StatusServisa != "Otkazan")
                                     {
-                                <td>@Html.ActionLink("Otkaži", "OtkaziNarudzbu", new { idNarudzbe = n.ServisID })</td>
+                                <td>@Html.ActionLink("Otkaži", "OtkaziNarudzbu", new { idNarudzbe = n.ServisID } , new {@class="btn btn-outline-danger" })</td>
                                 
                                 }
                                 }
@@ -77,6 +77,6 @@
             else
             {
 
-                <p>nema narudzbi</p>
+                <h2>Nema servisa</h2>
             }
 

@@ -12,6 +12,7 @@
 
             @using (Html.BeginForm("index", "Narudzbe", FormMethod.Post, new { @class = "form-horizontal", role = "form", enctype = "multipart/form-data" }))
             {
+                @Html.AntiForgeryToken()
                 if ((bool)ViewBag.UslugaPoznata)
                 {
                     <h6>Opis servisa: @Model.OpisProblema</h6>

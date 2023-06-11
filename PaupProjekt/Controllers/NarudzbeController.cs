@@ -46,6 +46,7 @@ namespace PaupProjekt.Controllers
 
      //uzmi podatke o narudžbi
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult Index(servis ser)
         {
            
@@ -94,8 +95,7 @@ namespace PaupProjekt.Controllers
 
             return RedirectToAction("Potvrda", ser);
         }
-        [HttpGet]
-
+        [HttpGet]    
         //------------------Potvrdi narudžbu-------------------------
         public ActionResult Potvrda(servis ser)
         {
@@ -109,7 +109,7 @@ namespace PaupProjekt.Controllers
         }
         [HttpPost]
         //spremi 
-
+        [ValidateAntiForgeryToken]
         public ActionResult PotvrdaNarudzbe(servis ser)
         {
             var Email = User.Identity.Name;
@@ -129,6 +129,7 @@ namespace PaupProjekt.Controllers
         }
 
         //---------------Odustani i (izbiriši sliku) nazad na novu narudžbu-----------------------------
+      
         public ActionResult odustani(string path, string usluga)
         {
            

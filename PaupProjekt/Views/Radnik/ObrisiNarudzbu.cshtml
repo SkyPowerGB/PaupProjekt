@@ -1,17 +1,18 @@
 ﻿@model PaupProjekt.Models.servis
 @{
-   
+
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>ObrisiNarudzbu</h2>
-@ViewBag.Title 
+<h2>Obriši servis </h2>
+@ViewBag.Title
 
 
-@using (Html.BeginForm()) { 
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
 
 
-
-
-    <button>Izbrisi</button>
+    @Html.ActionLink("Odustani","klijenti",null,new {@class="btn btn-secondary" });
+    <button class="btn btn-danger">Izbriši</button>
 }

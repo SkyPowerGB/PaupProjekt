@@ -6,17 +6,18 @@
 
 <h2>jeste li sigurni da želite otkazati servis</h2>
 
- @using (Html.BeginForm("OtkaziNarudzbu", "Korisnik", FormMethod.Post))
- {
-@Html.HiddenFor(model => model.voziloID)
-@Html.HiddenFor(model => model.Datum)
-@Html.HiddenFor(model => model.ServisID)
-@Html.HiddenFor(model => model.VlasnikID)
-@Html.HiddenFor(model => model.StatusServisa)
-@Html.HiddenFor(model => model.OpisProblema)
+@using (Html.BeginForm("OtkaziNarudzbu", "Korisnik", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(model => model.voziloID)
+    @Html.HiddenFor(model => model.Datum)
+    @Html.HiddenFor(model => model.ServisID)
+    @Html.HiddenFor(model => model.VlasnikID)
+    @Html.HiddenFor(model => model.StatusServisa)
+    @Html.HiddenFor(model => model.OpisProblema)
 
-@Html.ActionLink("Odustani", "Index", null, new { @class = "btn btn-secondary" })
-@Html.ValidationSummary();
-<button class="btn btn-primary">Otkaži</button>
+    @Html.ActionLink("Odustani", "Index", null, new { @class = "btn btn-secondary" })
+    @Html.ValidationSummary();
+    <button class="btn btn-primary">Otkaži</button>
 
 }

@@ -11,7 +11,7 @@
 
 @using (Html.BeginForm("UrediUslugu", "Usluge", FormMethod.Post))
 {
-
+    @Html.AntiForgeryToken()
     @Html.HiddenFor(model => model.UslugaID);
     @Html.LabelFor(model => model.nazivUsluga)
     @Html.TextBoxFor(model => model.nazivUsluga);

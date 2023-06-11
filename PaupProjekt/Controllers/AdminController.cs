@@ -48,6 +48,7 @@ namespace PaupProjekt.Controllers
 
         [HttpPost]
         [AllowAnonymous]
+        [ValidateAntiForgeryToken]
         public ActionResult uredi(vlasnik v)
         {
 
@@ -88,6 +89,7 @@ namespace PaupProjekt.Controllers
         }
  //izbrisi
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult izbrisi(int id) {
 
             vlasnik v = baza.vlasnikTab.FirstOrDefault(x=>x.VlasnikID==id);
@@ -121,6 +123,7 @@ namespace PaupProjekt.Controllers
        
     //spremi promjene
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult promjenaLozinke(vlasnik v)
         {
             if (!String.IsNullOrWhiteSpace(v.LozinkaA))

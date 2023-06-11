@@ -5,7 +5,7 @@
     ViewBag.Title = "IzdajRacun";
     Layout = "~/Views/Shared/_Layout.cshtml";
     decimal UkupanIznos = 0;
-    List<ListaUslugaTab> listaUslugaRacuna =(( List < ListaUslugaTab > )ViewBag.uslugeNarudzbe);
+    List<ListaUslugaTab> listaUslugaRacuna = ((List<ListaUslugaTab>)ViewBag.uslugeNarudzbe);
 }
 
 <h2 class="alert-danger">Upozorenje! </h2>
@@ -14,7 +14,7 @@
 <h4> Opis servisa : @Model.Narudzba.OpisProblema</h4>
 
 
-    
+
 
 
 
@@ -28,15 +28,16 @@
     </thead>
 
     <tbody>
-        @foreach (ListaUslugaTab usluga in listaUslugaRacuna) {
-        <tr>
-            
-            <td> @usluga.Usluge.nazivUsluga</td>
-            <td>@usluga.kol</td>
-            <td>@usluga.Usluge.cijenaUsluga</td>
-            @{UkupanIznos += usluga.Usluge.cijenaUsluga;
-            }
-        </tr>
+        @foreach (ListaUslugaTab usluga in listaUslugaRacuna)
+        {
+            <tr>
+
+                <td> @usluga.Usluge.nazivUsluga</td>
+                <td>@usluga.kol</td>
+                <td>@usluga.Usluge.cijenaUsluga</td>
+                @{UkupanIznos += usluga.Usluge.cijenaUsluga;
+                }
+            </tr>
         }
     </tbody>
 
@@ -45,18 +46,19 @@
     <h3>Ukupan iznos: @UkupanIznos</h3>
 </div>
 @{
-ViewBag.UkupanIznos= UkupanIznos;
+    ViewBag.UkupanIznos = UkupanIznos;
 
- }
+}
 
 @using (Html.BeginForm("IzdajRacun", "Racun", FormMethod.Post))
-{ 
-@Html.HiddenFor(model => model.RačunID)
-@Html.HiddenFor(model => model.UkupanIznos)
-@Html.HiddenFor(model => model.ServisID)
+{
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(model => model.RačunID)
+    @Html.HiddenFor(model => model.UkupanIznos)
+    @Html.HiddenFor(model => model.ServisID)
 
-    
 
-  @Html.ActionLink("Odustani","IzavanjeRacuna","Racun",new { idNarudzbe=Model.ServisID},new {@class= "btn btn-secondary" })
-<button class="btn btn-primary"> Izdaj Racun</button>
+
+    @Html.ActionLink("Odustani", "IzavanjeRacuna", "Racun", new { idNarudzbe = Model.ServisID }, new { @class = "btn btn-secondary" })
+    <button class="btn btn-primary"> Izdaj Racun</button>
 }

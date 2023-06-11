@@ -1,4 +1,5 @@
 ﻿using Microsoft.Ajax.Utilities;
+using PaupProjekt.Misc;
 using PaupProjekt.Models;
 using System;
 using System.Collections.Generic;
@@ -12,11 +13,18 @@ namespace PaupProjekt.Controllers
     public class RacunController : Controller
     {
         ServisVozilaDB baza = new ServisVozilaDB();
-        
-        //-------------------Kreiranje / uređivanje (ne izdanog) Računa-----
 
+        //-------------------Kreiranje / uređivanje (ne izdanog) Računa-----
+        [Authorize]
         public ActionResult IzavanjeRacuna(int? idNarudzbe,int? idUsluge)
         {
+            //podaci o kornisniku
+            LogiraniKorisnik kor = User as LogiraniKorisnik;
+            //ak je ne radnik ->na početnu
+            if (!((kor.IsInRole(OvlastiKorisnik.Radnik) || kor.IsInRole(OvlastiKorisnik.Admin))))
+            {
+                return RedirectToAction("Index", "Korisnik");
+            }
             bool novi = false;
 
             var racunNarudzbe = (baza.racunTab.FirstOrDefault(x => x.ServisID == idNarudzbe));
@@ -93,13 +101,19 @@ namespace PaupProjekt.Controllers
             return View(listaUsluga);
         }
 
-     //------------------Dodaj uslugu na listu usluga Računa-------------------------
-
+        //------------------Dodaj uslugu na listu usluga Računa-------------------------
+        [Authorize]
         public ActionResult DodajUslugu(int id) {
 
-            
-               
-            
+            //podaci o kornisniku
+            LogiraniKorisnik kor = User as LogiraniKorisnik;
+            //ak je ne radnik ->na početnu
+            if (!((kor.IsInRole(OvlastiKorisnik.Radnik) || kor.IsInRole(OvlastiKorisnik.Admin))))
+            {
+                return RedirectToAction("Index", "Korisnik");
+            }
+
+
 
 
 
@@ -109,8 +123,18 @@ namespace PaupProjekt.Controllers
 
 
         //------------------Makni uslugu sa liste usluga Računa-------------------------
+
+        [Authorize]
         public ActionResult MakniUslugu(int idListe)
         {
+            //podaci o kornisniku
+            LogiraniKorisnik kor = User as LogiraniKorisnik;
+            //ak je ne radnik ->na početnu
+            if (!((kor.IsInRole(OvlastiKorisnik.Radnik) || kor.IsInRole(OvlastiKorisnik.Admin))))
+            {
+                return RedirectToAction("Index", "Korisnik");
+            }
+
             var listaUsluga = baza.ListaUslugaTab.FirstOrDefault(x=>x.idListe==idListe);
             var idNarudzbe = listaUsluga.Račun.Narudzba.ServisID;
            
@@ -127,10 +151,18 @@ namespace PaupProjekt.Controllers
         //nakon što je izdan više ga nije moguće uređivat 
 
         [HttpGet]
+        [Authorize]
         public ActionResult IzdajRacun(int idRacuna , decimal? iznos) {
-            
-            
-        ViewBag.uslugeNarudzbe =  baza.ListaUslugaTab.Where(x=>x.RačunID==idRacuna).ToList();
+
+            //podaci o kornisniku
+            LogiraniKorisnik kor = User as LogiraniKorisnik;
+            //ak je ne radnik ->na početnu
+            if (!((kor.IsInRole(OvlastiKorisnik.Radnik) || kor.IsInRole(OvlastiKorisnik.Admin))))
+            {
+                return RedirectToAction("Index", "Korisnik");
+            }
+
+            ViewBag.uslugeNarudzbe =  baza.ListaUslugaTab.Where(x=>x.RačunID==idRacuna).ToList();
 
           var racun = baza.racunTab.FirstOrDefault(x => x.RačunID == idRacuna);
             if (iznos == null) { return HttpNotFound(); }
@@ -138,11 +170,17 @@ namespace PaupProjekt.Controllers
 
         return View(racun);
         }
+        [Authorize]
 
-     
         public ActionResult IzdajRacun(račun r)
         {
-            
+            //podaci o kornisniku
+            LogiraniKorisnik kor = User as LogiraniKorisnik;
+            //ak je ne radnik ->na početnu
+            if (!((kor.IsInRole(OvlastiKorisnik.Radnik) || kor.IsInRole(OvlastiKorisnik.Admin))))
+            {
+                return RedirectToAction("Index", "Korisnik");
+            }
             r.Izdan = true;
             r.DatumIzdavanja=DateTime.Now;
             baza.Entry(r).State= System.Data.Entity.EntityState.Modified;

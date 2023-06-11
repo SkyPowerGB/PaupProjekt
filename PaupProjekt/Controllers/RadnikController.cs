@@ -16,15 +16,22 @@ namespace PaupProjekt.Controllers
 {
     public class RadnikController : Controller
     {
-
+     
         //--------baza----------------------------
         ServisVozilaDB db = new ServisVozilaDB();
         //-----------------------------------------
 
         [Authorize]
-      //-------------------servis talblica--------------------------------------------------------------------------------------
-        public ActionResult klijenti(string prezimeIme, string marka , string usluga, string status) {
+        //-------------------servis talblica--------------------------------------------------------------------------------------
+        public ActionResult klijenti(string prezimeIme, string marka, string usluga, string status) {
             var narudzbe = db.servisTab.ToList();
+
+            //podaci o kornisniku
+            LogiraniKorisnik kor = User as LogiraniKorisnik;
+            //ak je ne radnik ->na početnu
+            if (!((kor.IsInRole(OvlastiKorisnik.Radnik) || kor.IsInRole(OvlastiKorisnik.Admin)))){
+                return RedirectToAction("Index","Korisnik");
+            }
 
             if (!String.IsNullOrWhiteSpace(usluga))
             {
@@ -53,7 +60,15 @@ namespace PaupProjekt.Controllers
         //----------detalji servisa-------------------------------------------------------------------------------------------
 
         [Authorize]
+       
         public ActionResult detalji(int? id) {
+            //podaci o kornisniku
+            LogiraniKorisnik kor = User as LogiraniKorisnik;
+            //ak je ne radnik ->na početnu
+            if (!((kor.IsInRole(OvlastiKorisnik.Radnik) || kor.IsInRole(OvlastiKorisnik.Admin))))
+            {
+                return RedirectToAction("Index", "Korisnik");
+            }
 
             if (id == null) { return RedirectToAction("klijenti"); }
 
@@ -69,11 +84,18 @@ namespace PaupProjekt.Controllers
             }
 
         [Authorize]
+    
         //----------------- Ažuriranje servisa--------------------------------------------------------------------------------------
         public ActionResult Azuriraj(int? id)
         {
+            //podaci o kornisniku
+            LogiraniKorisnik kor = User as LogiraniKorisnik;
+            //ak je ne radnik ->na početnu
+            if (!((kor.IsInRole(OvlastiKorisnik.Radnik) || kor.IsInRole(OvlastiKorisnik.Admin))))
+            {
+                return RedirectToAction("Index", "Korisnik");
+            }
 
-      
             servis nalozi = null;
             if (!id.HasValue ) {
                 return RedirectToAction("klijenti");
@@ -91,7 +113,15 @@ namespace PaupProjekt.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Azuriraj( servis Servis) {
-            
+
+            //podaci o kornisniku
+            LogiraniKorisnik kor = User as LogiraniKorisnik;
+            //ak je ne radnik ->na početnu
+            if (!((kor.IsInRole(OvlastiKorisnik.Radnik) || kor.IsInRole(OvlastiKorisnik.Admin))))
+            {
+                return RedirectToAction("Index", "Korisnik");
+            }
+
             if (ModelState.IsValid)
             {
 
@@ -111,10 +141,17 @@ namespace PaupProjekt.Controllers
 
         //----------------Brisanje Servisa-----------------------------------------------------------------------------
         [Authorize]
+        
         public ActionResult ObrisiNarudzbu(int? id) {
+            //podaci o kornisniku
+            LogiraniKorisnik kor = User as LogiraniKorisnik;
+            //ak je ne radnik ->na početnu
+            if (!((kor.IsInRole(OvlastiKorisnik.Radnik) || kor.IsInRole(OvlastiKorisnik.Admin))))
+            {
+                return RedirectToAction("Index", "Korisnik");
+            }
+
             if (!id.HasValue) { return HttpNotFound(); }
-
-
 
 
             var servisKorisnika = db.servisTab.FirstOrDefault(x => x.ServisID == id);
@@ -127,8 +164,18 @@ namespace PaupProjekt.Controllers
 
         [Authorize]
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult ObrisiNarudzbu(int id)
         {
+            //podaci o kornisniku
+            LogiraniKorisnik kor = User as LogiraniKorisnik;
+            //ak je ne radnik ->na početnu
+            if (!((kor.IsInRole(OvlastiKorisnik.Radnik) || kor.IsInRole(OvlastiKorisnik.Admin))))
+            {
+                return RedirectToAction("Index", "Korisnik");
+            }
+
+
             var servisKorisnika = db.servisTab.FirstOrDefault(x => x.ServisID == id);
 
             var racunServisa = db.racunTab.FirstOrDefault(x => x.ServisID == id);

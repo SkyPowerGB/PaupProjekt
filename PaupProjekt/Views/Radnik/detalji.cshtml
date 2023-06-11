@@ -22,10 +22,15 @@
 @Model.VoziloVlasnika.GodinaProizvodnje
 
 <h3>podaci o Servisu</h3>
-@Html.LabelFor(model=>model.Datum)
+@Html.LabelFor(model => model.Datum)
 @Model.Datum
+
+@Html.LabelFor(model => model.DatumServisa)
+@Model.DatumServisa
+
 @Html.LabelFor(model => model.OpisProblema)
 @Model.OpisProblema
+
 
 <h3>SLika kvara:</h3>
 
@@ -35,4 +40,4 @@
 }
 <br />
 
-@Html.ActionLink("Nazad", "klijenti", null,new { @class="btn btn-primary"});
+@Html.ActionLink("Nazad", "klijenti", null, new { @class = "btn btn-primary" });

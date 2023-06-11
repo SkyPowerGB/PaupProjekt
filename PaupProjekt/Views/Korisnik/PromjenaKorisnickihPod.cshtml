@@ -8,7 +8,7 @@
 
 @using (Html.BeginForm("PromjenaKorisnickihPod", "Korisnik", FormMethod.Post))
 {
-
+    @Html.AntiForgeryToken()
     @Html.HiddenFor(model => model.VlasnikID)
 
 
@@ -31,7 +31,7 @@
     <br />
     @Html.ActionLink("Promjeni Lozinku(neje nap)", " ");
     <br />
-    @Html.ActionLink("Odustani", "Profil", null, new {@class="btn btn-secondary" });
+    @Html.ActionLink("Odustani", "Profil", null, new { @class = "btn btn-secondary" });
     <btn class="btn btn-primary">Spremi Promjene</btn>
 
 }

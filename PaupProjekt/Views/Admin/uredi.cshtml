@@ -15,6 +15,7 @@
 
         @using (Html.BeginForm("uredi", "Admin", FormMethod.Post))
         {
+            @Html.AntiForgeryToken()
             @Html.HiddenFor(model => model.Email)
             @Html.HiddenFor(model => model.VlasnikID)
             @Html.HiddenFor(model => model.Prezime)
@@ -29,8 +30,8 @@
             </div>
 
 
-         <h6>Promjeni lozinku:</h6>
-        @Html.ActionLink("Promjeni lozinku", "promjenaLozinke", new { id = Model.VlasnikID }, new { @class = "btn btn-outline-secondary" })
+            <h6>Promjeni lozinku:</h6>
+            @Html.ActionLink("Promjeni lozinku", "promjenaLozinke", new { id = Model.VlasnikID }, new { @class = "btn btn-outline-secondary" })
 
             @Html.ValidationSummary()
 

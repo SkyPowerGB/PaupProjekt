@@ -10,6 +10,7 @@
 @ViewBag.Title
 @using (Html.BeginForm("obrisiVozilo", "Korisnik"))
 {
+
     @Html.AntiForgeryToken();
    @Html.Hidden("id",Model.VoziloId);
     <button type="submit" class="btn btn-danger">
