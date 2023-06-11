@@ -12,10 +12,12 @@ namespace PaupProjekt.Models
     {
         [Key]
         public int idListe { get; set; }
+
+       
         public int kol { get; set; }
-
+        //nekoristeno
         public decimal koef { get; set; }
-
+        //-----------------------------
       
         public int RačunID { get; set; }
 

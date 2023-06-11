@@ -1,0 +1,35 @@
+﻿@model PaupProjekt.Models.vlasnik
+
+@{
+    ViewBag.Title = "PromjenaLozinke";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Promjena Lozinke</h2>
+
+@using (Html.BeginForm("PromjenaLozinke", "Autentifikacijski", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(x => x.Email)
+    @Html.HiddenFor(x => x.Ime)
+    @Html.HiddenFor(x => x.Prezime)
+    @Html.HiddenFor(x => x.sifraOvlast)
+    @Html.HiddenFor(x => x.Lozinka)
+
+    <div class="form-group">
+        @Html.LabelFor(x => x.LozinkaA)
+        @Html.PasswordFor(x => x.LozinkaA)
+        @Html.ValidationMessageFor(x => x.LozinkaA)
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(x => x.LozinkaPon)
+        @Html.PasswordFor(x => x.LozinkaPon)
+        @Html.ValidationMessageFor(x => x.LozinkaPon)
+    </div>
+
+    <div class="form-group">
+        @Html.ActionLink("Odustani", "Profil", "Korisnik", null, new { @class = "btn btn-secondary" })
+        <button type="submit" class="btn btn-primary">Spremi Promjene</button>
+    </div>
+}

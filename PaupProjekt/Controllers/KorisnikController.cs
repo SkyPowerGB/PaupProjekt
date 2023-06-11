@@ -79,6 +79,8 @@ namespace PaupProjekt.Controllers
         [Authorize]
         [HttpGet]
         public ActionResult PromjenaKorisnickihPod() {
+            
+
             var Email = HttpContext.User.Identity.Name;
             vlasnik KorRacun = baza.vlasnikTab.FirstOrDefault(x => x.Email == Email);
 
@@ -91,7 +93,7 @@ namespace PaupProjekt.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult PromjenaKorisnickihPod(vlasnik v)
         {
-
+          
             if (ModelState.IsValid) {
 
                 baza.Entry(v).State= System.Data.Entity.EntityState.Modified;
@@ -129,6 +131,10 @@ namespace PaupProjekt.Controllers
                 ViewBag.Title = "Jeste li sigurni da želite izbrisat Vozilo ";
                 vozilo v = baza.voziloTab.FirstOrDefault(x => x.VoziloId == idVozila);
                 servis s = baza.servisTab.FirstOrDefault(x=>x.voziloID==idVozila);
+
+                
+
+
                 if (s == null)
                 {
                     return View(v);
@@ -136,6 +142,8 @@ namespace PaupProjekt.Controllers
             }
             ViewBag.Title = "Greška Vozilo je naručeno";
             
+            
+
             return RedirectToAction("Index","Korisnik");
         }
         [Authorize]
@@ -149,6 +157,7 @@ namespace PaupProjekt.Controllers
             if (v == null) { return HttpNotFound("nije naden vlasnik vozila"); }
             if (s == null)
             {
+                if (v.voziloVlasnika.Email != User.Identity.Name) { return RedirectToAction("Vozila"); }
                 baza.voziloTab.Remove(v);
                 baza.SaveChanges();
             }
@@ -195,8 +204,15 @@ namespace PaupProjekt.Controllers
             var Racun = baza.racunTab.FirstOrDefault(x=>x.ServisID== servisId);
             if(Racun == null) { return RedirectToAction("index"); }
             ViewData["ListaUsluga"] = baza.ListaUslugaTab.Where(x => x.RačunID == Racun.RačunID).ToList();
-            ViewData["Servis"] = baza.servisTab.FirstOrDefault(x=>x.ServisID==servisId);
-        
+            var Servis = baza.servisTab.FirstOrDefault(x => x.ServisID == servisId);
+            if(Servis==null) { return RedirectToAction("Index"); }
+
+            ViewData["Servis"] = Servis;
+            if (Servis.VlasnikVozila.Email != User.Identity.Name) {
+                return RedirectToAction("Index","Korisnici");
+            }
+          
+
         return View(Racun);
         }
         [Authorize]
@@ -206,7 +222,9 @@ namespace PaupProjekt.Controllers
         {
            
             if (Racun == null) { return HttpNotFound(); }
-
+            var servis = baza.servisTab.FirstOrDefault(x=>x.ServisID==Racun.ServisID);
+            if(servis == null) { return HttpNotFound(); }
+            if(servis.VlasnikVozila.Email!=User.Identity.Name) { return RedirectToAction("Index"); }
             ViewData["ListaUsluga"] = baza.ListaUslugaTab.Where(x => x.RačunID == Racun.RačunID).ToList();
             ViewData["Servis"] = baza.servisTab.FirstOrDefault(x => x.ServisID == Racun.ServisID);
 

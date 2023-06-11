@@ -4,12 +4,15 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>PromjenaKorisnickihPod</h2>
+<h2>Promjena korisnčkih podataka</h2>
 
 @using (Html.BeginForm("PromjenaKorisnickihPod", "Korisnik", FormMethod.Post))
 {
     @Html.AntiForgeryToken()
     @Html.HiddenFor(model => model.VlasnikID)
+
+    @Html.HiddenFor(model => model.sifraOvlast)
+    @Html.HiddenFor(model => model.Lozinka)
 
 
     <br />
@@ -28,10 +31,12 @@
     @Html.LabelFor(model => model.Email)
     @Html.TextBoxFor(model => model.Email)
     @Html.ValidationMessageFor(model => model.Email)
-    <br />
-    @Html.ActionLink("Promjeni Lozinku(neje nap)", " ");
-    <br />
+
+ 
     @Html.ActionLink("Odustani", "Profil", null, new { @class = "btn btn-secondary" });
-    <btn class="btn btn-primary">Spremi Promjene</btn>
+
+
+
+    <button class="btn btn-primary">Spremi Promjene</button>
 
 }

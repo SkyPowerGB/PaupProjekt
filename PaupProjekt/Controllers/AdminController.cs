@@ -1,5 +1,6 @@
 ﻿using Antlr.Runtime.Tree;
 using PagedList;
+using PaupProjekt.Misc;
 using PaupProjekt.Models;
 using System;
 using System.Collections.Generic;
@@ -15,23 +16,35 @@ namespace PaupProjekt.Controllers
     {
         ServisVozilaDB baza = new ServisVozilaDB();
 
-       
-      //--------(Tablica) --Lista Korisnika-*------------------
+        [Authorize(Roles =OvlastiKorisnik.Admin)]
+      
+  //--------(Tablica) --Lista Korisnika-*------------------
         public ActionResult Korisnici(int? i)
         {
+          
+
+
+
             var pageNumber = i ?? 1;
             var pageSize = 10;
             var kor = baza.vlasnikTab.ToList();
 
             var pagedKorisnici = kor.ToPagedList(pageNumber, pageSize);
 
+            
+
+
+
             return View(pagedKorisnici);
         }
 
 
-//-----promjena ovlasti / lozinke ------------------------------
-        [AllowAnonymous]
+        //-----promjena ovlasti / lozinke ------------------------------
+        [Authorize(Roles = OvlastiKorisnik.Admin)]
         public ActionResult uredi(int? id) {
+           
+
+
             vlasnik v=null;
             if (id.HasValue)
             {
@@ -47,7 +60,7 @@ namespace PaupProjekt.Controllers
         }
 
         [HttpPost]
-        [AllowAnonymous]
+        [Authorize(Roles = OvlastiKorisnik.Admin)]
         [ValidateAntiForgeryToken]
         public ActionResult uredi(vlasnik v)
         {
@@ -65,10 +78,22 @@ namespace PaupProjekt.Controllers
           return  RedirectToAction("Korisnici");
            
         }
- //----------izbrisi korisnika---------------------------------
-//potvrdi
-       public ActionResult izbrisi(int? id)
+        
+        
+        //----------izbrisi korisnika---------------------------------
+        //potvrdi
+
+        [Authorize(Roles = OvlastiKorisnik.Admin)]
+        public ActionResult izbrisi(int? id)
         {
+            //podaci o kornisniku
+            LogiraniKorisnik korisnik = User as LogiraniKorisnik;
+            //ak je ne admin ->na početnu
+            if (!korisnik.IsInRole(OvlastiKorisnik.Admin))
+            {
+                return RedirectToAction("Index", "Korisnik");
+            }
+
             if (id.HasValue) { 
             vlasnik v =baza.vlasnikTab.FirstOrDefault(x=>x.VlasnikID==id);
                 if (v == null)
@@ -87,8 +112,9 @@ namespace PaupProjekt.Controllers
 
             return RedirectToAction("Korisnici");
         }
- //izbrisi
+       //izbrisi
         [HttpPost]
+        [Authorize(Roles = OvlastiKorisnik.Admin)]
         [ValidateAntiForgeryToken]
         public ActionResult izbrisi(int id) {
 
@@ -100,9 +126,12 @@ namespace PaupProjekt.Controllers
         
         }
 
-//--------------------------promjeni lozinku-------------------------
-        public ActionResult promjenaLozinke(int? id) { 
-        if(id.HasValue)
+        //--------------------------promjeni lozinku-------------------------
+        [Authorize(Roles = OvlastiKorisnik.Admin)]
+        public ActionResult promjenaLozinke(int? id) {
+          
+
+            if (id.HasValue)
             {
                var korisnik= baza.vlasnikTab.FirstOrDefault(x=>x.VlasnikID==id);
 
@@ -120,12 +149,17 @@ namespace PaupProjekt.Controllers
        
         
         }
-       
-    //spremi promjene
+
+        //spremi promjene
+        
         [HttpPost]
+        [Authorize(Roles = OvlastiKorisnik.Admin)]
         [ValidateAntiForgeryToken]
-        public ActionResult promjenaLozinke(vlasnik v)
+  public ActionResult promjenaLozinke(vlasnik v)
         {
+
+         
+
             if (!String.IsNullOrWhiteSpace(v.LozinkaA))
             {
 

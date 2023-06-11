@@ -21,9 +21,9 @@ namespace PaupProjekt.Models
             {
                 DopusteneVrijednosi = new List<string>
                 {
-                    
-                    "Na Čekanju",
+
                     "Zaprimljen",
+                    "Na čekanju",
                     "U tijeku",
                     "Završen",
                     "Otkazan"

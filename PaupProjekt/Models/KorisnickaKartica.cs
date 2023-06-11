@@ -9,7 +9,7 @@ namespace PaupProjekt.Models
 {
     public class KorisnickaKartica
     {
-
+        //staro ostaci pokusaja izrade prijave
 
         [Required]
         [Display(Name = "Email ")]

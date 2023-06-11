@@ -148,32 +148,38 @@ namespace PaupProjekt.Controllers
         //-----tu bi trebala biti promjena  Lozinke korisnika (NIJE NAPRAVLJENO)
         //bilo bi dobro izvest tak da i admin ima tu tj ka ne tre dva action resulta
         [Authorize]
-        [ValidateAntiForgeryToken]
-        public ActionResult PromjenaLozinke(int? id)
-        {
-         
-            if(id.HasValue)
-            {
-
-
-            }
-            if (id != baza.vlasnikTab.FirstOrDefault(x => x.Email == User.Identity.Name).VlasnikID) {
-
-                return RedirectToAction("Index", "Korisnik");
-            }
-
-
-
-
-
-            return View();
-        }
-
-        
+       
         public ActionResult PromjenaLozinke()
         {
-           
-            return RedirectToAction("Index", "Korisnik");
+
+            var Email = User.Identity.Name;
+            var Trazeni = baza.vlasnikTab.FirstOrDefault(x=>x.Email==Email);
+            if(Trazeni == null ) { return HttpNotFound(); }
+
+
+            return View(Trazeni);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        [Authorize]
+        public ActionResult PromjenaLozinke(vlasnik v)
+        {
+            if (!string.IsNullOrWhiteSpace(v.LozinkaA) && v.LozinkaA != v.LozinkaPon)
+            {
+                ModelState.AddModelError("", "Lozinke se ne podudaraju.");
+                return View(v);
+            }
+            v.Lozinka=PasswordHelper.IzracunajHash(v.LozinkaA);
+            if(ModelState.IsValid)
+            {
+                baza.Entry(v).State = System.Data.Entity.EntityState.Modified;
+                baza.SaveChanges();
+                return RedirectToAction("Index","Korisnik");
+            }
+
+
+            return View(v);
         }
 
    //-----------------------------------odjava----------------  

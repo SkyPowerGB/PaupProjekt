@@ -96,6 +96,7 @@ namespace PaupProjekt.Controllers
                 return RedirectToAction("Index", "Korisnik");
             }
 
+
             servis nalozi = null;
             if (!id.HasValue ) {
                 return RedirectToAction("klijenti");
@@ -103,7 +104,12 @@ namespace PaupProjekt.Controllers
             }
           
             nalozi= db.servisTab.FirstOrDefault(x=>x.ServisID==id);
-            if(nalozi == null) { RedirectToAction("klijenti"); }
+           var  racun = db.racunTab.FirstOrDefault(x=>x.ServisID==nalozi.ServisID);
+            if (racun != null) {
+                if (racun.Izdan) { return RedirectToAction("klijenti"); }
+            }
+
+            if(nalozi == null) { return RedirectToAction("klijenti"); }
 
 
             return View(nalozi);
@@ -124,6 +130,12 @@ namespace PaupProjekt.Controllers
 
             if (ModelState.IsValid)
             {
+                if (ListaStatusaE.DopusteneVrijednosi.FirstOrDefault(x => x == Servis.StatusServisa) == null) {
+
+                   return  RedirectToAction("klijenti");
+
+                };
+
 
                 db.Entry(Servis).State =System.Data.Entity.EntityState.Modified;
                 db.SaveChanges();
@@ -136,8 +148,6 @@ namespace PaupProjekt.Controllers
            
 
         }
-
-
 
         //----------------Brisanje Servisa-----------------------------------------------------------------------------
         [Authorize]

@@ -322,6 +322,7 @@
     <Content Include="Views\Korisnik\OtkaziNarudzbu.cshtml" />
     <Content Include="Views\Korisnik\pregledRacuna.cshtml" />
     <Content Include="Views\Shared\ServisiTablica.cshtml" />
+    <Content Include="Views\Autentifikacijski\PromjenaLozinke.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
