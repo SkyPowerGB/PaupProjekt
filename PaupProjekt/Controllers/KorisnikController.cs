@@ -208,9 +208,8 @@ namespace PaupProjekt.Controllers
             if(Servis==null) { return RedirectToAction("Index"); }
 
             ViewData["Servis"] = Servis;
-            if (Servis.VlasnikVozila.Email != User.Identity.Name) {
-                return RedirectToAction("Index","Korisnici");
-            }
+          
+          
           
 
         return View(Racun);
