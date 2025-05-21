@@ -6,13 +6,11 @@ A university ASP.NET MVC5 project developed as an exam assignment.
 
 ---
 
-## ✨ Features
+## ✨Features (as remembered)
 
-- User account creation and management  
-- Adding and tracking service requests  
-- Creating and updating receipts with detailed services  
-- Downloadable receipts  
-- Multiple user roles: guest, user, mechanic, admin  
+- User accounts with multiple roles (guest, user, mechanic, admin)  
+- Ability to create and manage service requests  
+- Receipt creation and download functionality  
 
 ---
 
