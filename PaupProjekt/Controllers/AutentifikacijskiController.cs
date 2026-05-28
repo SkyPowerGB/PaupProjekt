@@ -28,7 +28,7 @@ namespace PaupProjekt.Controllers
             ViewBag.novo = false;
 
 
-            return View( ) ;
+            return View( new vlasnik() ) ;
         }
 //spremi podatke
         [HttpPost]

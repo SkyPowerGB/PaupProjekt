@@ -63,7 +63,7 @@ namespace PaupProjekt.Controllers
             
             }
         
-        return View();  
+        return View(new uslugeTab());  
         }
      
         [HttpPost]
@@ -148,7 +148,7 @@ namespace PaupProjekt.Controllers
             }
 
 
-            return View();
+            return View(new uslugeTab());
         }
        
         [HttpPost]

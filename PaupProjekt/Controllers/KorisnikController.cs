@@ -169,7 +169,7 @@ namespace PaupProjekt.Controllers
         [Authorize]
         public ActionResult dodajVozilo() {
            
-        return View();
+        return View( new vozilo());
         }
         [Authorize]
         [HttpPost]

@@ -44,92 +44,59 @@ namespace PaupProjekt.Controllers
             return View(noviServis);
         }
 
-     //uzmi podatke o narudžbi
+        //uzmi podatke o narudžbi
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Index(servis ser)
-        {
-           
-            ViewBag.UslugaPoznata = false;
+        public ActionResult Index(servis ser,HttpPostedFileBase ImageFile) // Dodaj parametar ovdje
+    {
             var Email = User.Identity.Name;
             vlasnik Trazeni = baza.vlasnikTab.FirstOrDefault(x => x.Email == Email);
+
             ser.VlasnikID = Trazeni.VlasnikID;
             ser.Datum = DateTime.Now;
-            NovaNarudzba = ser;
 
-            
-            if (ser.ImageFile != null)
-            {
-                string fileName = Path.GetFileNameWithoutExtension(ser.ImageFile.FileName);
-                string extension = Path.GetExtension(ser.ImageFile.FileName);
-
-                if (extension == ".jpg" || extension == ".jepg" || extension == ".png")
-                {
-                    fileName = fileName + DateTime.Now.ToString("yymmssfff") + extension;
-                    ser.slikaVozila = "~/SlikeServisi/" + fileName;
-                    fileName = Path.Combine(Server.MapPath("~/SlikeServisi/"), fileName);
-                    ser.ImageFile.SaveAs(fileName);
-
-                }
-                else
-                {
-                    ModelState.AddModelError("Slika kvara", "Nepodržana ekstenzija");
-                    return View(ser);
-                }
-
+            if(ImageFile != null && ImageFile.ContentLength > 0) {
+                string fileName = Path.GetFileNameWithoutExtension(ImageFile.FileName) + DateTime.Now.ToString("yymmssfff") + Path.GetExtension(ImageFile.FileName);
+                string path = Path.Combine(Server.MapPath("~/SlikeServisi/"),fileName);
+                ImageFile.SaveAs(path);
+                ser.slikaVozila = "~/SlikeServisi/" + fileName;
             }
 
-            /*
-             * Stari kod za spremanje:
-                        if (ModelState.IsValid)
-                        {
-                            baza.servisTab.Add(ser);
-                            baza.SaveChanges();
-                        }
-
-
-                 var vozila = baza.voziloTab.Where(x => x.VlasnikID == Trazeni.VlasnikID).ToList();
-                        ViewBag.VozilaList = vozila;
-
-             */
-
-            return RedirectToAction("Potvrda", ser);
+            // SPREMI U TEMPDATA (ovo prenosi objekt sigurno)
+            TempData["Narudzba"] = ser;
+            return RedirectToAction("Potvrda");
         }
-        [HttpGet]    
-        //------------------Potvrdi narudžbu-------------------------
-        public ActionResult Potvrda(servis ser)
-        {
 
-            if (ser == null) { return HttpNotFound("greska nije postavljen"); }
+        [HttpGet]
+        public ActionResult Potvrda() {
+            var ser = TempData["Narudzba"] as servis;
+            if(ser == null)
+                return RedirectToAction("Index");
+
             ViewBag.Vozilo = baza.voziloTab.FirstOrDefault(x => x.VoziloId == ser.voziloID);
             ViewBag.Vlasnik = baza.vlasnikTab.FirstOrDefault(x => x.VlasnikID == ser.VlasnikID);
 
-
+            // Vrati u TempData da bude dostupno za idući korak (PotvrdaNarudzbe)
+            TempData["Narudzba"] = ser;
             return View(ser);
         }
+
         [HttpPost]
-        //spremi 
         [ValidateAntiForgeryToken]
-        public ActionResult PotvrdaNarudzbe(servis ser)
-        {
-            var Email = User.Identity.Name;
-            vlasnik Trazeni = baza.vlasnikTab.FirstOrDefault(x => x.Email == Email);
+        public ActionResult PotvrdaNarudzbe() {
+            var ser = TempData["Narudzba"] as servis;
+            if(ser == null)
+                return RedirectToAction("Index");
 
-            //trerba dodat ua kontrolu ako vozilo i vlasnik id pripada korisniku koji je ulogiran
-            if (ModelState.IsValid)
-            {
-                baza.servisTab.Add(ser);
-                baza.SaveChanges();
-            }
-            else { return RedirectToAction("Index",ser); }
+            // Ovdje sada sigurno imaš popunjen objekt 'ser'
+            baza.servisTab.Add(ser);
+            baza.SaveChanges();
 
-            var vozila = baza.voziloTab.Where(x => x.VlasnikID == Trazeni.VlasnikID).ToList();
-            ViewBag.VozilaList = vozila;
-            return RedirectToAction("Index", "Korisnik");
+            return RedirectToAction("Index","Korisnik");
         }
 
         //---------------Odustani i (izbiriši sliku) nazad na novu narudžbu-----------------------------
-      
+
         public ActionResult odustani(string path, string usluga)
         {
            

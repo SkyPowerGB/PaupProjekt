@@ -15,7 +15,7 @@ namespace PaupProjekt.Models
         [Key]
 
         [Display(Name ="ID")]
-        [Required(ErrorMessage = "{0} je obavezan")]
+      
         public int ServisID { get; set; }
 
         [Display(Name = "VoziloID")]
